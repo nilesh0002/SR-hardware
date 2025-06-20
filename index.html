@@ -94,6 +94,13 @@
                 hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
             }
         });
+        // Center the first slider item on mobile on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            if (window.innerWidth <= 600) {
+                const first = document.querySelector('.slider-item');
+                if (first) first.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+            }
+        });
         let sliderActive = 0;
         function slideProducts(dir) {
             const track = document.getElementById('sliderTrack');
