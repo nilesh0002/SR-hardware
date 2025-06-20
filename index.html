@@ -31,6 +31,40 @@
                 </div>
             </div>
         </section>
+        <section class="featured-slider-section">
+            <h2 class="section-title">New & Upcoming Products</h2>
+            <div class="slider-container">
+                <button class="slider-arrow left" onclick="slideProducts(-1)">&#8592;</button>
+                <div class="slider-track" id="sliderTrack">
+                    <div class="slider-item">
+                        <img src="images/paint.jpg" alt="Premium Paint" class="slider-img">
+                        <h4>Premium Paint</h4>
+                        <p>High coverage, vibrant colors for all surfaces.</p>
+                    </div>
+                    <div class="slider-item">
+                        <img src="images/powertoolspic.jpg" alt="Power Drill" class="slider-img">
+                        <h4>Power Drill</h4>
+                        <p>Efficient, cordless, and perfect for all jobs.</p>
+                    </div>
+                    <div class="slider-item">
+                        <img src="images/tools.jpg" alt="Tool Set" class="slider-img">
+                        <h4>Tool Set</h4>
+                        <p>Complete set for every handyman and professional.</p>
+                    </div>
+                    <div class="slider-item">
+                        <img src="images/door.jpg" alt="Designer Door" class="slider-img">
+                        <h4>Designer Door</h4>
+                        <p>Modern, secure, and stylish for your home.</p>
+                    </div>
+                    <div class="slider-item">
+                        <img src="images/cement.jpg" alt="Ultra Cement" class="slider-img">
+                        <h4>Ultra Cement</h4>
+                        <p>Superior strength for all construction needs.</p>
+                    </div>
+                </div>
+                <button class="slider-arrow right" onclick="slideProducts(1)">&#8594;</button>
+            </div>
+        </section>
         <section class="product-grid-section">
             <h2 class="section-title">Featured Products</h2>
             <div class="product-grid">
@@ -72,6 +106,16 @@
                 hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
             }
         });
+        let sliderIndex = 0;
+        function slideProducts(dir) {
+            const track = document.getElementById('sliderTrack');
+            const items = track.children.length;
+            const itemWidth = track.children[0].offsetWidth + 24; // 24px gap
+            sliderIndex += dir;
+            if (sliderIndex < 0) sliderIndex = 0;
+            if (sliderIndex > items - 1) sliderIndex = items - 1;
+            track.scrollTo({ left: sliderIndex * itemWidth, behavior: 'smooth' });
+        }
     </script>
 </body>
 </html> 
