@@ -4,8 +4,10 @@ body {
     font-family: 'Roboto', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: #fdfdfd;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     color: #333;
+    min-height: 100vh;
+    transition: background 0.5s;
 }
 header {
     background: #111;
@@ -583,6 +585,21 @@ footer {
     footer {
         padding-bottom: 70px !important;
     }
+    body {
+        background: linear-gradient(120deg, #f7fafc 0%, #e3e9f3 100%);
+        transition: background 0.5s;
+    }
+    .product-card, .door-brand-card, .cement-brand-card, .slider-item {
+        transition: box-shadow 0.3s, transform 0.3s, background 0.4s;
+    }
+    .product-card:hover, .door-brand-card:hover, .cement-brand-card:hover, .slider-item:hover {
+        background: #e3e9f3;
+        box-shadow: 0 8px 32px rgba(34,34,34,0.13);
+        transform: translateY(-4px) scale(1.03);
+    }
+    section, .featured-slider-section, .product-grid-section {
+        transition: background 0.4s, box-shadow 0.4s;
+    }
 }
 
 .door-brands-grid {
@@ -877,5 +894,21 @@ footer {
         font-size: 0.85rem;
         margin-top: 0;
         letter-spacing: 0.01em;
+    }
+}
+
+.product-grid-row {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+}
+@media (max-width: 600px) {
+    .product-grid-row {
+        flex-direction: column;
+        gap: 18px;
+        align-items: center;
+    }
+    .product-grid {
+        justify-content: center;
     }
 } 

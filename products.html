@@ -205,6 +205,17 @@
             }
         });
     }
+    function showOnlyCementSectionMobile() {
+        if (window.innerWidth <= 600 && window.location.hash === '#cement-section') {
+            ['cement-section','doors-section','tools-section','other-equipment-section'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = (id === 'cement-section') ? 'block' : 'none';
+            });
+        }
+    }
+    window.addEventListener('DOMContentLoaded', showOnlyCementSectionMobile);
+    window.addEventListener('hashchange', showOnlyCementSectionMobile);
+    window.addEventListener('resize', showOnlyCementSectionMobile);
     </script>
 </body>
 </html> 
