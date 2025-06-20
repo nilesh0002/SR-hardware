@@ -414,16 +414,27 @@
     function showOnlySelectedSection() {
         const allSections = ['cement-section','doors-section','paint-section'];
         const hash = window.location.hash.replace('#','');
-        if (allSections.includes(hash)) {
+        const isMobile = window.matchMedia('(max-width: 600px)').matches;
+        if (isMobile) {
+            // On mobile, always show only the selected section (default to cement if none)
+            let showId = allSections.includes(hash) ? hash : 'cement-section';
             allSections.forEach(id => {
                 const el = document.getElementById(id);
-                if (el) el.style.display = (id === hash) ? 'block' : 'none';
+                if (el) el.style.display = (id === showId) ? 'block' : 'none';
             });
         } else {
-            allSections.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.style.display = 'block';
-            });
+            // On desktop, show all unless a hash is present
+            if (allSections.includes(hash)) {
+                allSections.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.style.display = (id === hash) ? 'block' : 'none';
+                });
+            } else {
+                allSections.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.style.display = 'block';
+                });
+            }
         }
     }
     window.addEventListener('DOMContentLoaded', showOnlySelectedSection);
