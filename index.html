@@ -97,12 +97,19 @@
         let sliderIndex = 0;
         function slideProducts(dir) {
             const track = document.getElementById('sliderTrack');
-            const items = track.children.length;
-            const itemWidth = track.children[0].offsetWidth + 24; // 24px gap
-            sliderIndex += dir;
-            if (sliderIndex < 0) sliderIndex = 0;
-            if (sliderIndex > items - 1) sliderIndex = items - 1;
-            track.scrollTo({ left: sliderIndex * itemWidth, behavior: 'smooth' });
+            const container = document.querySelector('.slider-container');
+            let scrollAmount;
+            if (window.innerWidth <= 600) {
+                scrollAmount = container.offsetWidth * 0.85; // scroll by almost full visible width
+            } else {
+                const itemWidth = track.children[0].offsetWidth + 24; // 24px gap
+                scrollAmount = itemWidth;
+            }
+            if (dir < 0) {
+                track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
         }
     </script>
 </body>
