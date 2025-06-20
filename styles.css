@@ -547,6 +547,9 @@ footer {
         font-size: 1.22rem;
         margin-bottom: 8px;
     }
+    nav ul li:last-child { /* Hide Contact link */
+        display: none;
+    }
 }
 
 .door-brands-grid {
