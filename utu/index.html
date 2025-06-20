@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardware Equipment</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Hardware Equipment</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>Mastering Excellence Every Day</h2>
+                    <p>Top-quality tools and building materials for every project. Shop the best in cement, doors, power tools, and more!</p>
+                    <a href="products.html" class="cta-btn">Shop Now</a>
+                </div>
+                <div class="hero-image">
+                    <img src="images/powertoolspic.jpg" alt="Power Tool" />
+                </div>
+            </div>
+        </section>
+        <section class="product-grid-section">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <a href="products.html#cement-section">
+                        <img src="images/cement.jpg" alt="Cement Bag">
+                        <h3>Cement</h3>
+                    </a>
+                </div>
+                <div class="product-card">
+                    <a href="products.html#doors-section">
+                        <img src="images/door.jpg" alt="Steel Door">
+                        <h3>Doors</h3>
+                    </a>
+                </div>
+                <div class="product-card">
+                    <a href="products.html#tools-section">
+                        <img src="images/tools.jpg" alt="Tool Set">
+                        <h3>Tools</h3>
+                    </a>
+                </div>
+                <div class="product-card">
+                    <a href="products.html#other-equipment-section">
+                        <img src="images/paint.jpg" alt="Paint Bucket">
+                        <h3>Paint & Supplies</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 UTU Hardware Equipment. All rights reserved.</p>
+    </footer>
+    <script>
+        window.addEventListener('scroll', function() {
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                const scrollPosition = window.pageYOffset;
+                hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+            }
+        });
+    </script>
+</body>
+</html> 
