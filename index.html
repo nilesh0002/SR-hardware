@@ -94,21 +94,18 @@
                 hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
             }
         });
-        let sliderIndex = 0;
+        let sliderActive = 0;
         function slideProducts(dir) {
             const track = document.getElementById('sliderTrack');
-            const container = document.querySelector('.slider-container');
-            let scrollAmount;
+            const items = Array.from(track.children);
             if (window.innerWidth <= 600) {
-                scrollAmount = container.offsetWidth * 0.85; // scroll by almost full visible width
+                sliderActive += dir;
+                if (sliderActive < 0) sliderActive = 0;
+                if (sliderActive > items.length - 1) sliderActive = items.length - 1;
+                items[sliderActive].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
             } else {
-                const itemWidth = track.children[0].offsetWidth + 24; // 24px gap
-                scrollAmount = itemWidth;
-            }
-            if (dir < 0) {
-                track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-            } else {
-                track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                const itemWidth = track.children[0].offsetWidth + 24;
+                track.scrollBy({ left: dir * itemWidth, behavior: 'smooth' });
             }
         }
     </script>

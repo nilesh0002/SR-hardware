@@ -758,6 +758,8 @@ footer {
     .slider-track {
         gap: 12px;
         padding: 10px 0;
+        padding-left: 8vw;
+        padding-right: 8vw;
     }
     .slider-item {
         min-width: 70vw;
