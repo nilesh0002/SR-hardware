@@ -94,13 +94,17 @@
                 hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
             }
         });
-        // Center the first slider item on mobile on page load
-        window.addEventListener('DOMContentLoaded', function() {
+        // Center the first slider item on mobile on page load and resize
+        function centerFirstSliderItem() {
             if (window.innerWidth <= 600) {
-                const first = document.querySelector('.slider-item');
-                if (first) first.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+                setTimeout(function() {
+                    const first = document.querySelector('.slider-item');
+                    if (first) first.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+                }, 100);
             }
-        });
+        }
+        window.addEventListener('DOMContentLoaded', centerFirstSliderItem);
+        window.addEventListener('resize', centerFirstSliderItem);
         let sliderActive = 0;
         function slideProducts(dir) {
             const track = document.getElementById('sliderTrack');
