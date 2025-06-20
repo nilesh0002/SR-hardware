@@ -66,13 +66,109 @@
                 </div>
             </div>
         </section>
-        <section class="category" id="doors-section">
-            <h2>Doors</h2>
-            <ul>
-                <li>Wooden Doors</li>
-                <li>Steel Doors</li>
-                <li>Glass Doors</li>
-            </ul>
+        <section class="category door-brands-section" id="doors-section">
+            <h2>🚪 Types of Doors – Detailed Overview</h2>
+            <div class="door-brands-grid">
+                <div class="door-brand-card" onclick="openDoorModal('wooden')">
+                    <img src="images/woodendoor.jpg" alt="Wooden Door" class="door-logo large">
+                    <h3>Wooden Doors</h3>
+                    <p class="door-summary">Classic, elegant, and durable for main entrances and bedrooms.</p>
+                    <p class="price">₹8,999</p>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+                <div class="door-brand-card" onclick="openDoorModal('steel')">
+                    <img src="images/steel door.jpg" alt="Steel Door" class="door-logo large">
+                    <h3>Steel Doors</h3>
+                    <p class="door-summary">High security, weather-resistant, and low maintenance.</p>
+                    <p class="price">₹5,499</p>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+                <div class="door-brand-card" onclick="openDoorModal('glass')">
+                    <img src="images/glass door.webp" alt="Glass Door" class="door-logo large">
+                    <h3>Glass Doors</h3>
+                    <p class="door-summary">Modern, elegant, and space-enhancing for interiors.</p>
+                    <p class="price">₹7,299</p>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+            <!-- Modals for details -->
+            <div id="door-modal-wooden" class="door-modal" style="display:none;">
+                <div class="door-modal-content">
+                    <span class="close" onclick="closeDoorModal('wooden')">&times;</span>
+                    <h3>Wooden Doors (Timber Doors)</h3>
+                    <img src="images/woodendoor.jpg" alt="Wooden Door" class="door-logo large-modal">
+                    <p><b>Material:</b> Teak, Sal, Sheesham, Pine, Engineered wood, MDF</p>
+                    <p><b>Features:</b><br>
+                        Classic & aesthetic look<br>
+                        Durable and strong (especially hardwoods)<br>
+                        Can be carved, polished, or painted
+                    </p>
+                    <p><b>Common Uses:</b><br>
+                        Main entrance doors<br>
+                        Bedroom and indoor doors
+                    </p>
+                    <p><b>Pros:</b><br>
+                        Good insulation (sound & temperature)<br>
+                        Traditional and elegant
+                    </p>
+                    <p><b>Cons:</b><br>
+                        Expensive (especially solid wood)<br>
+                        Can warp in moisture without proper treatment
+                    </p>
+                    <p><b>Popular Brands:</b> Greenply, Century Doors, Duro, Kitply</p>
+                </div>
+            </div>
+            <div id="door-modal-steel" class="door-modal" style="display:none;">
+                <div class="door-modal-content">
+                    <span class="close" onclick="closeDoorModal('steel')">&times;</span>
+                    <h3>Steel Doors</h3>
+                    <img src="images/steel door.jpg" alt="Steel Door" class="door-logo large-modal">
+                    <p><b>Material:</b> Galvanized steel, powder-coated steel, sometimes with honeycomb or PU core</p>
+                    <p><b>Features:</b><br>
+                        High strength and security<br>
+                        Weather-resistant<br>
+                        Fire-resistant options available
+                    </p>
+                    <p><b>Common Uses:</b><br>
+                        Main entrance, security doors, commercial buildings
+                    </p>
+                    <p><b>Pros:</b><br>
+                        Low maintenance<br>
+                        Affordable<br>
+                        Termite-proof and corrosion-resistant (if coated)
+                    </p>
+                    <p><b>Cons:</b><br>
+                        Less aesthetic than wood<br>
+                        Heavier
+                    </p>
+                    <p><b>Popular Brands:</b> Godrej, Tata Pravesh, Dorma, Sainik</p>
+                </div>
+            </div>
+            <div id="door-modal-glass" class="door-modal" style="display:none;">
+                <div class="door-modal-content">
+                    <span class="close" onclick="closeDoorModal('glass')">&times;</span>
+                    <h3>Glass Doors</h3>
+                    <img src="images/glass door.webp" alt="Glass Door" class="door-logo large-modal">
+                    <p><b>Material:</b> Tempered glass, frosted glass, laminated glass with aluminum or wooden frames</p>
+                    <p><b>Features:</b><br>
+                        Sleek and modern<br>
+                        Transparent or translucent for light passage<br>
+                        Available as sliding, hinged, or frameless
+                    </p>
+                    <p><b>Common Uses:</b><br>
+                        Bathrooms, balconies, offices, shower partitions
+                    </p>
+                    <p><b>Pros:</b><br>
+                        Elegant and space-enhancing<br>
+                        Good for visual openness
+                    </p>
+                    <p><b>Cons:</b><br>
+                        Needs frequent cleaning<br>
+                        Not ideal for high-security zones (unless reinforced)
+                    </p>
+                    <p><b>Popular Brands:</b> Saint-Gobain, Modiguard, AIS Glass</p>
+                </div>
+            </div>
         </section>
         <section class="category" id="tools-section">
             <h2>Tools</h2>
@@ -94,5 +190,21 @@
     <footer>
         <p>&copy; 2024 UTU Hardware Equipment. All rights reserved.</p>
     </footer>
+    <script>
+    function openDoorModal(type) {
+        document.getElementById('door-modal-' + type).style.display = 'block';
+    }
+    function closeDoorModal(type) {
+        document.getElementById('door-modal-' + type).style.display = 'none';
+    }
+    window.onclick = function(event) {
+        ['wooden','steel','glass'].forEach(function(type) {
+            var modal = document.getElementById('door-modal-' + type);
+            if (modal && event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    }
+    </script>
 </body>
 </html> 
