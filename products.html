@@ -170,21 +170,227 @@
                 </div>
             </div>
         </section>
-        <section class="category" id="tools-section">
-            <h2>Tools</h2>
-            <ul>
-                <li>Hammer</li>
-                <li>Screwdriver Set</li>
-                <li>Measuring Tape</li>
-            </ul>
-        </section>
-        <section class="category" id="other-equipment-section">
-            <h2>Other Equipment</h2>
-            <ul>
-                <li>Paints</li>
-                <li>Pipes & Fittings</li>
-                <li>Electrical Supplies</li>
-            </ul>
+        <section class="category paint-section" id="paint-section">
+            <h2>Paints & Painting Solutions</h2>
+            <div class="paint-brands-grid">
+                <div class="paint-brand-card" onclick="openPaintModal('interior')">
+                    <img src="images/interior paint.webp" alt="Interior Paint" class="paint-logo">
+                    <h3>Interior Paint</h3>
+                    <p>For walls and ceilings. Smooth, luxurious finish. Popular: Asian Paints Royale, Berger Silk.</p>
+                </div>
+                <div class="paint-brand-card" onclick="openPaintModal('exterior')">
+                    <img src="images/exterior paint.jpg" alt="Exterior Paint" class="paint-logo">
+                    <h3>Exterior Paint</h3>
+                    <p>Weather-resistant, long-lasting. Popular: Nerolac Excel, Dulux Weathershield.</p>
+                </div>
+                <div class="paint-brand-card" onclick="openPaintModal('putty')">
+                    <img src="images/wall putty.jpg" alt="Wall Putty & Primer" class="paint-logo">
+                    <h3>Wall Putty & Primer</h3>
+                    <p>Base coat for smooth finish. Brands: Birla White, JK Wall Putty, Asian Paints Primer.</p>
+                </div>
+                <div class="paint-brand-card" onclick="openPaintModal('enamel')">
+                    <img src="images/enamel paint.jpg" alt="Enamel Paint" class="paint-logo">
+                    <h3>Enamel Paint</h3>
+                    <p>Glossy, durable finish for wood & metal. Popular: Asian Paints Apcolite, Shalimar Superlac.</p>
+                </div>
+                <div class="paint-brand-card" onclick="openPaintModal('spray')">
+                    <img src="images/spray paint.jpg" alt="Spray Paint" class="paint-logo">
+                    <h3>Spray Paint</h3>
+                    <p>Quick application for crafts, touch-ups. Brands: Asian Paints, Nerolac, Indigo.</p>
+                </div>
+                <div class="paint-brand-card" onclick="openPaintModal('tools')">
+                    <img src="images/paint ttols.jpg" alt="Paint Tools" class="paint-logo">
+                    <h3>Paint Tools</h3>
+                    <p>Brushes, rollers, trays, tape, putty knife, sandpaper, mixing sticks, spray guns.</p>
+                </div>
+            </div>
+            <h3 style="margin-top:32px;">Top Paint Brands</h3>
+            <div class="paint-logo-grid">
+                <a href="#" class="paint-brand-logo"><img src="images/asian-paints.png" alt="Asian Paints"></a>
+                <a href="#" class="paint-brand-logo"><img src="images/berger.png" alt="Berger Paints"></a>
+                <a href="#" class="paint-brand-logo"><img src="images/nerolac.png" alt="Nerolac Paints"></a>
+                <a href="#" class="paint-brand-logo"><img src="images/dulux.png" alt="Dulux Paints"></a>
+                <a href="#" class="paint-brand-logo"><img src="images/indigo.png" alt="Indigo Paints"></a>
+                <a href="#" class="paint-brand-logo"><img src="images/shalimar.png" alt="Shalimar Paints"></a>
+                <a href="#" class="paint-brand-logo"><img src="images/british.png" alt="British Paints"></a>
+            </div>
+            <!-- Paint Modals with more details -->
+            <div id="paint-modal-interior" class="paint-modal" style="display:none;">
+                <div class="paint-modal-content">
+                    <span class="close" onclick="closePaintModal('interior')">&times;</span>
+                    <h3>Interior Paint</h3>
+                    <img src="images/interior paint.webp" alt="Interior Paint" class="paint-logo large-modal">
+                    <p><b>Material:</b> Acrylic Emulsion</p>
+                    <p><b>Features:</b><br>
+                        Smooth, luxurious finish<br>
+                        Low VOC, quick dry<br>
+                        Washable, stain-resistant
+                    </p>
+                    <p><b>Common Uses:</b><br>
+                        Living rooms, bedrooms, ceilings, offices
+                    </p>
+                    <p><b>Pros:</b><br>
+                        Easy to clean<br>
+                        Wide color range<br>
+                        Good coverage
+                    </p>
+                    <p><b>Cons:</b><br>
+                        Not suitable for exteriors<br>
+                        May require primer on new walls
+                    </p>
+                    <p><b>Popular Brands:</b> Asian Paints Royale, Berger Silk, Dulux Velvet Touch</p>
+                    <p><b>Variants:</b> 1L, 4L, 10L, 20L</p>
+                    <p><b>MRP:</b> ₹450</p>
+                    <p><b>Offer Price:</b> ₹420</p>
+                    <button class="add-cart-btn">Add to Cart</button>
+                    <p><b>Reviews:</b> ★★★★☆ (132 reviews)</p>
+                </div>
+            </div>
+            <div id="paint-modal-exterior" class="paint-modal" style="display:none;">
+                <div class="paint-modal-content">
+                    <span class="close" onclick="closePaintModal('exterior')">&times;</span>
+                    <h3>Exterior Paint</h3>
+                    <img src="images/exterior paint.jpg" alt="Exterior Paint" class="paint-logo large-modal">
+                    <p><b>Material:</b> Acrylic Emulsion</p>
+                    <p><b>Features:</b><br>
+                        Weather-resistant<br>
+                        UV protection<br>
+                        Anti-fungal, anti-algae
+                    </p>
+                    <p><b>Common Uses:</b><br>
+                        Building exteriors, balconies, boundary walls
+                    </p>
+                    <p><b>Pros:</b><br>
+                        Long-lasting color<br>
+                        Protects against rain and sun
+                    </p>
+                    <p><b>Cons:</b><br>
+                        Slightly higher cost<br>
+                        May need touch-ups in harsh climates
+                    </p>
+                    <p><b>Popular Brands:</b> Nerolac Excel, Dulux Weathershield, Asian Paints Apex</p>
+                    <p><b>Variants:</b> 1L, 4L, 10L, 20L</p>
+                    <p><b>MRP:</b> ₹500</p>
+                    <p><b>Offer Price:</b> ₹470</p>
+                    <button class="add-cart-btn">Add to Cart</button>
+                    <p><b>Reviews:</b> ★★★★☆ (98 reviews)</p>
+                </div>
+            </div>
+            <div id="paint-modal-putty" class="paint-modal" style="display:none;">
+                <div class="paint-modal-content">
+                    <span class="close" onclick="closePaintModal('putty')">&times;</span>
+                    <h3>Wall Putty & Primer</h3>
+                    <img src="images/wall putty.jpg" alt="Wall Putty & Primer" class="paint-logo large-modal">
+                    <p><b>Material:</b> White cement, acrylic</p>
+                    <p><b>Features:</b><br>
+                        Smoothens wall surface<br>
+                        Improves paint adhesion
+                    </p>
+                    <p><b>Common Uses:</b><br>
+                        Base coat before painting<br>
+                        Filling cracks and holes
+                    </p>
+                    <p><b>Pros:</b><br>
+                        Enhances paint life<br>
+                        Prevents flaking
+                    </p>
+                    <p><b>Cons:</b><br>
+                        Needs proper mixing<br>
+                        Can be dusty during sanding
+                    </p>
+                    <p><b>Popular Brands:</b> Birla White, JK Wall Putty, Asian Paints Primer</p>
+                    <p><b>Variants:</b> 1kg, 5kg, 20kg</p>
+                    <p><b>MRP:</b> ₹250</p>
+                    <p><b>Offer Price:</b> ₹220</p>
+                    <button class="add-cart-btn">Add to Cart</button>
+                    <p><b>Reviews:</b> ★★★★☆ (54 reviews)</p>
+                </div>
+            </div>
+            <div id="paint-modal-enamel" class="paint-modal" style="display:none;">
+                <div class="paint-modal-content">
+                    <span class="close" onclick="closePaintModal('enamel')">&times;</span>
+                    <h3>Enamel Paint</h3>
+                    <img src="images/enamel paint.jpg" alt="Enamel Paint" class="paint-logo large-modal">
+                    <p><b>Material:</b> Alkyd resin, pigments</p>
+                    <p><b>Features:</b><br>
+                        Glossy, durable finish<br>
+                        Water and stain resistant
+                    </p>
+                    <p><b>Common Uses:</b><br>
+                        Doors, windows, metal grills, furniture
+                    </p>
+                    <p><b>Pros:</b><br>
+                        High gloss<br>
+                        Easy to clean
+                    </p>
+                    <p><b>Cons:</b><br>
+                        Strong odor during application<br>
+                        Longer drying time
+                    </p>
+                    <p><b>Popular Brands:</b> Asian Paints Apcolite, Shalimar Superlac, Nerolac Enamel</p>
+                    <p><b>Variants:</b> 1L, 4L, 10L</p>
+                    <p><b>MRP:</b> ₹350</p>
+                    <p><b>Offer Price:</b> ₹320</p>
+                    <button class="add-cart-btn">Add to Cart</button>
+                    <p><b>Reviews:</b> ★★★★☆ (67 reviews)</p>
+                </div>
+            </div>
+            <div id="paint-modal-spray" class="paint-modal" style="display:none;">
+                <div class="paint-modal-content">
+                    <span class="close" onclick="closePaintModal('spray')">&times;</span>
+                    <h3>Spray Paint</h3>
+                    <img src="images/spray paint.jpg" alt="Spray Paint" class="paint-logo large-modal">
+                    <p><b>Material:</b> Acrylic, solvent</p>
+                    <p><b>Features:</b><br>
+                        Fast drying<br>
+                        Multi-surface use
+                    </p>
+                    <p><b>Common Uses:</b><br>
+                        Crafts, touch-ups, metal, wood
+                    </p>
+                    <p><b>Pros:</b><br>
+                        Easy to apply<br>
+                        No brush marks
+                    </p>
+                    <p><b>Cons:</b><br>
+                        Limited coverage per can<br>
+                        Needs good ventilation
+                    </p>
+                    <p><b>Popular Brands:</b> Asian Paints, Nerolac, Indigo</p>
+                    <p><b>Variants:</b> 200ml, 400ml</p>
+                    <p><b>MRP:</b> ₹180</p>
+                    <p><b>Offer Price:</b> ₹150</p>
+                    <button class="add-cart-btn">Add to Cart</button>
+                    <p><b>Reviews:</b> ★★★★☆ (41 reviews)</p>
+                </div>
+            </div>
+            <div id="paint-modal-tools" class="paint-modal" style="display:none;">
+                <div class="paint-modal-content">
+                    <span class="close" onclick="closePaintModal('tools')">&times;</span>
+                    <h3>Paint Tools</h3>
+                    <img src="images/paint ttols.jpg" alt="Paint Tools" class="paint-logo large-modal">
+                    <p><b>Includes:</b> Brushes, rollers, trays, tape, putty knife, sandpaper, mixing sticks, spray guns</p>
+                    <p><b>Features:</b><br>
+                        Durable, easy to use<br>
+                        Multiple sizes available
+                    </p>
+                    <p><b>Common Uses:</b><br>
+                        Painting, prepping, finishing
+                    </p>
+                    <p><b>Pros:</b><br>
+                        Reusable<br>
+                        Professional finish
+                    </p>
+                    <p><b>Cons:</b><br>
+                        Some tools need cleaning after use
+                    </p>
+                    <p><b>Popular Brands:</b> Asian Paints, Berger, Nerolac</p>
+                    <p><b>MRP:</b> ₹120</p>
+                    <p><b>Offer Price:</b> ₹99</p>
+                    <button class="add-cart-btn">Add to Cart</button>
+                    <p><b>Reviews:</b> ★★★★☆ (23 reviews)</p>
+                </div>
+            </div>
         </section>
     </main>
     <footer>
@@ -206,7 +412,7 @@
         });
     }
     function showOnlySelectedSection() {
-        const allSections = ['cement-section','doors-section','tools-section','other-equipment-section'];
+        const allSections = ['cement-section','doors-section','paint-section'];
         const hash = window.location.hash.replace('#','');
         if (allSections.includes(hash)) {
             allSections.forEach(id => {
@@ -223,6 +429,20 @@
     window.addEventListener('DOMContentLoaded', showOnlySelectedSection);
     window.addEventListener('hashchange', showOnlySelectedSection);
     window.addEventListener('resize', showOnlySelectedSection);
+    function openPaintModal(type) {
+        document.getElementById('paint-modal-' + type).style.display = 'block';
+    }
+    function closePaintModal(type) {
+        document.getElementById('paint-modal-' + type).style.display = 'none';
+    }
+    window.onclick = function(event) {
+        ['interior','exterior','putty','enamel','spray','tools'].forEach(function(type) {
+            var modal = document.getElementById('paint-modal-' + type);
+            if (modal && event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    }
     </script>
     <!-- Mobile Bottom Navigation Bar -->
     <nav class="mobile-bottom-nav">
