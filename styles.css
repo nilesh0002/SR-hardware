@@ -550,6 +550,24 @@ footer {
     nav ul li:last-child { /* Hide Contact link */
         display: none;
     }
+    .mobile-bottom-nav .nav-icon svg {
+        color: #222;
+        stroke: #222;
+        width: 28px;
+        height: 28px;
+        display: block;
+        margin: 0 auto;
+    }
+    .mobile-bottom-nav .nav-item.active .nav-icon svg {
+        color: #1976d2;
+        stroke: #1976d2;
+    }
+    main {
+        padding-bottom: 80px !important;
+    }
+    footer {
+        padding-bottom: 70px !important;
+    }
 }
 
 .door-brands-grid {
