@@ -205,17 +205,24 @@
             }
         });
     }
-    function showOnlyCementSectionMobile() {
-        if (window.innerWidth <= 600 && window.location.hash === '#cement-section') {
-            ['cement-section','doors-section','tools-section','other-equipment-section'].forEach(id => {
+    function showOnlySelectedSection() {
+        const allSections = ['cement-section','doors-section','tools-section','other-equipment-section'];
+        const hash = window.location.hash.replace('#','');
+        if (allSections.includes(hash)) {
+            allSections.forEach(id => {
                 const el = document.getElementById(id);
-                if (el) el.style.display = (id === 'cement-section') ? 'block' : 'none';
+                if (el) el.style.display = (id === hash) ? 'block' : 'none';
+            });
+        } else {
+            allSections.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = 'block';
             });
         }
     }
-    window.addEventListener('DOMContentLoaded', showOnlyCementSectionMobile);
-    window.addEventListener('hashchange', showOnlyCementSectionMobile);
-    window.addEventListener('resize', showOnlyCementSectionMobile);
+    window.addEventListener('DOMContentLoaded', showOnlySelectedSection);
+    window.addEventListener('hashchange', showOnlySelectedSection);
+    window.addEventListener('resize', showOnlySelectedSection);
     </script>
 </body>
 </html> 
