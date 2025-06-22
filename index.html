@@ -135,6 +135,53 @@
         main {
             padding-bottom: 90px;
         }
+        .featured-section {
+            max-width: 900px;
+            margin: 0 auto 2rem auto;
+            padding: 0 1rem;
+        }
+        .featured-section h2 {
+            text-align: center;
+            color: #FFD600;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        .featured-row {
+            display: flex;
+            overflow-x: auto;
+            gap: 1.1rem;
+            padding-bottom: 0.5rem;
+            -webkit-overflow-scrolling: touch;
+        }
+        .featured-card {
+            min-width: 140px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(34,34,34,0.10);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.8rem 0.7rem 0.7rem 0.7rem;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .featured-card img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+            background: #f5f5f5;
+        }
+        .featured-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 0.2rem;
+        }
+        .featured-desc {
+            font-size: 0.97rem;
+            color: #888;
+        }
         @media (max-width: 600px) {
             .main-header h1 {
                 font-size: 1.1rem;
@@ -179,6 +226,23 @@
             main {
                 padding-bottom: 80px;
             }
+            .featured-row {
+                gap: 0.6rem;
+            }
+            .featured-card {
+                min-width: 110px;
+                padding: 0.6rem 0.3rem 0.5rem 0.3rem;
+            }
+            .featured-card img {
+                width: 48px;
+                height: 48px;
+            }
+            .featured-title {
+                font-size: 0.98rem;
+            }
+            .featured-desc {
+                font-size: 0.92rem;
+            }
         }
     </style>
 </head>
@@ -194,6 +258,32 @@
                 <img src="images/door.jpg" alt="Door" class="slide">
                 <img src="images/tools.jpg" alt="Tools" class="slide">
                 <img src="images/cement.jpg" alt="Cement" class="slide">
+            </div>
+        </section>
+        <!-- Featured Products -->
+        <section class="featured-section">
+            <h2>Featured Products</h2>
+            <div class="featured-row">
+                <div class="featured-card">
+                    <img src="images/paint.jpg" alt="Enamel Paint">
+                    <div class="featured-title">Enamel Paint</div>
+                    <div class="featured-desc">Vibrant, long-lasting finish</div>
+                </div>
+                <div class="featured-card">
+                    <img src="images/steel door.jpg" alt="Steel Door">
+                    <div class="featured-title">Steel Door</div>
+                    <div class="featured-desc">Secure & modern design</div>
+                </div>
+                <div class="featured-card">
+                    <img src="images/powertoolspic.jpg" alt="Power Drill">
+                    <div class="featured-title">Power Drill</div>
+                    <div class="featured-desc">Efficient, cordless tool</div>
+                </div>
+                <div class="featured-card">
+                    <img src="images/cement.jpg" alt="Ultra Cement">
+                    <div class="featured-title">Ultra Cement</div>
+                    <div class="featured-desc">Superior strength cement</div>
+                </div>
             </div>
         </section>
         <!-- Product Categories Grid -->
