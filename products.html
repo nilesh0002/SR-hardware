@@ -5,6 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products - UTU Hardware Equipment</title>
     <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .products-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem 5rem 1rem;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.2rem;
+        }
+        .product-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(34,34,34,0.10);
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: box-shadow 0.2s;
+            position: relative;
+        }
+        .product-card img {
+            width: 100%;
+            max-width: 120px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.7rem;
+            background: #f5f5f5;
+        }
+        .product-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+            text-align: center;
+        }
+        .product-brand {
+            font-size: 0.98rem;
+            color: #888;
+            margin-bottom: 0.2rem;
+        }
+        .product-price {
+            font-size: 1.05rem;
+            color: #FFD600;
+            font-weight: 600;
+            margin-bottom: 0.7rem;
+        }
+        .add-cart-btn {
+            background: #FFD600;
+            color: #111;
+            font-weight: 700;
+            border: none;
+            border-radius: 6px;
+            padding: 0.6rem 1.2rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s, color 0.2s;
+            margin-top: auto;
+        }
+        .add-cart-btn:active {
+            background: #111;
+            color: #FFD600;
+        }
+        .cart-confirm {
+            position: fixed;
+            left: 50%;
+            bottom: 80px;
+            transform: translateX(-50%);
+            background: #FFD600;
+            color: #111;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(34,34,34,0.10);
+            z-index: 1000;
+            display: none;
+        }
+        @media (max-width: 600px) {
+            .products-section {
+                padding: 1rem 0.2rem 5rem 0.2rem;
+            }
+            .products-grid {
+                gap: 0.7rem;
+            }
+            .product-card {
+                padding: 0.7rem;
+            }
+            .product-card img {
+                max-width: 90px;
+                height: 70px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -19,441 +114,135 @@
         </nav>
     </header>
     <main>
-        <section class="category cement-brands-section" id="cement-section">
-            <h2>Cement</h2>
-            <div class="cement-brands-grid">
-                <div class="cement-brand-card">
-                    <img src="images/ultratech.png" alt="UltraTech Cement Logo" class="cement-logo full-img">
-                    <h3>UltraTech Cement</h3>
-                    <p><b>Use:</b> All-purpose, decorative</p>
-                    <p class="price">₹550</p>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="cement-brand-card">
-                    <img src="images/acc.png" alt="ACC Cement Logo" class="cement-logo full-img">
-                    <h3>ACC Cement</h3>
-                    <p><b>Use:</b> General construction</p>
-                    <p class="price">₹520</p>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="cement-brand-card">
-                    <img src="images/ambuja.png" alt="Ambuja Cement Logo" class="cement-logo full-img">
-                    <h3>Ambuja Cement</h3>
-                    <p><b>Use:</b> House construction, water-resistant</p>
-                    <p class="price">₹540</p>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="cement-brand-card">
-                    <img src="images/shree.png" alt="Shree Cement Logo" class="cement-logo full-img">
-                    <h3>Shree Cement</h3>
-                    <p><b>Use:</b> High early strength</p>
-                    <p class="price">₹510</p>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="cement-brand-card">
-                    <img src="images/dalmia.png" alt="Dalmia Bharat Cement Logo" class="cement-logo full-img">
-                    <h3>Dalmia Bharat Cement</h3>
-                    <p><b>Use:</b> High strength, infrastructure</p>
-                    <p class="price">₹530</p>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="cement-brand-card">
-                    <img src="images/jk.png" alt="JK Lakshmi Cement Logo" class="cement-logo full-img">
-                    <h3>JK Lakshmi Cement</h3>
-                    <p><b>Use:</b> Strong concrete work</p>
-                    <p class="price">₹499</p>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
+        <section class="products-section">
+            <h1>Our Products</h1>
+            <div class="products-grid" id="productsGrid">
+                <!-- Product cards will be rendered here -->
             </div>
         </section>
-        <section class="category door-brands-section" id="doors-section">
-            <h2>Types of Doors – Detailed Overview</h2>
-            <div class="door-brands-grid">
-                <div class="door-brand-card" onclick="openDoorModal('wooden')">
-                    <img src="images/woodendoor.jpg" alt="Wooden Door" class="door-logo large">
-                    <h3>Wooden Doors</h3>
-                    <p class="door-summary">Classic, elegant, and durable for main entrances and bedrooms.</p>
-                    <p class="price">₹8,999</p>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="door-brand-card" onclick="openDoorModal('steel')">
-                    <img src="images/steel door.jpg" alt="Steel Door" class="door-logo large">
-                    <h3>Steel Doors</h3>
-                    <p class="door-summary">High security, weather-resistant, and low maintenance.</p>
-                    <p class="price">₹5,499</p>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="door-brand-card" onclick="openDoorModal('glass')">
-                    <img src="images/glass door.webp" alt="Glass Door" class="door-logo large">
-                    <h3>Glass Doors</h3>
-                    <p class="door-summary">Modern, elegant, and space-enhancing for interiors.</p>
-                    <p class="price">₹7,299</p>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-            </div>
-            <!-- Modals for details -->
-            <div id="door-modal-wooden" class="door-modal" style="display:none;">
-                <div class="door-modal-content">
-                    <span class="close" onclick="closeDoorModal('wooden')">&times;</span>
-                    <h3>Wooden Doors (Timber Doors)</h3>
-                    <img src="images/woodendoor.jpg" alt="Wooden Door" class="door-logo large-modal">
-                    <p><b>Material:</b> Teak, Sal, Sheesham, Pine, Engineered wood, MDF</p>
-                    <p><b>Features:</b><br>
-                        Classic & aesthetic look<br>
-                        Durable and strong (especially hardwoods)<br>
-                        Can be carved, polished, or painted
-                    </p>
-                    <p><b>Common Uses:</b><br>
-                        Main entrance doors<br>
-                        Bedroom and indoor doors
-                    </p>
-                    <p><b>Pros:</b><br>
-                        Good insulation (sound & temperature)<br>
-                        Traditional and elegant
-                    </p>
-                    <p><b>Cons:</b><br>
-                        Expensive (especially solid wood)<br>
-                        Can warp in moisture without proper treatment
-                    </p>
-                    <p><b>Popular Brands:</b> Greenply, Century Doors, Duro, Kitply</p>
-                </div>
-            </div>
-            <div id="door-modal-steel" class="door-modal" style="display:none;">
-                <div class="door-modal-content">
-                    <span class="close" onclick="closeDoorModal('steel')">&times;</span>
-                    <h3>Steel Doors</h3>
-                    <img src="images/steel door.jpg" alt="Steel Door" class="door-logo large-modal">
-                    <p><b>Material:</b> Galvanized steel, powder-coated steel, sometimes with honeycomb or PU core</p>
-                    <p><b>Features:</b><br>
-                        High strength and security<br>
-                        Weather-resistant<br>
-                        Fire-resistant options available
-                    </p>
-                    <p><b>Common Uses:</b><br>
-                        Main entrance, security doors, commercial buildings
-                    </p>
-                    <p><b>Pros:</b><br>
-                        Low maintenance<br>
-                        Affordable<br>
-                        Termite-proof and corrosion-resistant (if coated)
-                    </p>
-                    <p><b>Cons:</b><br>
-                        Less aesthetic than wood<br>
-                        Heavier
-                    </p>
-                    <p><b>Popular Brands:</b> Godrej, Tata Pravesh, Dorma, Sainik</p>
-                </div>
-            </div>
-            <div id="door-modal-glass" class="door-modal" style="display:none;">
-                <div class="door-modal-content">
-                    <span class="close" onclick="closeDoorModal('glass')">&times;</span>
-                    <h3>Glass Doors</h3>
-                    <img src="images/glass door.webp" alt="Glass Door" class="door-logo large-modal">
-                    <p><b>Material:</b> Tempered glass, frosted glass, laminated glass with aluminum or wooden frames</p>
-                    <p><b>Features:</b><br>
-                        Sleek and modern<br>
-                        Transparent or translucent for light passage<br>
-                        Available as sliding, hinged, or frameless
-                    </p>
-                    <p><b>Common Uses:</b><br>
-                        Bathrooms, balconies, offices, shower partitions
-                    </p>
-                    <p><b>Pros:</b><br>
-                        Elegant and space-enhancing<br>
-                        Good for visual openness
-                    </p>
-                    <p><b>Cons:</b><br>
-                        Needs frequent cleaning<br>
-                        Not ideal for high-security zones (unless reinforced)
-                    </p>
-                    <p><b>Popular Brands:</b> Saint-Gobain, Modiguard, AIS Glass</p>
-                </div>
-            </div>
-        </section>
-        <section class="category paint-section" id="paint-section">
-            <h2>Paints & Painting Solutions</h2>
-            <div class="paint-brands-grid">
-                <div class="paint-brand-card" onclick="openPaintModal('interior')">
-                    <img src="images/interior paint.webp" alt="Interior Paint" class="paint-logo">
-                    <h3>Interior Paint</h3>
-                    <p>For walls and ceilings. Smooth, luxurious finish. Popular: Asian Paints Royale, Berger Silk.</p>
-                </div>
-                <div class="paint-brand-card" onclick="openPaintModal('exterior')">
-                    <img src="images/exterior paint.jpg" alt="Exterior Paint" class="paint-logo">
-                    <h3>Exterior Paint</h3>
-                    <p>Weather-resistant, long-lasting. Popular: Nerolac Excel, Dulux Weathershield.</p>
-                </div>
-                <div class="paint-brand-card" onclick="openPaintModal('putty')">
-                    <img src="images/wall putty.jpg" alt="Wall Putty & Primer" class="paint-logo">
-                    <h3>Wall Putty & Primer</h3>
-                    <p>Base coat for smooth finish. Brands: Birla White, JK Wall Putty, Asian Paints Primer.</p>
-                </div>
-                <div class="paint-brand-card" onclick="openPaintModal('enamel')">
-                    <img src="images/enamel paint.jpg" alt="Enamel Paint" class="paint-logo">
-                    <h3>Enamel Paint</h3>
-                    <p>Glossy, durable finish for wood & metal. Popular: Asian Paints Apcolite, Shalimar Superlac.</p>
-                </div>
-                <div class="paint-brand-card" onclick="openPaintModal('spray')">
-                    <img src="images/spray paint.jpg" alt="Spray Paint" class="paint-logo">
-                    <h3>Spray Paint</h3>
-                    <p>Quick application for crafts, touch-ups. Brands: Asian Paints, Nerolac, Indigo.</p>
-                </div>
-                <div class="paint-brand-card" onclick="openPaintModal('tools')">
-                    <img src="images/paint ttols.jpg" alt="Paint Tools" class="paint-logo">
-                    <h3>Paint Tools</h3>
-                    <p>Brushes, rollers, trays, tape, putty knife, sandpaper, mixing sticks, spray guns.</p>
-                </div>
-            </div>
-            <h3 style="margin-top:32px;">Top Paint Brands</h3>
-            <div class="paint-logo-grid">
-                <a href="#" class="paint-brand-logo"><img src="images/asian-paints.png" alt="Asian Paints"></a>
-                <a href="#" class="paint-brand-logo"><img src="images/berger.png" alt="Berger Paints"></a>
-                <a href="#" class="paint-brand-logo"><img src="images/nerolac.png" alt="Nerolac Paints"></a>
-                <a href="#" class="paint-brand-logo"><img src="images/dulux.png" alt="Dulux Paints"></a>
-                <a href="#" class="paint-brand-logo"><img src="images/indigo.png" alt="Indigo Paints"></a>
-                <a href="#" class="paint-brand-logo"><img src="images/shalimar.png" alt="Shalimar Paints"></a>
-                <a href="#" class="paint-brand-logo"><img src="images/british.png" alt="British Paints"></a>
-            </div>
-            <!-- Paint Modals with more details -->
-            <div id="paint-modal-interior" class="paint-modal" style="display:none;">
-                <div class="paint-modal-content">
-                    <span class="close" onclick="closePaintModal('interior')">&times;</span>
-                    <h3>Interior Paint</h3>
-                    <img src="images/interior paint.webp" alt="Interior Paint" class="paint-logo large-modal">
-                    <p><b>Material:</b> Acrylic Emulsion</p>
-                    <p><b>Features:</b><br>
-                        Smooth, luxurious finish<br>
-                        Low VOC, quick dry<br>
-                        Washable, stain-resistant
-                    </p>
-                    <p><b>Common Uses:</b><br>
-                        Living rooms, bedrooms, ceilings, offices
-                    </p>
-                    <p><b>Pros:</b><br>
-                        Easy to clean<br>
-                        Wide color range<br>
-                        Good coverage
-                    </p>
-                    <p><b>Cons:</b><br>
-                        Not suitable for exteriors<br>
-                        May require primer on new walls
-                    </p>
-                    <p><b>Popular Brands:</b> Asian Paints Royale, Berger Silk, Dulux Velvet Touch</p>
-                    <p><b>Variants:</b> 1L, 4L, 10L, 20L</p>
-                    <p><b>MRP:</b> ₹450</p>
-                    <p><b>Offer Price:</b> ₹420</p>
-                    <button class="add-cart-btn">Add to Cart</button>
-                    <p><b>Reviews:</b> ★★★★☆ (132 reviews)</p>
-                </div>
-            </div>
-            <div id="paint-modal-exterior" class="paint-modal" style="display:none;">
-                <div class="paint-modal-content">
-                    <span class="close" onclick="closePaintModal('exterior')">&times;</span>
-                    <h3>Exterior Paint</h3>
-                    <img src="images/exterior paint.jpg" alt="Exterior Paint" class="paint-logo large-modal">
-                    <p><b>Material:</b> Acrylic Emulsion</p>
-                    <p><b>Features:</b><br>
-                        Weather-resistant<br>
-                        UV protection<br>
-                        Anti-fungal, anti-algae
-                    </p>
-                    <p><b>Common Uses:</b><br>
-                        Building exteriors, balconies, boundary walls
-                    </p>
-                    <p><b>Pros:</b><br>
-                        Long-lasting color<br>
-                        Protects against rain and sun
-                    </p>
-                    <p><b>Cons:</b><br>
-                        Slightly higher cost<br>
-                        May need touch-ups in harsh climates
-                    </p>
-                    <p><b>Popular Brands:</b> Nerolac Excel, Dulux Weathershield, Asian Paints Apex</p>
-                    <p><b>Variants:</b> 1L, 4L, 10L, 20L</p>
-                    <p><b>MRP:</b> ₹500</p>
-                    <p><b>Offer Price:</b> ₹470</p>
-                    <button class="add-cart-btn">Add to Cart</button>
-                    <p><b>Reviews:</b> ★★★★☆ (98 reviews)</p>
-                </div>
-            </div>
-            <div id="paint-modal-putty" class="paint-modal" style="display:none;">
-                <div class="paint-modal-content">
-                    <span class="close" onclick="closePaintModal('putty')">&times;</span>
-                    <h3>Wall Putty & Primer</h3>
-                    <img src="images/wall putty.jpg" alt="Wall Putty & Primer" class="paint-logo large-modal">
-                    <p><b>Material:</b> White cement, acrylic</p>
-                    <p><b>Features:</b><br>
-                        Smoothens wall surface<br>
-                        Improves paint adhesion
-                    </p>
-                    <p><b>Common Uses:</b><br>
-                        Base coat before painting<br>
-                        Filling cracks and holes
-                    </p>
-                    <p><b>Pros:</b><br>
-                        Enhances paint life<br>
-                        Prevents flaking
-                    </p>
-                    <p><b>Cons:</b><br>
-                        Needs proper mixing<br>
-                        Can be dusty during sanding
-                    </p>
-                    <p><b>Popular Brands:</b> Birla White, JK Wall Putty, Asian Paints Primer</p>
-                    <p><b>Variants:</b> 1kg, 5kg, 20kg</p>
-                    <p><b>MRP:</b> ₹250</p>
-                    <p><b>Offer Price:</b> ₹220</p>
-                    <button class="add-cart-btn">Add to Cart</button>
-                    <p><b>Reviews:</b> ★★★★☆ (54 reviews)</p>
-                </div>
-            </div>
-            <div id="paint-modal-enamel" class="paint-modal" style="display:none;">
-                <div class="paint-modal-content">
-                    <span class="close" onclick="closePaintModal('enamel')">&times;</span>
-                    <h3>Enamel Paint</h3>
-                    <img src="images/enamel paint.jpg" alt="Enamel Paint" class="paint-logo large-modal">
-                    <p><b>Material:</b> Alkyd resin, pigments</p>
-                    <p><b>Features:</b><br>
-                        Glossy, durable finish<br>
-                        Water and stain resistant
-                    </p>
-                    <p><b>Common Uses:</b><br>
-                        Doors, windows, metal grills, furniture
-                    </p>
-                    <p><b>Pros:</b><br>
-                        High gloss<br>
-                        Easy to clean
-                    </p>
-                    <p><b>Cons:</b><br>
-                        Strong odor during application<br>
-                        Longer drying time
-                    </p>
-                    <p><b>Popular Brands:</b> Asian Paints Apcolite, Shalimar Superlac, Nerolac Enamel</p>
-                    <p><b>Variants:</b> 1L, 4L, 10L</p>
-                    <p><b>MRP:</b> ₹350</p>
-                    <p><b>Offer Price:</b> ₹320</p>
-                    <button class="add-cart-btn">Add to Cart</button>
-                    <p><b>Reviews:</b> ★★★★☆ (67 reviews)</p>
-                </div>
-            </div>
-            <div id="paint-modal-spray" class="paint-modal" style="display:none;">
-                <div class="paint-modal-content">
-                    <span class="close" onclick="closePaintModal('spray')">&times;</span>
-                    <h3>Spray Paint</h3>
-                    <img src="images/spray paint.jpg" alt="Spray Paint" class="paint-logo large-modal">
-                    <p><b>Material:</b> Acrylic, solvent</p>
-                    <p><b>Features:</b><br>
-                        Fast drying<br>
-                        Multi-surface use
-                    </p>
-                    <p><b>Common Uses:</b><br>
-                        Crafts, touch-ups, metal, wood
-                    </p>
-                    <p><b>Pros:</b><br>
-                        Easy to apply<br>
-                        No brush marks
-                    </p>
-                    <p><b>Cons:</b><br>
-                        Limited coverage per can<br>
-                        Needs good ventilation
-                    </p>
-                    <p><b>Popular Brands:</b> Asian Paints, Nerolac, Indigo</p>
-                    <p><b>Variants:</b> 200ml, 400ml</p>
-                    <p><b>MRP:</b> ₹180</p>
-                    <p><b>Offer Price:</b> ₹150</p>
-                    <button class="add-cart-btn">Add to Cart</button>
-                    <p><b>Reviews:</b> ★★★★☆ (41 reviews)</p>
-                </div>
-            </div>
-            <div id="paint-modal-tools" class="paint-modal" style="display:none;">
-                <div class="paint-modal-content">
-                    <span class="close" onclick="closePaintModal('tools')">&times;</span>
-                    <h3>Paint Tools</h3>
-                    <img src="images/paint ttols.jpg" alt="Paint Tools" class="paint-logo large-modal">
-                    <p><b>Includes:</b> Brushes, rollers, trays, tape, putty knife, sandpaper, mixing sticks, spray guns</p>
-                    <p><b>Features:</b><br>
-                        Durable, easy to use<br>
-                        Multiple sizes available
-                    </p>
-                    <p><b>Common Uses:</b><br>
-                        Painting, prepping, finishing
-                    </p>
-                    <p><b>Pros:</b><br>
-                        Reusable<br>
-                        Professional finish
-                    </p>
-                    <p><b>Cons:</b><br>
-                        Some tools need cleaning after use
-                    </p>
-                    <p><b>Popular Brands:</b> Asian Paints, Berger, Nerolac</p>
-                    <p><b>MRP:</b> ₹120</p>
-                    <p><b>Offer Price:</b> ₹99</p>
-                    <button class="add-cart-btn">Add to Cart</button>
-                    <p><b>Reviews:</b> ★★★★☆ (23 reviews)</p>
-                </div>
-            </div>
-        </section>
+        <div class="cart-confirm" id="cartConfirm">Added to cart!</div>
     </main>
     <footer>
         <p>&copy; 2024 UTU Hardware Equipment. All rights reserved.</p>
     </footer>
     <script>
-    function openDoorModal(type) {
-        document.getElementById('door-modal-' + type).style.display = 'block';
-    }
-    function closeDoorModal(type) {
-        document.getElementById('door-modal-' + type).style.display = 'none';
-    }
-    window.onclick = function(event) {
-        ['wooden','steel','glass'].forEach(function(type) {
-            var modal = document.getElementById('door-modal-' + type);
-            if (modal && event.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-    }
-    function showOnlySelectedSection() {
-        const allSections = ['cement-section','doors-section','paint-section','tools-section'];
-        const hash = window.location.hash.replace('#','');
-        const isMobile = window.matchMedia('(max-width: 600px)').matches;
-        if (isMobile) {
-            // On mobile, always show only the selected section (default to cement if none)
-            let showId = allSections.includes(hash) ? hash : 'cement-section';
-            allSections.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.style.display = (id === showId) ? 'block' : 'none';
-            });
-        } else {
-            // On desktop, show all unless a hash is present
-            if (allSections.includes(hash)) {
-                allSections.forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el) el.style.display = (id === hash) ? 'block' : 'none';
-                });
-            } else {
-                allSections.forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el) el.style.display = 'block';
-                });
-            }
+    // Example product data (replace with real data as needed)
+    const products = [
+        {
+            id: 'cement1',
+            name: 'Ultra Cement',
+            image: 'images/cement.jpg',
+            brand: 'UltraTech',
+            price: 350
+        },
+        {
+            id: 'door1',
+            name: 'Steel Door',
+            image: 'images/steel door.jpg',
+            brand: 'Tata',
+            price: 4200
+        },
+        {
+            id: 'door2',
+            name: 'Wooden Door',
+            image: 'images/woodendoor.jpg',
+            brand: 'Greenply',
+            price: 3900
+        },
+        {
+            id: 'paint1',
+            name: 'Enamel Paint',
+            image: 'images/enamel paint.jpg',
+            brand: 'Asian Paints',
+            price: 650
+        },
+        {
+            id: 'paint2',
+            name: 'Interior Paint',
+            image: 'images/interior paint.webp',
+            brand: 'Berger',
+            price: 1200
+        },
+        {
+            id: 'paint3',
+            name: 'Exterior Paint',
+            image: 'images/exterior paint.jpg',
+            brand: 'Nerolac',
+            price: 1400
+        },
+        {
+            id: 'putty1',
+            name: 'Wall Putty',
+            image: 'images/wall putty.jpg',
+            brand: 'JK',
+            price: 450
+        },
+        {
+            id: 'tools1',
+            name: 'Power Drill',
+            image: 'images/powertoolspic.jpg',
+            brand: 'Bosch',
+            price: 3200
+        },
+        {
+            id: 'tools2',
+            name: 'Hand Tools Set',
+            image: 'images/tools.jpg',
+            brand: 'Stanley',
+            price: 1800
+        },
+        {
+            id: 'tools3',
+            name: 'Paint Tools',
+            image: 'images/paint ttols.jpg',
+            brand: 'Pidilite',
+            price: 350
+        },
+        {
+            id: 'glass1',
+            name: 'Glass Door',
+            image: 'images/glass door.webp',
+            brand: 'Saint-Gobain',
+            price: 5200
+        },
+        {
+            id: 'spray1',
+            name: 'Spray Paint',
+            image: 'images/spray paint.jpg',
+            brand: 'Pidilite',
+            price: 250
         }
-    }
-    window.addEventListener('DOMContentLoaded', showOnlySelectedSection);
-    window.addEventListener('hashchange', showOnlySelectedSection);
-    window.addEventListener('resize', showOnlySelectedSection);
-    function openPaintModal(type) {
-        document.getElementById('paint-modal-' + type).style.display = 'block';
-    }
-    function closePaintModal(type) {
-        document.getElementById('paint-modal-' + type).style.display = 'none';
-    }
-    window.onclick = function(event) {
-        ['interior','exterior','putty','enamel','spray','tools'].forEach(function(type) {
-            var modal = document.getElementById('paint-modal-' + type);
-            if (modal && event.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-    }
+    ];
+    // Render product cards
+    const grid = document.getElementById('productsGrid');
+    products.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <div class="product-title">${product.name}</div>
+            <div class="product-brand">${product.brand}</div>
+            <div class="product-price">₹${product.price}</div>
+            <button class="add-cart-btn" data-id="${product.id}">Add to Cart</button>
+        `;
+        grid.appendChild(card);
+    });
+    // Add to cart logic
+    grid.addEventListener('click', async (e) => {
+        if (e.target.classList.contains('add-cart-btn')) {
+            const id = e.target.getAttribute('data-id');
+            const product = products.find(p => p.id === id);
+            await fetch('/cart/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(product)
+            });
+            // Show confirmation
+            const confirm = document.getElementById('cartConfirm');
+            confirm.style.display = 'block';
+            setTimeout(() => { confirm.style.display = 'none'; }, 1200);
+        }
+    });
     </script>
     <!-- Mobile Bottom Navigation Bar -->
     <nav class="mobile-bottom-nav">
