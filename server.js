@@ -29,6 +29,24 @@ app.use(session({
     cookie: { maxAge: 24 * 60 * 60 * 1000 }
 }));
 
+// Middleware: Protect all routes except login/signup
+app.use((req, res, next) => {
+    const publicPaths = [
+        '/login', '/signup', '/login.html', '/signup.html', '/styles.css'
+    ];
+    if (
+        publicPaths.includes(req.path) ||
+        req.path.startsWith('/images') ||
+        req.path.startsWith('/favicon')
+    ) {
+        return next();
+    }
+    if (!req.session.user) {
+        return res.redirect('/login.html');
+    }
+    next();
+});
+
 // Nodemailer transporter
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -48,18 +66,6 @@ function saveUsers(users) {
     fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
 }
 
-// Middleware: Protect all routes except login/signup
-app.use((req, res, next) => {
-    const publicPaths = ['/login', '/signup', '/login.html', '/styles.css'];
-    if (publicPaths.includes(req.path) || req.path.startsWith('/images')) {
-        return next();
-    }
-    if (!req.session.user) {
-        return res.redirect('/login.html');
-    }
-    next();
-});
-
 // SIGNUP
 app.post('/signup', async (req, res) => {
     const { email, password } = req.body;
@@ -75,6 +81,18 @@ app.post('/signup', async (req, res) => {
     saveUsers(users);
     req.session.user = { email };
     res.redirect('/index.html');
+
+    // Send notification email to admin
+    const mailOptions = {
+        from: EMAIL_USER,
+        to: ADMIN_EMAIL,
+        subject: 'New User Signup on Hardware & Equipment',
+        text: `A new user has signed up:\nEmail: ${email}\nTime: ${new Date().toLocaleString()}`
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+        // Ignore errors for UX
+        res.redirect('/index.html');
+    });
 });
 
 // LOGIN

@@ -3,10 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products - UTU Hardware Equipment</title>
-    <link rel="stylesheet" href="styles.css?v=2">
+    <title>Products | UTU Hardware & Equipment</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        .section-hidden { display: none !important; }
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.45); align-items: center; justify-content: center; }
+        .modal.active { display: flex; }
+        .modal-content { background: #fff; border-radius: 1.2rem; padding: 2rem 1.2rem; max-width: 95vw; width: 400px; box-shadow: 0 4px 24px rgba(0,0,0,0.13); position: relative; }
+        .modal-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; color: #3b6cb7; cursor: pointer; }
+        .brand-logos { display: flex; flex-wrap: wrap; gap: 1.2rem; justify-content: center; margin: 1.5rem 0; }
+        .brand-logos img { height: 38px; object-fit: contain; filter: grayscale(0.2); background: #f5f7fa; border-radius: 0.5rem; padding: 0.3rem 0.7rem; }
+        .paint-filters { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+        .paint-filters button { background: #e0eafc; border: none; border-radius: 0.7rem; padding: 0.5rem 1.1rem; font-size: 1rem; cursor: pointer; transition: background 0.18s; }
+        .paint-filters button.active { background: #3b6cb7; color: #fff; }
         .products-section {
             max-width: 900px;
             margin: 0 auto;
@@ -165,161 +175,255 @@
     </style>
 </head>
 <body>
-    <header>
+    <header class="main-header">
         <h1>Our Products</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
     </header>
-    <main>
-        <section class="products-section">
-            <h1>Our Products</h1>
-            <div class="products-grid" id="productsGrid">
-                <!-- Product cards will be rendered here -->
+    <main style="max-width: 1100px; margin: 2.2rem auto 2rem auto;">
+        <!-- Cement Section -->
+        <section id="cement-section" class="product-section">
+            <h2>Cement</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="images/cement.jpg" alt="Cement Bag">
+                    <span>UltraStrong Cement</span>
+                    <span style="color:#3b6cb7; font-weight:600;">$8.99/bag</span>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="images/wall putty.jpg" alt="Wall Putty">
+                    <span>Wall Putty</span>
+                    <span style="color:#3b6cb7; font-weight:600;">$5.49/pack</span>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
             </div>
         </section>
-        <div class="cart-confirm" id="cartConfirm">Added to cart!</div>
+        <!-- Doors Section -->
+        <section id="doors-section" class="product-section section-hidden">
+            <h2>Doors</h2>
+            <div class="product-grid">
+                <div class="product-card" onclick="openModal('door1')">
+                    <img src="images/door.jpg" alt="Wooden Door">
+                    <span>Classic Wooden Door</span>
+                    <span style="color:#3b6cb7; font-weight:600;">$120.00</span>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+                <div class="product-card" onclick="openModal('door2')">
+                    <img src="images/steel door.jpg" alt="Steel Door">
+                    <span>Steel Security Door</span>
+                    <span style="color:#3b6cb7; font-weight:600;">$180.00</span>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+                <div class="product-card" onclick="openModal('door3')">
+                    <img src="images/glass door.webp" alt="Glass Door">
+                    <span>Modern Glass Door</span>
+                    <span style="color:#3b6cb7; font-weight:600;">$210.00</span>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+        <!-- Paint Section -->
+        <section id="paint-section" class="product-section section-hidden">
+            <h2>Paint</h2>
+            <div class="paint-filters">
+                <button onclick="filterPaint('all')" class="active">All</button>
+                <button onclick="filterPaint('interior')">Interior</button>
+                <button onclick="filterPaint('exterior')">Exterior</button>
+                <button onclick="filterPaint('enamel')">Enamel</button>
+                <button onclick="filterPaint('spray')">Spray</button>
+                <button onclick="filterPaint('primer')">Primer/Putty</button>
+            </div>
+            <div class="product-grid" id="paint-products">
+                <div class="product-card paint-card interior" onclick="openModal('paint1')">
+                    <img src="images/interior paint.webp" alt="Interior Paint">
+                    <span>Interior Paint</span>
+                    <span style="color:#3b6cb7; font-weight:600;">$22.00</span>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+                <div class="product-card paint-card exterior" onclick="openModal('paint2')">
+                    <img src="images/exterior paint.jpg" alt="Exterior Paint">
+                    <span>Exterior Paint</span>
+                    <span style="color:#3b6cb7; font-weight:600;">$25.00</span>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+                <div class="product-card paint-card enamel" onclick="openModal('paint3')">
+                    <img src="images/enamel paint.jpg" alt="Enamel Paint">
+                    <span>Enamel Paint</span>
+                    <span style="color:#3b6cb7; font-weight:600;">$18.00</span>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+                <div class="product-card paint-card spray" onclick="openModal('paint4')">
+                    <img src="images/spray paint.jpg" alt="Spray Paint">
+                    <span>Spray Paint</span>
+                    <span style="color:#3b6cb7; font-weight:600;">$7.00</span>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+                <div class="product-card paint-card primer" onclick="openModal('paint5')">
+                    <img src="images/wall putty.jpg" alt="Wall Putty/Primer">
+                    <span>Wall Putty/Primer</span>
+                    <span style="color:#3b6cb7; font-weight:600;">$9.00</span>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+            <div class="brand-logos">
+                <img src="images/hp.jpg" alt="HP Brand">
+                <img src="images/paint.jpg" alt="Paint Brand">
+                <img src="images/interior paint.webp" alt="Interior Brand">
+                <img src="images/exterior paint.jpg" alt="Exterior Brand">
+            </div>
+        </section>
+        <!-- Tools Section -->
+        <section id="tools-section" class="product-section section-hidden">
+            <h2>Tools</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="images/tools.jpg" alt="Hand Tools">
+                    <span>Hand Tools Set</span>
+                    <span style="color:#3b6cb7; font-weight:600;">$35.00</span>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="images/powertoolspic.jpg" alt="Power Tools">
+                    <span>Power Tools</span>
+                    <span style="color:#3b6cb7; font-weight:600;">$99.00</span>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="images/paint ttols.jpg" alt="Paint Tools">
+                    <span>Paint Tools</span>
+                    <span style="color:#3b6cb7; font-weight:600;">$12.00</span>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+        <!-- Modals for Doors -->
+        <div class="modal" id="modal-door1">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('door1')">&times;</button>
+                <h3>Classic Wooden Door</h3>
+                <img src="images/door.jpg" alt="Wooden Door" style="width:100%; border-radius:0.7rem; margin-bottom:1rem;">
+                <p>Premium quality wooden door, perfect for interiors. Durable, stylish, and easy to install.</p>
+                <p style="color:#3b6cb7; font-weight:600;">$120.00</p>
+            </div>
+        </div>
+        <div class="modal" id="modal-door2">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('door2')">&times;</button>
+                <h3>Steel Security Door</h3>
+                <img src="images/steel door.jpg" alt="Steel Door" style="width:100%; border-radius:0.7rem; margin-bottom:1rem;">
+                <p>Heavy-duty steel door for maximum security. Weather-resistant and long-lasting.</p>
+                <p style="color:#3b6cb7; font-weight:600;">$180.00</p>
+            </div>
+        </div>
+        <div class="modal" id="modal-door3">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('door3')">&times;</button>
+                <h3>Modern Glass Door</h3>
+                <img src="images/glass door.webp" alt="Glass Door" style="width:100%; border-radius:0.7rem; margin-bottom:1rem;">
+                <p>Elegant glass door for contemporary spaces. Toughened glass, sleek design.</p>
+                <p style="color:#3b6cb7; font-weight:600;">$210.00</p>
+            </div>
+        </div>
+        <!-- Modals for Paint -->
+        <div class="modal" id="modal-paint1">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('paint1')">&times;</button>
+                <h3>Interior Paint</h3>
+                <img src="images/interior paint.webp" alt="Interior Paint" style="width:100%; border-radius:0.7rem; margin-bottom:1rem;">
+                <p>High-coverage, low-odor paint for beautiful interiors. Available in multiple colors.</p>
+                <p style="color:#3b6cb7; font-weight:600;">$22.00</p>
+            </div>
+        </div>
+        <div class="modal" id="modal-paint2">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('paint2')">&times;</button>
+                <h3>Exterior Paint</h3>
+                <img src="images/exterior paint.jpg" alt="Exterior Paint" style="width:100%; border-radius:0.7rem; margin-bottom:1rem;">
+                <p>Weather-resistant paint for exterior walls. Long-lasting color and protection.</p>
+                <p style="color:#3b6cb7; font-weight:600;">$25.00</p>
+            </div>
+        </div>
+        <div class="modal" id="modal-paint3">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('paint3')">&times;</button>
+                <h3>Enamel Paint</h3>
+                <img src="images/enamel paint.jpg" alt="Enamel Paint" style="width:100%; border-radius:0.7rem; margin-bottom:1rem;">
+                <p>Glossy, durable enamel paint for wood and metal surfaces.</p>
+                <p style="color:#3b6cb7; font-weight:600;">$18.00</p>
+            </div>
+        </div>
+        <div class="modal" id="modal-paint4">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('paint4')">&times;</button>
+                <h3>Spray Paint</h3>
+                <img src="images/spray paint.jpg" alt="Spray Paint" style="width:100%; border-radius:0.7rem; margin-bottom:1rem;">
+                <p>Easy-to-use spray paint for quick touch-ups and creative projects.</p>
+                <p style="color:#3b6cb7; font-weight:600;">$7.00</p>
+            </div>
+        </div>
+        <div class="modal" id="modal-paint5">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('paint5')">&times;</button>
+                <h3>Wall Putty/Primer</h3>
+                <img src="images/wall putty.jpg" alt="Wall Putty/Primer" style="width:100%; border-radius:0.7rem; margin-bottom:1rem;">
+                <p>Smooth wall putty and primer for perfect paint finish.</p>
+                <p style="color:#3b6cb7; font-weight:600;">$9.00</p>
+            </div>
+        </div>
     </main>
-    <footer>
-        <p>&copy; 2024 UTU Hardware Equipment. All rights reserved.</p>
+    <div class="cart-confirm" id="cartConfirm">Added to cart!</div>
+    <footer class="main-footer">
+        <p>&copy; 2024 UTU Hardware & Equipment. All rights reserved.</p>
     </footer>
     <nav class="bottom-nav">
-        <a href="index.html" class="nav-item">
-            <i class="fa fa-home"></i>
+        <a href="index.html" class="nav-link">
             <span>Home</span>
         </a>
-        <a href="products.html" class="nav-item active">
-            <i class="fa fa-th-large"></i>
+        <a href="products.html" class="nav-link active">
             <span>Products</span>
         </a>
-        <a href="cart.html" class="nav-item">
-            <i class="fa fa-shopping-cart"></i>
-            <span>Cart</span>
+        <a href="about.html" class="nav-link">
+            <span>About</span>
         </a>
     </nav>
     <script>
-    // Example product data (replace with real data as needed)
-    const products = [
-        {
-            id: 'cement1',
-            name: 'Ultra Cement',
-            image: 'images/cement.jpg',
-            brand: 'UltraTech',
-            price: 350
-        },
-        {
-            id: 'door1',
-            name: 'Steel Door',
-            image: 'images/steel door.jpg',
-            brand: 'Tata',
-            price: 4200
-        },
-        {
-            id: 'door2',
-            name: 'Wooden Door',
-            image: 'images/woodendoor.jpg',
-            brand: 'Greenply',
-            price: 3900
-        },
-        {
-            id: 'paint1',
-            name: 'Enamel Paint',
-            image: 'images/enamel paint.jpg',
-            brand: 'Asian Paints',
-            price: 650
-        },
-        {
-            id: 'paint2',
-            name: 'Interior Paint',
-            image: 'images/interior paint.webp',
-            brand: 'Berger',
-            price: 1200
-        },
-        {
-            id: 'paint3',
-            name: 'Exterior Paint',
-            image: 'images/exterior paint.jpg',
-            brand: 'Nerolac',
-            price: 1400
-        },
-        {
-            id: 'putty1',
-            name: 'Wall Putty',
-            image: 'images/wall putty.jpg',
-            brand: 'JK',
-            price: 450
-        },
-        {
-            id: 'tools1',
-            name: 'Power Drill',
-            image: 'images/powertoolspic.jpg',
-            brand: 'Bosch',
-            price: 3200
-        },
-        {
-            id: 'tools2',
-            name: 'Hand Tools Set',
-            image: 'images/tools.jpg',
-            brand: 'Stanley',
-            price: 1800
-        },
-        {
-            id: 'tools3',
-            name: 'Paint Tools',
-            image: 'images/paint ttols.jpg',
-            brand: 'Pidilite',
-            price: 350
-        },
-        {
-            id: 'glass1',
-            name: 'Glass Door',
-            image: 'images/glass door.webp',
-            brand: 'Saint-Gobain',
-            price: 5200
-        },
-        {
-            id: 'spray1',
-            name: 'Spray Paint',
-            image: 'images/spray paint.jpg',
-            brand: 'Pidilite',
-            price: 250
-        }
-    ];
-    // Render product cards
-    const grid = document.getElementById('productsGrid');
-    products.forEach(product => {
-        const card = document.createElement('div');
-        card.className = 'product-card';
-        card.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
-            <div class="product-title">${product.name}</div>
-            <div class="product-brand">${product.brand}</div>
-            <div class="product-price">₹${product.price}</div>
-            <button class="add-cart-btn" data-id="${product.id}">Add to Cart</button>
-        `;
-        grid.appendChild(card);
-    });
-    // Add to cart logic
-    grid.addEventListener('click', async (e) => {
-        if (e.target.classList.contains('add-cart-btn')) {
-            const id = e.target.getAttribute('data-id');
-            const product = products.find(p => p.id === id);
-            await fetch('/cart/add', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(product)
+        // Section switching logic for mobile
+        function showSectionFromHash() {
+            const hash = window.location.hash || '#cement-section';
+            document.querySelectorAll('.product-section').forEach(section => {
+                section.classList.add('section-hidden');
             });
-            // Show confirmation
-            const confirm = document.getElementById('cartConfirm');
-            confirm.style.display = 'block';
-            setTimeout(() => { confirm.style.display = 'none'; }, 1200);
+            const target = document.querySelector(hash);
+            if (target) target.classList.remove('section-hidden');
         }
-    });
+        window.addEventListener('hashchange', showSectionFromHash);
+        window.addEventListener('DOMContentLoaded', function() {
+            showSectionFromHash();
+            filterPaint('all'); // Ensure all paint products are visible and 'All' is selected on load
+        });
+        // Modal logic
+        function openModal(id) {
+            document.getElementById('modal-' + id).classList.add('active');
+        }
+        function closeModal(id) {
+            document.getElementById('modal-' + id).classList.remove('active');
+        }
+        window.onclick = function(event) {
+            document.querySelectorAll('.modal.active').forEach(modal => {
+                if (event.target === modal) modal.classList.remove('active');
+            });
+        };
+        // Paint filter logic
+        function filterPaint(type) {
+            document.querySelectorAll('.paint-filters button').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.paint-filters button[onclick*="' + type + '"]').classList.add('active');
+            document.querySelectorAll('.paint-card').forEach(card => {
+                if (type === 'all' || card.classList.contains(type)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
     </script>
 </body>
 </html> 

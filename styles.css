@@ -1,14 +1,287 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;500&display=swap');
 
 body {
-    font-family: 'Roboto', Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    color: #333;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
     min-height: 100vh;
-    transition: background 0.5s;
+    color: #222;
+    display: flex;
+    flex-direction: column;
 }
+.main-header {
+    background: rgba(255,255,255,0.95);
+    padding: 1.5rem 0 1rem 0;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 0 0 1.2rem 1.2rem;
+}
+.slider-section {
+    margin: 1.5rem auto 0 auto;
+    max-width: 600px;
+    width: 95vw;
+    position: relative;
+}
+.slider {
+    display: flex;
+    overflow: hidden;
+    border-radius: 1.2rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    background: #fff;
+    min-height: 220px;
+}
+.slide {
+    min-width: 100%;
+    opacity: 0;
+    transition: opacity 0.7s cubic-bezier(.4,0,.2,1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+}
+.slide.active {
+    opacity: 1;
+    position: relative;
+    z-index: 2;
+}
+.slide img {
+    width: 90%;
+    max-width: 320px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 1rem;
+    margin: 0 auto 0.5rem auto;
+    display: block;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+.slide-caption {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #2a3a4a;
+    background: rgba(255,255,255,0.85);
+    padding: 0.4rem 1.2rem;
+    border-radius: 1rem;
+    margin-bottom: 0.7rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.slider-controls {
+    position: absolute;
+    top: 50%;
+    left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    width: 100%;
+    pointer-events: none;
+}
+.slider-controls button {
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    font-size: 1.5rem;
+    color: #2a3a4a;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    cursor: pointer;
+    pointer-events: all;
+    transition: background 0.2s;
+}
+.slider-controls button:hover {
+    background: #e0eafc;
+}
+.product-grid-section {
+    margin: 2.2rem auto 1.5rem auto;
+    max-width: 900px;
+    width: 95vw;
+}
+.product-grid-section h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    color: #7b2ff2;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 8px rgba(123,47,242,0.07);
+}
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    justify-items: center;
+}
+.product-card {
+    background: #fff;
+    border-radius: 1.2rem;
+    box-shadow: 0 2px 16px rgba(123,47,242,0.08), 0 1.5px 6px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #222;
+    padding: 1.2rem 0.8rem 0.8rem 0.8rem;
+    transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+    min-width: 120px;
+    min-height: 160px;
+    border: 1.5px solid #f3e8ff;
+}
+.product-card:hover {
+    transform: translateY(-6px) scale(1.04);
+    box-shadow: 0 8px 32px rgba(123,47,242,0.13), 0 2px 12px rgba(0,0,0,0.08);
+    background: #f8f6ff;
+    border-color: #d1b3ff;
+}
+.product-card img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 0.9rem;
+    margin-bottom: 0.7rem;
+    box-shadow: 0 1px 6px rgba(123,47,242,0.06);
+    background: #f5f5f5;
+}
+.product-card span {
+    font-size: 1.08rem;
+    font-weight: 500;
+    margin-top: 0.2rem;
+}
+.add-cart-btn {
+    background: linear-gradient(90deg, #7b2ff2 0%, #f357a8 100%);
+    color: #fff;
+    font-weight: 700;
+    border: none;
+    border-radius: 0.7rem;
+    padding: 0.7rem 1.4rem;
+    cursor: pointer;
+    font-size: 1.08rem;
+    margin-top: auto;
+    min-width: 120px;
+    min-height: 44px;
+    box-shadow: 0 2px 8px rgba(123,47,242,0.10);
+    transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.18s;
+}
+.add-cart-btn:hover, .add-cart-btn:focus {
+    background: linear-gradient(90deg, #f357a8 0%, #7b2ff2 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(123,47,242,0.18);
+    transform: translateY(-2px) scale(1.03);
+}
+.bottom-nav {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    background: rgba(255,255,255,0.90);
+    box-shadow: 0 -4px 24px rgba(123,47,242,0.10), 0 -1.5px 8px rgba(0,0,0,0.04);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    z-index: 100;
+    border-radius: 1.2rem 1.2rem 0 0;
+    backdrop-filter: blur(8px);
+}
+.nav-link {
+    flex: 1;
+    text-align: center;
+    color: #2a3a4a;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.7rem 0 0.2rem 0;
+    transition: color 0.18s, background 0.18s;
+    border-top: 2.5px solid transparent;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.7rem;
+}
+.nav-link:active, .nav-link:focus {
+    background: #f3e8ff;
+}
+.nav-link.active, .nav-link:focus {
+    color: #7b2ff2;
+    border-top: 2.5px solid #7b2ff2;
+    background: #f3e8ff;
+}
+.nav-link i.fa-shopping-cart {
+    font-size: 1.6rem;
+    margin: 0;
+    display: block;
+    color: #7b2ff2;
+    transition: color 0.18s;
+}
+.nav-link.active i.fa-shopping-cart {
+    color: #f357a8;
+}
+.main-footer {
+    background: rgba(255,255,255,0.97);
+    text-align: center;
+    padding: 0.7rem 0 1.2rem 0;
+    font-size: 1rem;
+    color: #888;
+    margin-top: auto;
+    box-shadow: 0 -1px 8px rgba(0,0,0,0.03);
+    border-radius: 1.2rem 1.2rem 0 0;
+}
+@media (min-width: 600px) {
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .slider-section, .product-grid-section {
+        max-width: 900px;
+    }
+}
+@media (max-width: 600px) {
+    .main-header {
+        font-size: 1.1rem;
+        padding: 0.8rem 0 0.5rem 0;
+    }
+    .slider-section {
+        min-height: 180px;
+    }
+    .slide img {
+        height: 110px;
+        max-width: 200px;
+    }
+    .product-card {
+        min-width: 90px;
+        min-height: 120px;
+        padding: 0.7rem 0.3rem 0.3rem 0.3rem;
+        border-radius: 0.8rem;
+    }
+    .product-card img {
+        width: 60px;
+        height: 60px;
+        border-radius: 0.6rem;
+    }
+    .bottom-nav {
+        height: 54px;
+        border-radius: 1rem 1rem 0 0;
+    }
+    .main-footer {
+        font-size: 0.95rem;
+        padding: 0.5rem 0 0.8rem 0;
+        border-radius: 1rem 1rem 0 0;
+    }
+    .nav-link {
+        font-size: 0.98rem;
+        min-width: 44px;
+        min-height: 44px;
+        padding: 0.3rem 0 0.1rem 0;
+        border-radius: 0.5rem;
+    }
+    .nav-link i.fa-shopping-cart {
+        font-size: 1.8rem;
+    }
+}
+
 header {
     background: #111;
     color: #FFD600;
@@ -244,372 +517,29 @@ footer {
     box-shadow: 0 2px 16px rgba(34,34,34,0.10);
     border: 2px solid #FFD600;
 }
-.product-grid-section {
-    margin-top: 32px;
-}
-.section-title {
-    text-align: center;
-    font-size: 2rem;
-    color: #111;
-    font-weight: 700;
-    margin-bottom: 32px;
-}
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 32px;
-    justify-items: center;
-}
-.product-card {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 18px rgba(34,34,34,0.08);
-    border: 1px solid #FFD600;
-    padding: 24px 18px 18px 18px;
-    text-align: center;
-    width: 220px;
-    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-}
-.product-card:hover {
-    transform: translateY(-8px) scale(1.04);
-    box-shadow: 0 12px 40px rgba(34,34,34,0.15);
-    border-color: #111;
-}
-.product-card a {
-    text-decoration: none;
-    display: block;
-    height: 100%;
-}
-.product-card h3 {
-    color: #111;
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin: 0;
-    transition: color 0.2s;
-}
-.product-card:hover h3 {
-    color: #FFD600;
-}
-.product-card img {
-    width: 120px;
-    height: 120px;
-    object-fit: contain;
-    border-radius: 6px;
-    margin-bottom: 14px;
-    background: #fff;
-    border: 1px solid #eee;
-}
-.price {
-    color: #111;
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 12px;
-}
-.add-cart-btn {
-    background: #FFD600;
-    color: #111;
-    font-weight: 700;
-    font-size: 1rem;
-    padding: 10px 22px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-}
-.add-cart-btn:hover {
-    background: #111;
-    color: #FFD600;
-}
-.cement-companies {
-    background: #f7f7f7;
-    border-radius: 8px;
-    margin-top: 16px;
-    padding: 12px 10px;
-    font-size: 0.93rem;
-    color: #222;
-    box-shadow: 0 1px 4px rgba(34,34,34,0.04);
-}
-.cement-companies h4 {
-    margin: 0 0 8px 0;
-    color: #FFD600;
-    font-size: 1.05rem;
-    font-weight: 700;
-}
-.cement-companies ul {
-    padding-left: 18px;
-    margin: 0;
-}
-.cement-companies li {
-    margin-bottom: 8px;
-    line-height: 1.5;
-}
-.cement-brands-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 28px;
-    margin-top: 24px;
-}
-.cement-brand-card {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 18px rgba(34,34,34,0.08);
-    border: 1px solid #FFD600;
-    padding: 20px 14px 14px 14px;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+.product-grid-row {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.cement-brand-card:hover {
-    transform: translateY(-6px) scale(1.03);
-    box-shadow: 0 12px 40px rgba(34,34,34,0.15);
-    border-color: #111;
-}
-.cement-logo {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    margin-bottom: 10px;
-    background: #fff;
-    border-radius: 6px;
-    border: 1px solid #eee;
-}
-.cement-brand-card h3 {
-    color: #FFD600;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin: 0 0 8px 0;
-}
-.cement-brand-card p:last-of-type {
-    flex-grow: 1;
-}
-.cement-logo.full-img {
-    width: 100%;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 8px 8px 0 0;
-    margin-bottom: 10px;
-    background: #fff;
-    display: block;
+    gap: 32px;
+    justify-content: center;
 }
 @media (max-width: 600px) {
-    .cement-logo.full-img {
-        height: 38vw;
-        max-height: 140px;
-    }
-}
-
-/* Responsive styles */
-@media (max-width: 900px) {
-    main, .hero-content {
-        padding: 16px;
-        max-width: 100%;
-    }
-    .hero-content {
+    .product-grid-row {
         flex-direction: column;
-        gap: 24px;
-        align-items: flex-start;
-    }
-    .hero-text {
-        padding-left: 0;
-        text-align: left;
-    }
-    .hero-image {
-        justify-content: flex-start;
-    }
-    .product-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 20px;
-    }
-    nav ul {
         gap: 18px;
-    }
-}
-@media (max-width: 600px) {
-    header {
-        padding: 16px 0 8px 0;
-    }
-    nav ul {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-        margin: 0 0 0 10px;
-    }
-    nav a {
-        font-size: 0.98rem;
-        padding: 4px 10px;
-    }
-    header h1 {
-        font-size: 1.3rem;
-        text-align: center;
-        margin: 0 0 6px 0;
-    }
-    header {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-    }
-    .hero {
-        padding: 18px 0 18px 0;
-    }
-    .hero-content {
-        flex-direction: column;
-        gap: 12px;
         align-items: center;
     }
-    .hero-text h2 {
-        font-size: 1.3rem;
-    }
-    .hero-text p {
-        font-size: 1rem;
-    }
-    .hero-image img {
-        width: 120px;
-        height: 120px;
-    }
-    .section-title {
-        font-size: 1.2rem;
-    }
-    .product-card {
-        width: 100%;
-        padding: 12px 6px 10px 6px;
-    }
-    .product-card img {
-        width: 80px;
-        height: 80px;
-    }
-    .contact-form, .contact-details {
-        max-width: 100%;
-        padding: 8px;
-    }
-    main {
-        padding: 8px;
-    }
-    .cement-brands-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-    .cement-brand-card {
-        padding: 12px 6px 10px 6px;
-    }
-    .cement-logo {
-        width: 40px;
-        height: 40px;
-    }
-    .door-brands-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        margin-left: 0;
-        margin-right: 0;
-    }
-    .door-brand-card {
-        padding: 14px 4vw 18px 4vw;
-        border-radius: 12px;
-        font-size: 1.08rem;
-        box-shadow: 0 2px 10px rgba(34,34,34,0.10);
-        margin-bottom: 8px;
-    }
-    .door-logo.large {
-        width: 100vw;
-        max-width: 320px;
-        height: auto;
-        margin-bottom: 18px;
-        border-radius: 10px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .door-logo.large-modal {
-        width: 90vw;
-        max-width: 240px;
-        height: auto;
-        margin-bottom: 18px;
-        border-radius: 10px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .door-modal-content {
-        padding: 18px 2vw 18px 2vw;
-        max-width: 99vw;
-        min-width: 0;
-        font-size: 1.08rem;
-        border-radius: 14px;
-        margin: 30px auto;
-        overflow-y: auto;
-        max-height: 90vh;
-    }
-    .door-modal .close {
-        top: 10px;
-        right: 16px;
-        font-size: 2.2rem;
-    }
-    .add-cart-btn {
-        width: 100%;
-        font-size: 1.18rem;
-        padding: 16px 0;
-        margin-top: 10px;
-        border-radius: 8px;
-    }
-    .price {
-        font-size: 1.18rem;
-        margin-bottom: 12px;
-    }
-    .door-summary {
-        font-size: 1.08rem;
-        margin-bottom: 14px;
-    }
-    .door-brand-card h3 {
-        font-size: 1.22rem;
-        margin-bottom: 8px;
-    }
-    nav ul li:last-child { /* Hide Contact link */
-        display: none;
-    }
-    .mobile-bottom-nav .nav-icon svg {
-        color: #222;
-        stroke: #222;
-        width: 28px;
-        height: 28px;
-        display: block;
-        margin: 0 auto;
-    }
-    .mobile-bottom-nav .nav-item.active .nav-icon svg {
-        color: #1976d2;
-        stroke: #1976d2;
-    }
-    main {
-        padding-bottom: 80px !important;
-    }
-    footer {
-        padding-bottom: 70px !important;
-    }
-    body {
-        background: linear-gradient(120deg, #f7fafc 0%, #e3e9f3 100%);
-        transition: background 0.5s;
-    }
-    .product-card, .door-brand-card, .cement-brand-card, .slider-item {
-        transition: box-shadow 0.3s, transform 0.3s, background 0.4s;
-    }
-    .product-card:hover, .door-brand-card:hover, .cement-brand-card:hover, .slider-item:hover {
-        background: #e3e9f3;
-        box-shadow: 0 8px 32px rgba(34,34,34,0.13);
-        transform: translateY(-4px) scale(1.03);
-    }
-    section, .featured-slider-section, .product-grid-section {
-        transition: background 0.4s, box-shadow 0.4s;
+    .product-grid {
+        justify-content: center;
     }
 }
-
-.door-brands-grid {
+.paint-brands-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 28px;
     margin-top: 24px;
     margin-bottom: 32px;
 }
-.door-brand-card {
+.paint-brand-card {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 18px rgba(34,34,34,0.08);
@@ -621,65 +551,87 @@ footer {
     flex-direction: column;
     justify-content: space-between;
 }
-.door-brand-card:hover {
+.paint-brand-card:hover {
     transform: translateY(-6px) scale(1.03);
     box-shadow: 0 12px 40px rgba(34,34,34,0.15);
     border-color: #111;
 }
-.door-logo {
-    width: 70px;
-    height: 70px;
+.paint-logo {
+    width: 90px;
+    height: 90px;
     object-fit: contain;
     margin-bottom: 10px;
     background: #fff;
     border-radius: 6px;
     border: 1px solid #eee;
-}
-.door-brand-card h3 {
-    color: #FFD600;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin: 0 0 8px 0;
-}
-.door-brand-card p {
-    margin: 4px 0;
-    font-size: 0.97rem;
-    color: #222;
-}
-@media (max-width: 600px) {
-    .door-brands-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-    .door-brand-card {
-        padding: 12px 6px 10px 6px;
-    }
-    .door-logo {
-        width: 50px;
-        height: 50px;
-    }
-}
-
-.door-logo.large {
-    width: 120px;
-    height: 120px;
-    margin-bottom: 18px;
-}
-.door-logo.large-modal {
-    width: 180px;
-    height: 180px;
-    margin-bottom: 18px;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
-.door-summary {
-    font-size: 1.05rem;
-    color: #444;
-    margin-bottom: 10px;
+.paint-brand-card h3 {
+    color: #FFD600;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
 }
-/* Modal styles */
-.door-modal {
+.paint-brand-card p {
+    margin: 4px 0;
+    font-size: 0.97rem;
+    color: #222;
+}
+.paint-logo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 18px;
+}
+.paint-brand-logo {
+    display: block;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(34,34,34,0.07);
+    padding: 10px 18px;
+    transition: box-shadow 0.2s, transform 0.2s;
+    border: 1px solid #FFD600;
+}
+.paint-brand-logo img {
+    width: 60px;
+    height: 40px;
+    object-fit: contain;
+    display: block;
+}
+.paint-brand-logo:hover {
+    box-shadow: 0 8px 24px rgba(34,34,34,0.13);
+    transform: translateY(-4px) scale(1.03);
+    border-color: #111;
+}
+@media (max-width: 600px) {
+    .paint-brands-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .paint-brand-card {
+        padding: 12px 6px 10px 6px;
+    }
+    .paint-logo {
+        width: 60vw;
+        max-width: 120px;
+        height: auto;
+    }
+    .paint-logo-grid {
+        gap: 10px;
+    }
+    .paint-brand-logo {
+        padding: 6px 8px;
+    }
+    .paint-brand-logo img {
+        width: 40px;
+        height: 28px;
+    }
+}
+.paint-modal {
     display: none;
     position: fixed;
     z-index: 1000;
@@ -690,7 +642,7 @@ footer {
     overflow: auto;
     background-color: rgba(0,0,0,0.5);
 }
-.door-modal-content {
+.paint-modal-content {
     background: #fff;
     margin: 60px auto;
     padding: 32px 24px 24px 24px;
@@ -700,11 +652,15 @@ footer {
     box-shadow: 0 8px 32px rgba(34,34,34,0.18);
     animation: modalIn 0.2s;
 }
-@keyframes modalIn {
-    from { transform: translateY(40px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+.paint-logo.large-modal {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 18px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
-.door-modal .close {
+.paint-modal .close {
     position: absolute;
     top: 12px;
     right: 18px;
@@ -714,32 +670,20 @@ footer {
     font-weight: bold;
 }
 @media (max-width: 600px) {
-    .door-logo.large {
-        width: 100vw;
-        max-width: 320px;
-        height: auto;
-        margin-bottom: 18px;
-        border-radius: 10px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .door-logo.large-modal {
-        width: 90vw;
-        max-width: 240px;
-        height: auto;
-        margin-bottom: 18px;
-        border-radius: 10px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .door-modal-content {
+    .paint-modal-content {
         padding: 16px 4px 12px 4px;
         max-width: 95vw;
     }
+    .paint-logo.large-modal {
+        width: 120px;
+        height: 120px;
+    }
+    .paint-modal .close {
+        top: 6px;
+        right: 10px;
+        font-size: 1.7rem;
+    }
 }
-
 .featured-slider-section {
     margin: 40px 0 32px 0;
     padding: 0 0 16px 0;
@@ -845,7 +789,6 @@ footer {
         margin: 0 2px;
     }
 }
-
 .mobile-bottom-nav {
     display: none;
 }
@@ -896,31 +839,14 @@ footer {
         letter-spacing: 0.01em;
     }
 }
-
-.product-grid-row {
-    display: flex;
-    gap: 32px;
-    justify-content: center;
-}
-@media (max-width: 600px) {
-    .product-grid-row {
-        flex-direction: column;
-        gap: 18px;
-        align-items: center;
-    }
-    .product-grid {
-        justify-content: center;
-    }
-}
-
-.paint-brands-grid {
+.door-brands-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 28px;
     margin-top: 24px;
     margin-bottom: 32px;
 }
-.paint-brand-card {
+.door-brand-card {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 18px rgba(34,34,34,0.08);
@@ -932,88 +858,63 @@ footer {
     flex-direction: column;
     justify-content: space-between;
 }
-.paint-brand-card:hover {
+.door-brand-card:hover {
     transform: translateY(-6px) scale(1.03);
     box-shadow: 0 12px 40px rgba(34,34,34,0.15);
     border-color: #111;
 }
-.paint-logo {
-    width: 90px;
-    height: 90px;
+.door-logo {
+    width: 70px;
+    height: 70px;
     object-fit: contain;
     margin-bottom: 10px;
     background: #fff;
     border-radius: 6px;
     border: 1px solid #eee;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
-.paint-brand-card h3 {
+.door-brand-card h3 {
     color: #FFD600;
     font-size: 1.1rem;
     font-weight: 700;
     margin: 0 0 8px 0;
 }
-.paint-brand-card p {
+.door-brand-card p {
     margin: 4px 0;
     font-size: 0.97rem;
     color: #222;
 }
-.paint-logo-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-    justify-content: center;
-    align-items: center;
-    margin-top: 18px;
-}
-.paint-brand-logo {
-    display: block;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(34,34,34,0.07);
-    padding: 10px 18px;
-    transition: box-shadow 0.2s, transform 0.2s;
-    border: 1px solid #FFD600;
-}
-.paint-brand-logo img {
-    width: 60px;
-    height: 40px;
-    object-fit: contain;
-    display: block;
-}
-.paint-brand-logo:hover {
-    box-shadow: 0 8px 24px rgba(34,34,34,0.13);
-    transform: translateY(-4px) scale(1.03);
-    border-color: #111;
-}
 @media (max-width: 600px) {
-    .paint-brands-grid {
+    .door-brands-grid {
         grid-template-columns: 1fr;
         gap: 16px;
     }
-    .paint-brand-card {
+    .door-brand-card {
         padding: 12px 6px 10px 6px;
     }
-    .paint-logo {
-        width: 60vw;
-        max-width: 120px;
-        height: auto;
-    }
-    .paint-logo-grid {
-        gap: 10px;
-    }
-    .paint-brand-logo {
-        padding: 6px 8px;
-    }
-    .paint-brand-logo img {
-        width: 40px;
-        height: 28px;
+    .door-logo {
+        width: 50px;
+        height: 50px;
     }
 }
-
-.paint-modal {
+.door-logo.large {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 18px;
+}
+.door-logo.large-modal {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 18px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.door-summary {
+    font-size: 1.05rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+.door-modal {
     display: none;
     position: fixed;
     z-index: 1000;
@@ -1024,7 +925,7 @@ footer {
     overflow: auto;
     background-color: rgba(0,0,0,0.5);
 }
-.paint-modal-content {
+.door-modal-content {
     background: #fff;
     margin: 60px auto;
     padding: 32px 24px 24px 24px;
@@ -1034,15 +935,11 @@ footer {
     box-shadow: 0 8px 32px rgba(34,34,34,0.18);
     animation: modalIn 0.2s;
 }
-.paint-logo.large-modal {
-    width: 180px;
-    height: 180px;
-    margin-bottom: 18px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+@keyframes modalIn {
+    from { transform: translateY(40px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
-.paint-modal .close {
+.door-modal .close {
     position: absolute;
     top: 12px;
     right: 18px;
@@ -1052,17 +949,33 @@ footer {
     font-weight: bold;
 }
 @media (max-width: 600px) {
-    .paint-modal-content {
+    .door-logo.large {
+        width: 100vw;
+        max-width: 320px;
+        height: auto;
+        margin-bottom: 18px;
+        border-radius: 10px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .door-logo.large-modal {
+        width: 90vw;
+        max-width: 240px;
+        height: auto;
+        margin-bottom: 18px;
+        border-radius: 10px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .door-modal-content {
         padding: 16px 4px 12px 4px;
         max-width: 95vw;
     }
-    .paint-logo.large-modal {
-        width: 120px;
-        height: 120px;
-    }
-    .paint-modal .close {
-        top: 6px;
-        right: 10px;
-        font-size: 1.7rem;
-    }
+}
+
+/* Ensure main content is not hidden behind nav bar */
+main, .product-grid-section, .products-section {
+    padding-bottom: 80px !important;
 } 

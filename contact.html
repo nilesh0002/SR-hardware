@@ -3,43 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - UTU Hardware Equipment</title>
+    <title>Contact | Hardware & Equipment</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
+    <header class="main-header">
         <h1>Contact Us</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
     </header>
-    <main>
-        <section>
-            <h2>Get in Touch</h2>
-            <form class="contact-form">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" required></textarea>
-                <button type="submit">Send</button>
-            </form>
-            <div class="contact-details">
-                <h3>Business Contact</h3>
-                <p>Email: info@utuhardware.com</p>
-                <p>Phone: +1 234 567 8900</p>
-                <p>Address: 123 Main Street, Your City, Country</p>
-            </div>
-        </section>
+    <main style="max-width: 700px; margin: 2.5rem auto 2rem auto; background: rgba(255,255,255,0.97); border-radius: 1.2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 2rem 1.2rem;">
+        <h2>Get in Touch</h2>
+        <form class="contact-form" style="display: flex; flex-direction: column; gap: 1.1rem;">
+            <input type="text" name="name" placeholder="Your Name" required style="padding: 0.7rem; border-radius: 0.6rem; border: 1px solid #ccc; font-size: 1rem;">
+            <input type="email" name="email" placeholder="Your Email" required style="padding: 0.7rem; border-radius: 0.6rem; border: 1px solid #ccc; font-size: 1rem;">
+            <textarea name="message" placeholder="Your Message" rows="5" required style="padding: 0.7rem; border-radius: 0.6rem; border: 1px solid #ccc; font-size: 1rem;"></textarea>
+            <button type="submit" style="background: #3b6cb7; color: #fff; border: none; border-radius: 0.6rem; padding: 0.8rem 0; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background 0.2s;">Send Message</button>
+        </form>
+        <div style="margin-top: 2rem;">
+            <h3>Contact Information</h3>
+            <p>Email: <a href="mailto:info@utuhardware.com">info@utuhardware.com</a></p>
+            <p>Phone: <a href="tel:+1234567890">+1 234 567 890</a></p>
+            <p>Address: 123 Main Street, Your City, Country</p>
+        </div>
     </main>
-    <footer>
-        <p>&copy; 2024 UTU Hardware Equipment. All rights reserved.</p>
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-link">
+            <span>Home</span>
+        </a>
+        <a href="products.html" class="nav-link">
+            <span>Products</span>
+        </a>
+        <a href="cart.html" class="nav-link">
+            <i class="fa fa-shopping-cart"></i>
+        </a>
+    </nav>
+    <footer class="main-footer">
+        <p>&copy; 2024 Hardware & Equipment. All rights reserved.</p>
     </footer>
 </body>
 </html> 
