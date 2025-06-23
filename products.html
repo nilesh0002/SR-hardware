@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products | UTU Hardware & Equipment</title>
+    <title>Products | Hardware & Equipment</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -175,255 +175,118 @@
     </style>
 </head>
 <body>
-    <header class="main-header">
-        <h1>Our Products</h1>
+    <!-- Flipkart-style Header -->
+    <header class="fk-header">
+        <div class="fk-header-left">
+            <a href="index.html">
+                <img src="https://cdn-icons-png.flaticon.com/512/2965/2965567.png" alt="Hardware & Equipment Logo" class="fk-logo">
+            </a>
+            <span class="fk-site-title">Hardware & Equipment</span>
+        </div>
+        <form class="fk-search-bar" action="#" method="get">
+            <input type="text" placeholder="Search for products, brands and more" name="q">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+        <nav class="fk-header-nav">
+            <a href="products.html" class="fk-header-link">Products</a>
+            <a href="about.html" class="fk-header-link">About</a>
+            <a href="contact.html" class="fk-header-link">Contact</a>
+        </nav>
+        <div class="fk-header-cart">
+            <a href="cart.html" class="fk-cart-link">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="fk-cart-badge">2</span>
+            </a>
+        </div>
     </header>
-    <main style="max-width: 1100px; margin: 2.2rem auto 2rem auto;">
-        <!-- Cement Section -->
-        <section id="cement-section" class="product-section">
-            <h2>Cement</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <img src="images/cement.jpg" alt="Cement Bag">
-                    <span>UltraStrong Cement</span>
-                    <span style="color:#3b6cb7; font-weight:600;">$8.99/bag</span>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <img src="images/wall putty.jpg" alt="Wall Putty">
-                    <span>Wall Putty</span>
-                    <span style="color:#3b6cb7; font-weight:600;">$5.49/pack</span>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-            </div>
-        </section>
-        <!-- Doors Section -->
-        <section id="doors-section" class="product-section section-hidden">
-            <h2>Doors</h2>
-            <div class="product-grid">
-                <div class="product-card" onclick="openModal('door1')">
-                    <img src="images/door.jpg" alt="Wooden Door">
-                    <span>Classic Wooden Door</span>
-                    <span style="color:#3b6cb7; font-weight:600;">$120.00</span>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="product-card" onclick="openModal('door2')">
-                    <img src="images/steel door.jpg" alt="Steel Door">
-                    <span>Steel Security Door</span>
-                    <span style="color:#3b6cb7; font-weight:600;">$180.00</span>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="product-card" onclick="openModal('door3')">
-                    <img src="images/glass door.webp" alt="Glass Door">
-                    <span>Modern Glass Door</span>
-                    <span style="color:#3b6cb7; font-weight:600;">$210.00</span>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-            </div>
-        </section>
-        <!-- Paint Section -->
-        <section id="paint-section" class="product-section section-hidden">
-            <h2>Paint</h2>
-            <div class="paint-filters">
-                <button onclick="filterPaint('all')" class="active">All</button>
-                <button onclick="filterPaint('interior')">Interior</button>
-                <button onclick="filterPaint('exterior')">Exterior</button>
-                <button onclick="filterPaint('enamel')">Enamel</button>
-                <button onclick="filterPaint('spray')">Spray</button>
-                <button onclick="filterPaint('primer')">Primer/Putty</button>
-            </div>
-            <div class="product-grid" id="paint-products">
-                <div class="product-card paint-card interior" onclick="openModal('paint1')">
-                    <img src="images/interior paint.webp" alt="Interior Paint">
-                    <span>Interior Paint</span>
-                    <span style="color:#3b6cb7; font-weight:600;">$22.00</span>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="product-card paint-card exterior" onclick="openModal('paint2')">
-                    <img src="images/exterior paint.jpg" alt="Exterior Paint">
-                    <span>Exterior Paint</span>
-                    <span style="color:#3b6cb7; font-weight:600;">$25.00</span>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="product-card paint-card enamel" onclick="openModal('paint3')">
-                    <img src="images/enamel paint.jpg" alt="Enamel Paint">
-                    <span>Enamel Paint</span>
-                    <span style="color:#3b6cb7; font-weight:600;">$18.00</span>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="product-card paint-card spray" onclick="openModal('paint4')">
-                    <img src="images/spray paint.jpg" alt="Spray Paint">
-                    <span>Spray Paint</span>
-                    <span style="color:#3b6cb7; font-weight:600;">$7.00</span>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="product-card paint-card primer" onclick="openModal('paint5')">
-                    <img src="images/wall putty.jpg" alt="Wall Putty/Primer">
-                    <span>Wall Putty/Primer</span>
-                    <span style="color:#3b6cb7; font-weight:600;">$9.00</span>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-            </div>
-            <div class="brand-logos">
-                <img src="images/hp.jpg" alt="HP Brand">
-                <img src="images/paint.jpg" alt="Paint Brand">
-                <img src="images/interior paint.webp" alt="Interior Brand">
-                <img src="images/exterior paint.jpg" alt="Exterior Brand">
-            </div>
-        </section>
-        <!-- Tools Section -->
-        <section id="tools-section" class="product-section section-hidden">
-            <h2>Tools</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <img src="images/tools.jpg" alt="Hand Tools">
-                    <span>Hand Tools Set</span>
-                    <span style="color:#3b6cb7; font-weight:600;">$35.00</span>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <img src="images/powertoolspic.jpg" alt="Power Tools">
-                    <span>Power Tools</span>
-                    <span style="color:#3b6cb7; font-weight:600;">$99.00</span>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <img src="images/paint ttols.jpg" alt="Paint Tools">
-                    <span>Paint Tools</span>
-                    <span style="color:#3b6cb7; font-weight:600;">$12.00</span>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-            </div>
-        </section>
-        <!-- Modals for Doors -->
-        <div class="modal" id="modal-door1">
-            <div class="modal-content">
-                <button class="modal-close" onclick="closeModal('door1')">&times;</button>
-                <h3>Classic Wooden Door</h3>
-                <img src="images/door.jpg" alt="Wooden Door" style="width:100%; border-radius:0.7rem; margin-bottom:1rem;">
-                <p>Premium quality wooden door, perfect for interiors. Durable, stylish, and easy to install.</p>
-                <p style="color:#3b6cb7; font-weight:600;">$120.00</p>
-            </div>
-        </div>
-        <div class="modal" id="modal-door2">
-            <div class="modal-content">
-                <button class="modal-close" onclick="closeModal('door2')">&times;</button>
-                <h3>Steel Security Door</h3>
-                <img src="images/steel door.jpg" alt="Steel Door" style="width:100%; border-radius:0.7rem; margin-bottom:1rem;">
-                <p>Heavy-duty steel door for maximum security. Weather-resistant and long-lasting.</p>
-                <p style="color:#3b6cb7; font-weight:600;">$180.00</p>
-            </div>
-        </div>
-        <div class="modal" id="modal-door3">
-            <div class="modal-content">
-                <button class="modal-close" onclick="closeModal('door3')">&times;</button>
-                <h3>Modern Glass Door</h3>
-                <img src="images/glass door.webp" alt="Glass Door" style="width:100%; border-radius:0.7rem; margin-bottom:1rem;">
-                <p>Elegant glass door for contemporary spaces. Toughened glass, sleek design.</p>
-                <p style="color:#3b6cb7; font-weight:600;">$210.00</p>
-            </div>
-        </div>
-        <!-- Modals for Paint -->
-        <div class="modal" id="modal-paint1">
-            <div class="modal-content">
-                <button class="modal-close" onclick="closeModal('paint1')">&times;</button>
-                <h3>Interior Paint</h3>
-                <img src="images/interior paint.webp" alt="Interior Paint" style="width:100%; border-radius:0.7rem; margin-bottom:1rem;">
-                <p>High-coverage, low-odor paint for beautiful interiors. Available in multiple colors.</p>
-                <p style="color:#3b6cb7; font-weight:600;">$22.00</p>
-            </div>
-        </div>
-        <div class="modal" id="modal-paint2">
-            <div class="modal-content">
-                <button class="modal-close" onclick="closeModal('paint2')">&times;</button>
-                <h3>Exterior Paint</h3>
-                <img src="images/exterior paint.jpg" alt="Exterior Paint" style="width:100%; border-radius:0.7rem; margin-bottom:1rem;">
-                <p>Weather-resistant paint for exterior walls. Long-lasting color and protection.</p>
-                <p style="color:#3b6cb7; font-weight:600;">$25.00</p>
-            </div>
-        </div>
-        <div class="modal" id="modal-paint3">
-            <div class="modal-content">
-                <button class="modal-close" onclick="closeModal('paint3')">&times;</button>
-                <h3>Enamel Paint</h3>
-                <img src="images/enamel paint.jpg" alt="Enamel Paint" style="width:100%; border-radius:0.7rem; margin-bottom:1rem;">
-                <p>Glossy, durable enamel paint for wood and metal surfaces.</p>
-                <p style="color:#3b6cb7; font-weight:600;">$18.00</p>
-            </div>
-        </div>
-        <div class="modal" id="modal-paint4">
-            <div class="modal-content">
-                <button class="modal-close" onclick="closeModal('paint4')">&times;</button>
-                <h3>Spray Paint</h3>
-                <img src="images/spray paint.jpg" alt="Spray Paint" style="width:100%; border-radius:0.7rem; margin-bottom:1rem;">
-                <p>Easy-to-use spray paint for quick touch-ups and creative projects.</p>
-                <p style="color:#3b6cb7; font-weight:600;">$7.00</p>
-            </div>
-        </div>
-        <div class="modal" id="modal-paint5">
-            <div class="modal-content">
-                <button class="modal-close" onclick="closeModal('paint5')">&times;</button>
-                <h3>Wall Putty/Primer</h3>
-                <img src="images/wall putty.jpg" alt="Wall Putty/Primer" style="width:100%; border-radius:0.7rem; margin-bottom:1rem;">
-                <p>Smooth wall putty and primer for perfect paint finish.</p>
-                <p style="color:#3b6cb7; font-weight:600;">$9.00</p>
-            </div>
-        </div>
-    </main>
-    <div class="cart-confirm" id="cartConfirm">Added to cart!</div>
-    <footer class="main-footer">
-        <p>&copy; 2024 UTU Hardware & Equipment. All rights reserved.</p>
-    </footer>
-    <nav class="bottom-nav">
-        <a href="index.html" class="nav-link">
-            <span>Home</span>
-        </a>
-        <a href="products.html" class="nav-link active">
-            <span>Products</span>
-        </a>
-        <a href="about.html" class="nav-link">
-            <span>About</span>
-        </a>
+    <!-- Category Navigation -->
+    <nav class="fk-category-bar">
+        <a href="#cement" class="fk-category-link active">Cement</a>
+        <a href="#doors" class="fk-category-link">Doors</a>
+        <a href="#paint" class="fk-category-link">Paint</a>
+        <a href="#tools" class="fk-category-link">Tools</a>
+        <a href="#putty" class="fk-category-link">Putty/Primer</a>
     </nav>
-    <script>
-        // Section switching logic for mobile
-        function showSectionFromHash() {
-            const hash = window.location.hash || '#cement-section';
-            document.querySelectorAll('.product-section').forEach(section => {
-                section.classList.add('section-hidden');
-            });
-            const target = document.querySelector(hash);
-            if (target) target.classList.remove('section-hidden');
-        }
-        window.addEventListener('hashchange', showSectionFromHash);
-        window.addEventListener('DOMContentLoaded', function() {
-            showSectionFromHash();
-            filterPaint('all'); // Ensure all paint products are visible and 'All' is selected on load
-        });
-        // Modal logic
-        function openModal(id) {
-            document.getElementById('modal-' + id).classList.add('active');
-        }
-        function closeModal(id) {
-            document.getElementById('modal-' + id).classList.remove('active');
-        }
-        window.onclick = function(event) {
-            document.querySelectorAll('.modal.active').forEach(modal => {
-                if (event.target === modal) modal.classList.remove('active');
-            });
-        };
-        // Paint filter logic
-        function filterPaint(type) {
-            document.querySelectorAll('.paint-filters button').forEach(btn => btn.classList.remove('active'));
-            document.querySelector('.paint-filters button[onclick*="' + type + '"]').classList.add('active');
-            document.querySelectorAll('.paint-card').forEach(card => {
-                if (type === 'all' || card.classList.contains(type)) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-    </script>
+    <main style="max-width: 1100px; margin: 2.2rem auto 2rem auto;">
+        <section class="fk-product-grid-section">
+            <h2>All Products</h2>
+            <div class="fk-product-grid">
+                <div class="fk-product-card" id="cement">
+                    <img src="images/cement.jpg" alt="Cement">
+                    <div class="fk-product-title">UltraStrong Cement</div>
+                    <div class="fk-product-rating">
+                        <span>4.5</span>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-alt"></i>
+                    </div>
+                    <div class="fk-product-price">₹399</div>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+                <div class="fk-product-card" id="doors">
+                    <img src="images/door.jpg" alt="Doors">
+                    <div class="fk-product-title">Classic Wooden Door</div>
+                    <div class="fk-product-rating">
+                        <span>4.2</span>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-alt"></i>
+                    </div>
+                    <div class="fk-product-price">₹2,499</div>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+                <div class="fk-product-card" id="paint">
+                    <img src="images/paint.jpg" alt="Paint">
+                    <div class="fk-product-title">Vibrant Paints</div>
+                    <div class="fk-product-rating">
+                        <span>4.7</span>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <div class="fk-product-price">₹799</div>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+                <div class="fk-product-card" id="tools">
+                    <img src="images/tools.jpg" alt="Tools">
+                    <div class="fk-product-title">Hand Tools Set</div>
+                    <div class="fk-product-rating">
+                        <span>4.3</span>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-alt"></i>
+                    </div>
+                    <div class="fk-product-price">₹1,299</div>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+                <div class="fk-product-card" id="putty">
+                    <img src="images/wall putty.jpg" alt="Putty/Primer">
+                    <div class="fk-product-title">Wall Putty/Primer</div>
+                    <div class="fk-product-rating">
+                        <span>4.4</span>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-alt"></i>
+                    </div>
+                    <div class="fk-product-price">₹299</div>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="main-footer">
+        <p>&copy; 2024 Hardware & Equipment. All rights reserved.</p>
+    </footer>
+    <script src="cart.js"></script>
 </body>
 </html> 

@@ -65,8 +65,28 @@
     </style>
 </head>
 <body>
-    <header class="main-header">
-        <h1>Hardware & Equipment</h1>
+    <header class="fk-header">
+        <div class="fk-header-left">
+            <a href="index.html">
+                <img src="https://cdn-icons-png.flaticon.com/512/2965/2965567.png" alt="Hardware & Equipment Logo" class="fk-logo">
+            </a>
+            <span class="fk-site-title">Hardware & Equipment</span>
+        </div>
+        <form class="fk-search-bar" action="#" method="get">
+            <input type="text" placeholder="Search for products, brands and more" name="q">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+        <nav class="fk-header-nav">
+            <a href="products.html" class="fk-header-link">Products</a>
+            <a href="about.html" class="fk-header-link">About</a>
+            <a href="contact.html" class="fk-header-link">Contact</a>
+        </nav>
+        <div class="fk-header-cart">
+            <a href="cart.html" class="fk-cart-link">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="fk-cart-badge">2</span>
+            </a>
+        </div>
     </header>
     <main>
         <div class="login-container">
@@ -81,17 +101,6 @@
             </div>
         </div>
     </main>
-    <nav class="bottom-nav">
-        <a href="index.html" class="nav-link">
-            <span>Home</span>
-        </a>
-        <a href="products.html" class="nav-link">
-            <span>Products</span>
-        </a>
-        <a href="cart.html" class="nav-link">
-            <i class="fa fa-shopping-cart"></i>
-        </a>
-    </nav>
     <footer class="main-footer">
         <p>&copy; 2024 Hardware & Equipment. All rights reserved.</p>
     </footer>
