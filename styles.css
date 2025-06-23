@@ -1243,13 +1243,9 @@ main, .product-grid-section, .products-section {
 
 /* Flipkart-style header */
 .fk-header {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    background: #2874f0;
-    color: #fff;
     display: flex;
+    flex-direction: row;
+    align-items: center;
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem 1.2rem;
@@ -1585,47 +1581,24 @@ main, .product-grid-section, .products-section {
         border-radius: 0.5rem;
     }
     .fk-cart-title {
-        font-size: 0.97rem;
+        font-size: 1rem;
     }
     .fk-cart-remove {
-        font-size: 0.97rem;
-        width: 24px;
-        height: 24px;
+        font-size: 1rem;
+        width: 28px;
+        height: 28px;
     }
     .fk-cart-summary {
-        padding: 0.7rem 0.3rem 1rem 0.3rem;
-        margin-bottom: 1rem;
-        border-radius: 0.7rem;
+        padding: 0.8rem 0.5rem 1.1rem 0.5rem;
+        margin-bottom: 1.2rem;
     }
     .fk-cart-total-row {
-        font-size: 1.01rem;
-        margin-bottom: 0.6rem;
+        font-size: 1.05rem;
+        margin-bottom: 0.7rem;
     }
     .fk-checkout-btn {
-        font-size: 0.98rem;
-        padding: 0.6rem 0;
-        width: 100%;
-        border-radius: 0.6rem;
-    }
-    .fk-cart-badge {
-        top: -7px;
-        right: -10px;
-        font-size: 0.85rem;
-        font-weight: 700;
-        border-radius: 50%;
-        padding: 2px 7px;
-        border: 2px solid #2874f0;
-        background: #ffe11b;
-        color: #222;
-        box-shadow: 0 1px 4px rgba(40,116,240,0.10);
-    }
-    .main-footer {
-        font-size: 0.93rem;
-        padding: 0.6rem 0.2rem;
-        text-align: center;
-        background: #fff;
-        border-top: 1px solid #e3eafc;
-        margin-top: 1.2rem;
+        font-size: 1rem;
+        padding: 0.7rem 0;
     }
 }
 
@@ -1864,5 +1837,46 @@ main, .product-grid-section, .products-section {
     .fk-header-link {
         font-size: 0.95rem;
         padding: 0.2rem 0.5rem;
+    }
+}
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 18px;
+    right: 18px;
+    width: 56px;
+    height: 56px;
+    background: #25d366;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 4px 16px rgba(40,116,240,0.13);
+    z-index: 2000;
+    transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
+    text-decoration: none;
+}
+.whatsapp-float:hover, .whatsapp-float:focus {
+    background: #128c7e;
+    box-shadow: 0 8px 32px rgba(40,116,240,0.18);
+    transform: scale(1.07);
+    color: #fff;
+}
+.whatsapp-float i.fab.fa-whatsapp {
+    font-size: 2.1rem;
+    color: #fff;
+}
+@media (max-width: 600px) {
+    .whatsapp-float {
+        width: 48px;
+        height: 48px;
+        font-size: 1.7rem;
+        bottom: 14px;
+        right: 14px;
+    }
+    .whatsapp-float i.fab.fa-whatsapp {
+        font-size: 1.8rem;
     }
 } 
