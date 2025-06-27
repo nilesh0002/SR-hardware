@@ -87,11 +87,31 @@
     if (!toast) {
       toast = document.createElement('div');
       toast.className = 'cart-confirm';
-      toast.textContent = 'Added to cart!';
+      toast.style.position = 'fixed';
+      toast.style.left = '50%';
+      toast.style.bottom = '48px';
+      toast.style.transform = 'translateX(-50%)';
+      toast.style.background = '#2874f0';
+      toast.style.color = '#fff';
+      toast.style.padding = '1rem 2.2rem';
+      toast.style.borderRadius = '1.2rem';
+      toast.style.fontWeight = '700';
+      toast.style.boxShadow = '0 4px 24px rgba(40,116,240,0.13)';
+      toast.style.zIndex = '2001';
+      toast.style.fontSize = '1.12rem';
+      toast.style.display = 'flex';
+      toast.style.alignItems = 'center';
+      toast.style.gap = '0.7rem';
+      toast.innerHTML = '<span style="font-size:1.3rem;display:inline-block;"><i class="fa fa-check-circle"></i></span> Added to cart!';
       document.body.appendChild(toast);
     }
-    toast.style.display = 'block';
-    setTimeout(() => { toast.style.display = 'none'; }, 1200);
+    toast.style.display = 'flex';
+    toast.style.opacity = '1';
+    clearTimeout(window._cartToastTimeout);
+    window._cartToastTimeout = setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => { toast.style.display = 'none'; }, 350);
+    }, 1500);
   }
 
   // --- Cart Page Rendering ---

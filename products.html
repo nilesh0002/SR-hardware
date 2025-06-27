@@ -207,8 +207,10 @@
         /* Responsive images */
         .fk-product-card img, .product-card img {
             max-width: 100%;
-            height: auto;
-            object-fit: cover;
+            max-height: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 1rem;
         }
 
         /* Responsive header/footer/nav */
@@ -819,6 +821,35 @@
           if (grid) grid.innerHTML = '<div style="padding:2rem;text-align:center;color:#2874f0;font-weight:bold;">No matching products found.</div>';
         }
       }
+    });
+
+    // Category filtering for product grid
+    document.addEventListener('DOMContentLoaded', function() {
+      const navLinks = document.querySelectorAll('.fk-category-link');
+      const productCards = document.querySelectorAll('.fk-product-card');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          // Only handle in-page anchors
+          if (link.getAttribute('href').startsWith('#')) {
+            e.preventDefault();
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            const cat = link.getAttribute('href').replace('#','');
+            if (cat === 'home' || cat === '') {
+              productCards.forEach(card => card.style.display = '');
+            } else {
+              productCards.forEach(card => {
+                // Show if card id or class matches category
+                if (card.id && (card.id === cat || card.id.startsWith(cat+'-'))) {
+                  card.style.display = '';
+                } else {
+                  card.style.display = 'none';
+                }
+              });
+            }
+          }
+        });
+      });
     });
     </script>
 </body>
