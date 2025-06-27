@@ -534,23 +534,17 @@ main {
 }
 .contact-form input,
 .contact-form textarea {
-    padding: 10px;
-    border: 1.5px solid #FFD600;
-    border-radius: 5px;
-    font-size: 1em;
-    background: #fff;
-    color: #222;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1.08em;
+    padding: 12px;
+    margin: 0;
 }
 .contact-form button {
-    background: #FFD600;
-    color: #111;
-    border: none;
-    padding: 12px;
-    border-radius: 5px;
-    font-size: 1.1em;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
+    width: 100%;
+    font-size: 1.13em;
+    padding: 13px;
+    margin-top: 0.5rem;
 }
 .contact-form button:hover {
     background: #111;
