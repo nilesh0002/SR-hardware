@@ -13,52 +13,106 @@
 </head>
 <body>
   <header class="fk-header">
-    <div class="fk-header-left">
+    <div class="fk-header-content">
       <a href="index.html" class="fk-logo-link" aria-label="Home" style="display:flex;align-items:center;gap:8px;">
         <img src="images/hw-logo.svg" alt="HW Logo" style="height:32px;width:32px;vertical-align:middle;">
         <span class="fk-logo-text" style="font-weight:700;font-size:1.2rem;letter-spacing:1px;">Hardware & Equipment</span>
       </a>
-    </div>
-    <form class="fk-search-bar" action="#" method="get">
-      <input type="text" placeholder="Search products..." name="q">
-      <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
-    <div class="fk-header-cart">
-      <a href="cart.html" class="fk-cart-link">
-        <i class="fa fa-shopping-cart"></i>
-        <span class="fk-cart-badge">0</span>
-      </a>
+      <form class="fk-search-bar" action="#" method="get">
+        <span class="fk-search-icon"><i class="fa fa-search"></i></span>
+        <input type="text" placeholder="Search for products, brands and more" name="q">
+      </form>
+      <nav class="fk-header-nav">
+        <a href="products.html" class="fk-nav-link">Products</a>
+        <a href="cart.html" class="fk-nav-link"><i class="fa fa-shopping-cart"></i> Cart</a>
+        <a href="login.html" class="fk-nav-link">Login</a>
+      </nav>
     </div>
   </header>
+  <!-- Flipkart-style Category Bar -->
   <nav class="fk-category-bar">
-    <a href="index.html" class="fk-category-link">Home</a>
-    <a href="products.html" class="fk-category-link">Products</a>
-    <a href="cart.html" class="fk-category-link active">Cart</a>
-    <a href="about.html" class="fk-category-link">About</a>
-    <a href="contact.html" class="fk-category-link">Contact</a>
-    <a href="login.html" class="fk-category-link">Login</a>
-  </nav>
-  <main class="fk-cart-section">
-    <h2 style="font-size: 1.5rem; font-weight: 700; color: #2874f0; margin-bottom: 1.5rem;">Your Cart</h2>
-    <div class="fk-cart-item">
-      <img src="images/cement.jpg" alt="UltraTech Cement" class="fk-cart-image">
-      <div class="fk-cart-details">
-        <div class="fk-cart-title">UltraTech Cement</div>
-        <div class="fk-cart-price">₹420</div>
-        <div class="fk-cart-quantity">
-          <button class="fk-qty-btn">-</button>
-          <span>1</span>
-          <button class="fk-qty-btn">+</button>
-        </div>
-      </div>
-      <button class="fk-cart-remove">Remove</button>
+    <div class="fk-category-content">
+      <a href="#cement" class="fk-category-link">Cement</a>
+      <a href="#paints" class="fk-category-link">Paints</a>
+      <a href="#doors-windows" class="fk-category-link">Doors & Windows</a>
+      <a href="#tools-equipment" class="fk-category-link">Tools & Equipment</a>
+      <a href="#plumbing" class="fk-category-link">Plumbing</a>
+      <a href="#wall-putty" class="fk-category-link">Wall Putty & Adhesives</a>
+      <a href="#bulk-orders" class="fk-category-link">Bulk Orders</a>
+      <a href="cart.html" class="fk-category-link active">Cart</a>
+      <a href="login.html" class="fk-category-link">Login</a>
     </div>
-    <div class="fk-cart-summary">
-      <div class="fk-cart-total">
-        <span>Total</span>
-        <span>₹420</span>
+  </nav>
+  <main class="fk-cart-section" style="display:flex;gap:2.5rem;flex-wrap:wrap;align-items:flex-start;justify-content:center;">
+    <div style="width:100%;max-width:900px;margin-bottom:2.5rem;">
+      <button id="explore-cement-btn" class="explore-btn" style="margin-bottom:1.2rem;">Explore Cement Brands</button>
+      <section id="cement" class="fk-product-grid-section" style="display:none;width:100%;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;">
+          <h2 style="font-size: 1.3rem; font-weight: 700; color: #2874f0; margin:0;">Cement Brands</h2>
+          <button id="close-cement-btn" style="background:none;border:none;font-size:1.5rem;color:#2874f0;cursor:pointer;">&times;</button>
+        </div>
+        <div class="fk-product-grid">
+          <div class="fk-product-card" id="cement-ultratech">
+            <img src="images/cement.jpg" alt="UltraTech Cement" class="fk-product-image">
+            <div class="fk-product-title">UltraTech Cement</div>
+            <div class="fk-product-price">₹420</div>
+            <button class="add-cart-btn">Add to Cart</button>
+          </div>
+          <div class="fk-product-card" id="cement-acc">
+            <img src="images/cement.jpg" alt="ACC Cement" class="fk-product-image">
+            <div class="fk-product-title">ACC Cement</div>
+            <div class="fk-product-price">₹410</div>
+            <button class="add-cart-btn">Add to Cart</button>
+          </div>
+          <div class="fk-product-card" id="cement-ambuja">
+            <img src="images/cement.jpg" alt="Ambuja Cement" class="fk-product-image">
+            <div class="fk-product-title">Ambuja Cement</div>
+            <div class="fk-product-price">₹415</div>
+            <button class="add-cart-btn">Add to Cart</button>
+          </div>
+          <div class="fk-product-card" id="cement-shree">
+            <img src="images/cement.jpg" alt="Shree Cement" class="fk-product-image">
+            <div class="fk-product-title">Shree Cement</div>
+            <div class="fk-product-price">₹405</div>
+            <button class="add-cart-btn">Add to Cart</button>
+          </div>
+          <div class="fk-product-card" id="cement-jk-lakshmi">
+            <img src="images/cement.jpg" alt="JK Lakshmi Cement" class="fk-product-image">
+            <div class="fk-product-title">JK Lakshmi Cement</div>
+            <div class="fk-product-price">₹400</div>
+            <button class="add-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="fk-cart-items" style="flex:2;min-width:270px;">
+      <h2 style="font-size: 1.5rem; font-weight: 700; color: #2874f0; margin-bottom: 1.5rem;">Your Cart</h2>
+      <div class="fk-cart-list"></div>
+      <!-- Empty cart state will be handled by JS -->
+    </div>
+    <div class="fk-cart-summary" style="flex:1;min-width:240px;max-width:340px;">
+      <div style="width:100%;">
+        <div style="font-size:1.15rem;font-weight:700;color:#2874f0;margin-bottom:1.2rem;">Price Details</div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:0.7rem;font-size:1rem;">
+          <span>Price (items)</span>
+          <span class="fk-cart-price-detail">₹0</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:0.7rem;font-size:1rem;">
+          <span>Discount</span>
+          <span class="fk-cart-discount-detail" style="color:#388e3c;">-₹0</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:0.7rem;font-size:1rem;">
+          <span>Delivery Charges</span>
+          <span style="color:#388e3c;">FREE</span>
+        </div>
+        <div style="border-top:1px dashed #bbb;margin:1.2rem 0;"></div>
+        <div style="display:flex;justify-content:space-between;font-size:1.15rem;font-weight:700;">
+          <span>Total Amount</span>
+          <span class="fk-cart-total">₹0</span>
+        </div>
+        <div class="fk-cart-savings" style="color:#388e3c;font-size:0.98rem;margin-top:0.7rem;">You will save ₹0 on this order</div>
+        <button class="fk-checkout-btn" style="margin-top:1.5rem;width:100%;">Place Order</button>
       </div>
-      <button class="fk-checkout-btn">Checkout</button>
     </div>
   </main>
   <footer class="main-footer">
@@ -66,5 +120,25 @@
   </footer>
   <a href="https://wa.me/91XXXXXXXXXX" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
   <script src="cart.js"></script>
+  <script>
+    // Cement Explore/Close logic
+    document.addEventListener('DOMContentLoaded', function() {
+      var cementSection = document.getElementById('cement');
+      var exploreBtn = document.getElementById('explore-cement-btn');
+      var closeBtn = document.getElementById('close-cement-btn');
+      if (exploreBtn && cementSection) {
+        exploreBtn.addEventListener('click', function() {
+          cementSection.style.display = '';
+          exploreBtn.style.display = 'none';
+        });
+      }
+      if (closeBtn && cementSection) {
+        closeBtn.addEventListener('click', function() {
+          cementSection.style.display = 'none';
+          exploreBtn.style.display = '';
+        });
+      }
+    });
+  </script>
 </body>
 </html> 

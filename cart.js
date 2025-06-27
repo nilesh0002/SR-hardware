@@ -98,38 +98,68 @@
   function renderCartPage() {
     const cartList = document.querySelector('.fk-cart-list');
     const summary = document.querySelector('.fk-cart-summary');
+    const priceDetail = document.querySelector('.fk-cart-price-detail');
+    const discountDetail = document.querySelector('.fk-cart-discount-detail');
+    const totalDetail = document.querySelector('.fk-cart-total');
+    const savingsDetail = document.querySelector('.fk-cart-savings');
+    const emptyState = document.querySelector('.fk-cart-empty');
     if (!cartList) return;
     const cart = getCart();
     cartList.innerHTML = '';
-    let total = 0;
+    let total = 0, originalTotal = 0, discount = 0;
     if (cart.length === 0) {
-      cartList.innerHTML = '<div style="padding:2rem;text-align:center;color:#888;">Your cart is empty.</div>';
       if (summary) summary.style.display = 'none';
+      if (emptyState) emptyState.style.display = '';
+      else {
+        // Add empty state if not present
+        const emptyDiv = document.createElement('div');
+        emptyDiv.className = 'fk-cart-empty';
+        emptyDiv.style = 'text-align:center;padding:2.5rem 0;color:#888;';
+        emptyDiv.innerHTML = `
+          <i class="fa fa-shopping-cart" style="font-size:3rem;color:#2874f0;margin-bottom:1rem;"></i>
+          <div style="font-size:1.2rem;font-weight:600;">Your cart is empty!</div>
+          <div style="margin-top:0.7rem;">Add items to it now.</div>
+          <a href="products.html" class="fk-checkout-btn" style="margin-top:1.5rem;display:inline-block;">Shop Now</a>
+        `;
+        cartList.appendChild(emptyDiv);
+      }
+      if (priceDetail) priceDetail.textContent = '₹0';
+      if (discountDetail) discountDetail.textContent = '-₹0';
+      if (totalDetail) totalDetail.textContent = '₹0';
+      if (savingsDetail) savingsDetail.textContent = 'You will save ₹0 on this order';
       return;
+    } else {
+      if (summary) summary.style.display = '';
+      if (emptyState) emptyState.style.display = 'none';
     }
     cart.forEach(item => {
+      // Simulate original price for discount (10% higher)
+      const originalPrice = Math.round(item.price * 1.12);
+      originalTotal += originalPrice * item.qty;
       total += item.price * item.qty;
+      discount += (originalPrice - item.price) * item.qty;
       const div = document.createElement('div');
       div.className = 'fk-cart-item';
       div.innerHTML = `
-        <img src="${item.image}" alt="${item.name}" class="fk-cart-img">
+        <img src="${item.image}" alt="${item.name}" class="fk-cart-image">
         <div class="fk-cart-details">
           <div class="fk-cart-title">${item.name}</div>
-          <div class="fk-cart-price">₹${item.price.toLocaleString()}</div>
-          <div class="fk-cart-qty">
+          <div class="fk-cart-price">₹${item.price.toLocaleString()} <span style="color:#888;font-size:1rem;font-weight:400;text-decoration:line-through;margin-left:8px;">₹${originalPrice.toLocaleString()}</span> <span style="color:#388e3c;font-size:0.98rem;font-weight:600;margin-left:8px;">${Math.round((originalPrice-item.price)/originalPrice*100)}% off</span></div>
+          <div class="fk-cart-quantity">
             <button class="fk-qty-btn" data-id="${item.id}" data-delta="-1">-</button>
             <span>${item.qty}</span>
             <button class="fk-qty-btn" data-id="${item.id}" data-delta="1">+</button>
           </div>
+          <div style="color:#388e3c;font-size:0.98rem;margin-top:0.5rem;">You save ₹${((originalPrice-item.price)*item.qty).toLocaleString()} on this item</div>
         </div>
         <button class="fk-cart-remove" data-id="${item.id}"><i class="fa fa-trash"></i></button>
       `;
       cartList.appendChild(div);
     });
-    if (summary) {
-      summary.style.display = '';
-      summary.querySelector('.fk-cart-total').textContent = '₹' + total.toLocaleString();
-    }
+    if (priceDetail) priceDetail.textContent = '₹' + originalTotal.toLocaleString();
+    if (discountDetail) discountDetail.textContent = '-₹' + discount.toLocaleString();
+    if (totalDetail) totalDetail.textContent = '₹' + total.toLocaleString();
+    if (savingsDetail) savingsDetail.textContent = `You will save ₹${discount.toLocaleString()} on this order`;
     // Remove/Qty listeners
     cartList.querySelectorAll('.fk-cart-remove').forEach(btn => {
       btn.addEventListener('click', function() {
