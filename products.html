@@ -827,9 +827,37 @@
     document.addEventListener('DOMContentLoaded', function() {
       const navLinks = document.querySelectorAll('.fk-category-link');
       const productCards = document.querySelectorAll('.fk-product-card');
+      // --- New: Filter by ?category=... on page load ---
+      function getQueryParam(name) {
+        const url = new URL(window.location.href);
+        return url.searchParams.get(name);
+      }
+      const category = getQueryParam('category');
+      if (category) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        let found = false;
+        navLinks.forEach(link => {
+          if (link.getAttribute('href').replace('#','').toLowerCase() === category.toLowerCase()) {
+            link.classList.add('active');
+            found = true;
+          }
+        });
+        // Special handling for plural categories like 'paints'
+        let matchPrefix = category;
+        if (category === 'paints') matchPrefix = 'paint';
+        if (category === 'doors-windows') matchPrefix = 'door';
+        if (category === 'tools-equipment') matchPrefix = 'tools';
+        productCards.forEach(card => {
+          if (card.id && (card.id === category || card.id.startsWith(matchPrefix+'-'))) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+      // --- Existing: Filter by nav bar click ---
       navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-          // Only handle in-page anchors
           if (link.getAttribute('href').startsWith('#')) {
             e.preventDefault();
             navLinks.forEach(l => l.classList.remove('active'));
@@ -838,9 +866,13 @@
             if (cat === 'home' || cat === '') {
               productCards.forEach(card => card.style.display = '');
             } else {
+              // Special handling for plural categories like 'paints'
+              let matchPrefix = cat;
+              if (cat === 'paints') matchPrefix = 'paint';
+              if (cat === 'doors-windows') matchPrefix = 'door';
+              if (cat === 'tools-equipment') matchPrefix = 'tools';
               productCards.forEach(card => {
-                // Show if card id or class matches category
-                if (card.id && (card.id === cat || card.id.startsWith(cat+'-'))) {
+                if (card.id && (card.id === cat || card.id.startsWith(matchPrefix+'-'))) {
                   card.style.display = '';
                 } else {
                   card.style.display = 'none';
