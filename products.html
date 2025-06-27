@@ -428,8 +428,9 @@
     <!-- Flipkart-style Header -->
     <header class="fk-header">
         <div class="fk-header-content">
-            <a href="index.html" class="fk-logo-link" aria-label="Home">
-                <span class="fk-logo-text">Hardware & Equipment</span>
+            <a href="index.html" class="fk-logo-link" aria-label="Home" style="display:flex;align-items:center;gap:8px;">
+                <img src="images/hw-logo.svg" alt="HW Logo" style="height:32px;width:32px;vertical-align:middle;">
+                <span class="fk-logo-text" style="font-weight:700;font-size:1.2rem;letter-spacing:1px;">Hardware & Equipment</span>
             </a>
             <form class="fk-search-bar" action="#" method="get">
                 <span class="fk-search-icon"><i class="fa fa-search"></i></span>
@@ -446,15 +447,13 @@
     <!-- Flipkart-style Category Bar -->
     <nav class="fk-category-bar">
         <div class="fk-category-content">
-            <a href="index.html" class="fk-category-link active">Home</a>
-            <a href="#" class="fk-category-link">Cement</a>
-            <a href="#" class="fk-category-link">Paints</a>
-            <a href="#" class="fk-category-link">Doors & Windows</a>
-            <a href="#" class="fk-category-link">Tools & Equipment</a>
-            <a href="#" class="fk-category-link">Electricals</a>
-            <a href="#" class="fk-category-link">Plumbing</a>
-            <a href="#" class="fk-category-link">Wall Putty & Adhesives</a>
-            <a href="#" class="fk-category-link">Bulk Orders</a>
+            <a href="#cement" class="fk-category-link active">Cement</a>
+            <a href="#paints" class="fk-category-link">Paints</a>
+            <a href="#doors-windows" class="fk-category-link">Doors & Windows</a>
+            <a href="#tools-equipment" class="fk-category-link">Tools & Equipment</a>
+            <a href="#plumbing" class="fk-category-link">Plumbing</a>
+            <a href="#wall-putty" class="fk-category-link">Wall Putty & Adhesives</a>
+            <a href="#bulk-orders" class="fk-category-link">Bulk Orders</a>
             <a href="cart.html" class="fk-category-link">Cart</a>
             <a href="login.html" class="fk-category-link">Login</a>
         </div>
@@ -466,7 +465,7 @@
         <div class="fk-product-container">
             <div class="fk-product-grid">
                 <!-- Cement Products -->
-                <div class="fk-product-card" id="cement-ultratech">
+                <div id="cement" class="fk-product-card" id="cement-ultratech">
                     <img src="images/cement.jpg" alt="UltraTech Cement" class="fk-product-image">
                     <div class="fk-product-title">UltraTech Cement</div>
                     <div class="fk-product-rating">
@@ -479,100 +478,7 @@
                     <button class="fk-add-to-cart">Add to Cart</button>
                 </div>
 
-                <div class="fk-product-card" id="cement-acc">
-                    <img src="images/cement.jpg" alt="ACC Cement" class="fk-product-image">
-                    <div class="fk-product-title">ACC Cement</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.6</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹410</span>
-                    </div>
-                    <button class="fk-add-to-cart">Add to Cart</button>
-                </div>
-
-                <div class="fk-product-card" id="cement-ambuja">
-                    <img src="images/cement.jpg" alt="Ambuja Cement" class="fk-product-image">
-                    <div class="fk-product-title">Ambuja Cement</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.7</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹415</span>
-                    </div>
-                    <button class="fk-add-to-cart">Add to Cart</button>
-                </div>
-
-                <div class="fk-product-card" id="cement-shree">
-                    <img src="images/cement.jpg" alt="Shree Cement" class="fk-product-image">
-                    <div class="fk-product-title">Shree Cement</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.5</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹405</span>
-                    </div>
-                    <button class="fk-add-to-cart">Add to Cart</button>
-                </div>
-
-                <div class="fk-product-card" id="cement-jk-lakshmi">
-                    <img src="images/cement.jpg" alt="JK Lakshmi Cement" class="fk-product-image">
-                    <div class="fk-product-title">JK Lakshmi Cement</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.4</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹400</span>
-                    </div>
-                    <button class="fk-add-to-cart">Add to Cart</button>
-                </div>
-
-                <!-- Door Products -->
-                <div class="fk-product-card" id="door-steel">
-                    <img src="images/steel door.jpg" alt="Steel Door" class="fk-product-image">
-                    <div class="fk-product-title">Steel Door</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.6</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹3,200</span>
-                    </div>
-                    <button class="fk-add-to-cart">Add to Cart</button>
-                </div>
-
-                <div class="fk-product-card" id="door-wooden">
-                    <img src="images/woodendoor.jpg" alt="Wooden Door" class="fk-product-image">
-                    <div class="fk-product-title">Wooden Door</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.7</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹2,800</span>
-                    </div>
-                    <button class="fk-add-to-cart">Add to Cart</button>
-                </div>
-
-                <div class="fk-product-card" id="door-glass">
-                    <img src="images/glass door.webp" alt="Glass Door" class="fk-product-image">
-                    <div class="fk-product-title">Glass Door</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.5</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹4,000</span>
-                    </div>
-                    <button class="fk-add-to-cart">Add to Cart</button>
-                </div>
-
-                <!-- Paint Products -->
-                <div class="fk-product-card" id="paint-asian-paints">
+                <div id="paints" class="fk-product-card" id="paint-asian-paints">
                     <img src="images/paint.jpg" alt="Asian Paints" class="fk-product-image">
                     <div class="fk-product-title">Asian Paints</div>
                     <div class="fk-product-rating">
@@ -585,60 +491,20 @@
                     <button class="fk-add-to-cart">Add to Cart</button>
                 </div>
 
-                <div class="fk-product-card" id="paint-berger">
-                    <img src="images/paint.jpg" alt="Berger" class="fk-product-image">
-                    <div class="fk-product-title">Berger</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.7</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹820</span>
-                    </div>
-                    <button class="fk-add-to-cart">Add to Cart</button>
-                </div>
-
-                <div class="fk-product-card" id="paint-nerolac">
-                    <img src="images/paint.jpg" alt="Nerolac" class="fk-product-image">
-                    <div class="fk-product-title">Nerolac</div>
+                <div id="doors-windows" class="fk-product-card" id="door-steel">
+                    <img src="images/steel door.jpg" alt="Steel Door" class="fk-product-image">
+                    <div class="fk-product-title">Steel Door</div>
                     <div class="fk-product-rating">
                         <span class="fk-rating-stars">★★★★☆</span>
                         <span class="fk-rating-text">4.6</span>
                     </div>
                     <div class="fk-product-price">
-                        <span class="fk-current-price">₹800</span>
+                        <span class="fk-current-price">₹3,200</span>
                     </div>
                     <button class="fk-add-to-cart">Add to Cart</button>
                 </div>
 
-                <div class="fk-product-card" id="paint-dulux">
-                    <img src="images/paint.jpg" alt="Dulux" class="fk-product-image">
-                    <div class="fk-product-title">Dulux</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.5</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹780</span>
-                    </div>
-                    <button class="fk-add-to-cart">Add to Cart</button>
-                </div>
-
-                <div class="fk-product-card" id="paint-indigo">
-                    <img src="images/paint.jpg" alt="Indigo" class="fk-product-image">
-                    <div class="fk-product-title">Indigo</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.4</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹760</span>
-                    </div>
-                    <button class="fk-add-to-cart">Add to Cart</button>
-                </div>
-
-                <!-- Tools Products -->
-                <div class="fk-product-card" id="tools-bosch">
+                <div id="tools-equipment" class="fk-product-card" id="tools-bosch">
                     <img src="images/powertoolspic.jpg" alt="Bosch Power Tools" class="fk-product-image">
                     <div class="fk-product-title">Bosch Power Tools</div>
                     <div class="fk-product-rating">
@@ -651,34 +517,7 @@
                     <button class="fk-add-to-cart">Add to Cart</button>
                 </div>
 
-                <div class="fk-product-card" id="tools-stanley">
-                    <img src="images/tools.jpg" alt="Stanley Hand Tools" class="fk-product-image">
-                    <div class="fk-product-title">Stanley Hand Tools</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.6</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹2,200</span>
-                    </div>
-                    <button class="fk-add-to-cart">Add to Cart</button>
-                </div>
-
-                <div class="fk-product-card" id="tools-makita">
-                    <img src="images/powertoolspic.jpg" alt="Makita Power Tools" class="fk-product-image">
-                    <div class="fk-product-title">Makita Power Tools</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.7</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹5,200</span>
-                    </div>
-                    <button class="fk-add-to-cart">Add to Cart</button>
-                </div>
-
-                <!-- Putty Products -->
-                <div class="fk-product-card" id="putty-wall">
+                <div id="wall-putty" class="fk-product-card" id="putty-wall">
                     <img src="images/wall putty.jpg" alt="Wall Putty" class="fk-product-image">
                     <div class="fk-product-title">Wall Putty</div>
                     <div class="fk-product-rating">
@@ -687,19 +526,6 @@
                     </div>
                     <div class="fk-product-price">
                         <span class="fk-current-price">₹320</span>
-                    </div>
-                    <button class="fk-add-to-cart">Add to Cart</button>
-                </div>
-
-                <div class="fk-product-card" id="putty-primer">
-                    <img src="images/wall putty.jpg" alt="Primer" class="fk-product-image">
-                    <div class="fk-product-title">Primer</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.4</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹300</span>
                     </div>
                     <button class="fk-add-to-cart">Add to Cart</button>
                 </div>
