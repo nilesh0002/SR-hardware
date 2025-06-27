@@ -2,36 +2,22 @@
 (function() {
   // Product data for demo (should match index.html/products.html)
   const PRODUCTS = [
-    {
-      id: 'cement',
-      name: 'UltraStrong Cement',
-      price: 399,
-      image: 'images/cement.jpg'
-    },
-    {
-      id: 'doors',
-      name: 'Classic Wooden Door',
-      price: 2499,
-      image: 'images/door.jpg'
-    },
-    {
-      id: 'paint',
-      name: 'Vibrant Paints',
-      price: 799,
-      image: 'images/paint.jpg'
-    },
-    {
-      id: 'tools',
-      name: 'Hand Tools Set',
-      price: 1299,
-      image: 'images/tools.jpg'
-    },
-    {
-      id: 'putty',
-      name: 'Wall Putty/Primer',
-      price: 299,
-      image: 'images/wall putty.jpg'
-    }
+    // Cement brands
+    { id: 'cement-ultratech', name: 'UltraTech Cement', price: 420, image: 'images/cement.jpg' },
+    { id: 'cement-acc', name: 'ACC Cement', price: 410, image: 'images/cement.jpg' },
+    { id: 'cement-ambuja', name: 'Ambuja Cement', price: 415, image: 'images/cement.jpg' },
+    { id: 'cement-shree', name: 'Shree Cement', price: 405, image: 'images/cement.jpg' },
+    { id: 'cement-jk-lakshmi', name: 'JK Lakshmi Cement', price: 400, image: 'images/cement.jpg' },
+    // Paint brands
+    { id: 'paint-asian-paints', name: 'Asian Paints', price: 850, image: 'images/paint.jpg' },
+    { id: 'paint-berger', name: 'Berger', price: 820, image: 'images/paint.jpg' },
+    { id: 'paint-nerolac', name: 'Nerolac', price: 800, image: 'images/paint.jpg' },
+    { id: 'paint-dulux', name: 'Dulux', price: 780, image: 'images/paint.jpg' },
+    { id: 'paint-indigo', name: 'Indigo', price: 760, image: 'images/paint.jpg' },
+    // Example for other products (add more as needed)
+    { id: 'doors', name: 'Classic Wooden Door', price: 2499, image: 'images/door.jpg' },
+    { id: 'tools', name: 'Hand Tools Set', price: 1299, image: 'images/tools.jpg' },
+    { id: 'putty', name: 'Wall Putty/Primer', price: 299, image: 'images/wall putty.jpg' }
   ];
 
   // --- Cart Storage ---
