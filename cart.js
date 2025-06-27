@@ -39,6 +39,20 @@
     setCart(cart);
     updateCartBadge();
     showCartConfirm();
+    // --- Add to Cart Button Feedback ---
+    const btn = document.querySelector(
+      `.add-cart-btn[data-id='${productId}'], .fk-add-to-cart[data-id='${productId}']`
+    ) || document.querySelector(`#${productId} .add-cart-btn, #${productId} .fk-add-to-cart`);
+    if (btn) {
+      btn.classList.add('added-to-cart');
+      btn.innerHTML = '<i class="fa fa-check"></i> Added';
+      setTimeout(() => {
+        btn.classList.remove('added-to-cart');
+        btn.innerHTML = 'Add to Cart';
+      }, 1400);
+    }
+    // --- Update Cart Icon Symbol ---
+    updateCartIconSymbol();
   }
   function removeFromCart(productId) {
     let cart = getCart();
@@ -193,10 +207,33 @@
     });
   }
 
+  function updateCartIconSymbol() {
+    const cart = getCart();
+    const count = cart.reduce((sum, i) => sum + i.qty, 0);
+    document.querySelectorAll('.fk-header-nav .fk-nav-link i.fa-shopping-cart').forEach(icon => {
+      if (count > 0) {
+        icon.classList.add('fa-cart-plus');
+        icon.classList.remove('fa-shopping-cart');
+      } else {
+        icon.classList.remove('fa-cart-plus');
+        icon.classList.add('fa-shopping-cart');
+      }
+    });
+    // Optionally, add a checkmark badge
+    document.querySelectorAll('.fk-cart-badge').forEach(badge => {
+      if (count > 0) {
+        badge.innerHTML = '<i class="fa fa-check"></i>';
+      } else {
+        badge.textContent = '0';
+      }
+    });
+  }
+
   // --- On Page Load ---
   document.addEventListener('DOMContentLoaded', function() {
     updateCartBadge();
     setupAddToCartButtons();
     renderCartPage();
+    updateCartIconSymbol();
   });
 })(); 
