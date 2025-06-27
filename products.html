@@ -256,6 +256,10 @@
             font-weight: 700;
             text-decoration: none;
             letter-spacing: 1px;
+            transition: filter 0.18s;
+        }
+        .fk-logo-link:hover, .fk-logo-link:focus {
+            filter: brightness(1.15) drop-shadow(0 2px 8px rgba(40,116,240,0.10));
         }
         .fk-header-nav {
             display: flex;
@@ -268,10 +272,43 @@
             font-weight: 500;
             padding: 6px 10px;
             border-radius: 2px;
-            transition: background 0.2s;
+            transition: background 0.18s, color 0.18s, box-shadow 0.13s;
         }
         .fk-nav-link:hover, .fk-nav-link:focus {
-            background: rgba(255,255,255,0.13);
+            background: #fff;
+            color: #2874f0;
+            box-shadow: 0 2px 8px rgba(40,116,240,0.10);
+        }
+        .fk-logo-link {
+            margin-right: 22px;
+        }
+        .fk-product-card img {
+            box-shadow: 0 2px 12px rgba(40,116,240,0.10);
+            border-radius: 0.7rem;
+            transition: box-shadow 0.18s, transform 0.13s;
+        }
+        .fk-product-card img:hover {
+            box-shadow: 0 6px 24px rgba(40,116,240,0.18);
+            transform: scale(1.04);
+        }
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 1.18rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .section-title-bar {
+            width: 5px;
+            height: 24px;
+            background: #2874f0;
+            border-radius: 3px;
+            display: inline-block;
+        }
+        .main-footer {
+            border-top: 1.5px solid #e0e6ef;
+            margin-top: 2.5rem;
         }
         @media (max-width: 600px) {
             .fk-header-content {

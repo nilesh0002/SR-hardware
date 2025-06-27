@@ -10,6 +10,53 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="logo.png" type="image/png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .fk-logo-link {
+      transition: filter 0.18s;
+    }
+    .fk-logo-link:hover, .fk-logo-link:focus {
+      filter: brightness(1.15) drop-shadow(0 2px 8px rgba(40,116,240,0.10));
+    }
+    .fk-header-nav .fk-nav-link {
+      transition: background 0.18s, color 0.18s, box-shadow 0.13s;
+    }
+    .fk-header-nav .fk-nav-link:hover, .fk-header-nav .fk-nav-link:focus {
+      background: #fff;
+      color: #2874f0;
+      box-shadow: 0 2px 8px rgba(40,116,240,0.10);
+    }
+    .fk-logo-link {
+      margin-right: 22px;
+    }
+    .fk-product-card img {
+      box-shadow: 0 2px 12px rgba(40,116,240,0.10);
+      border-radius: 0.7rem;
+      transition: box-shadow 0.18s, transform 0.13s;
+    }
+    .fk-product-card img:hover {
+      box-shadow: 0 6px 24px rgba(40,116,240,0.18);
+      transform: scale(1.04);
+    }
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 1.18rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .section-title-bar {
+      width: 5px;
+      height: 24px;
+      background: #2874f0;
+      border-radius: 3px;
+      display: inline-block;
+    }
+    .main-footer {
+      border-top: 1.5px solid #e0e6ef;
+      margin-top: 2.5rem;
+    }
+  </style>
 </head>
 <body>
   <header class="fk-header">
@@ -32,6 +79,7 @@
   <!-- Flipkart-style Category Bar -->
   <nav class="fk-category-bar">
     <div class="fk-category-content">
+      <a href="index.html" class="fk-category-link">Home</a>
       <a href="#cement" class="fk-category-link">Cement</a>
       <a href="#paints" class="fk-category-link">Paints</a>
       <a href="#doors-windows" class="fk-category-link">Doors & Windows</a>
@@ -39,8 +87,6 @@
       <a href="#plumbing" class="fk-category-link">Plumbing</a>
       <a href="#wall-putty" class="fk-category-link">Wall Putty & Adhesives</a>
       <a href="#bulk-orders" class="fk-category-link">Bulk Orders</a>
-      <a href="cart.html" class="fk-category-link active">Cart</a>
-      <a href="login.html" class="fk-category-link">Login</a>
     </div>
   </nav>
   <main class="fk-cart-section" style="display:flex;gap:2.5rem;flex-wrap:wrap;align-items:flex-start;justify-content:center;">

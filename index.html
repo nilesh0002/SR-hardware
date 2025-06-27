@@ -15,10 +15,223 @@
         position: sticky;
         top: 56px;
         z-index: 999;
+        margin-top: 0;
+        box-shadow: 0 2px 8px rgba(40,116,240,0.07);
       }
       @media (max-width: 600px) {
         .fk-category-bar {
           top: 98px;
+        }
+      }
+      .fk-header {
+        margin-bottom: 0;
+      }
+      .fk-header-content {
+        min-height: 44px;
+        padding: 0 8px 0 8px;
+        margin-bottom: 0;
+      }
+      .fk-logo-link img {
+        height: 36px !important;
+        width: 36px !important;
+      }
+      .fk-logo-text {
+        font-size: 1.35rem !important;
+        letter-spacing: 1.2px;
+      }
+      .fk-search-bar input {
+        padding: 7px 10px 7px 32px;
+        font-size: 0.98rem;
+      }
+      .fk-header-nav .fk-nav-link {
+        font-size: 0.98rem;
+        padding: 4px 14px;
+      }
+      .fk-category-content {
+        gap: 38px !important;
+      }
+      .hero {
+        min-height: 70px;
+        padding: 0.7rem 0 0.5rem 0;
+        background: linear-gradient(90deg, #2874f0 0%, #0059c8 100%);
+        position: relative;
+        overflow: hidden;
+        border-radius: 1.1rem;
+        margin-bottom: 1.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .hero::after {
+        content: '';
+        position: absolute;
+        left: 0; top: 0; width: 100%; height: 100%;
+        background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.08) 0px, rgba(255,255,255,0.08) 2px, transparent 2px, transparent 16px);
+        pointer-events: none;
+      }
+      .hero-content {
+        padding: 0.5rem 0.2rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 24px rgba(40,116,240,0.10);
+        border-radius: 1rem;
+        background: rgba(255,255,255,0.02);
+      }
+      .hero-icon {
+        font-size: 2.7rem;
+        color: #2874f0;
+        margin-bottom: 0.5rem;
+        filter: drop-shadow(0 0 8px #2874f0aa);
+      }
+      .hero-title {
+        font-size: 1.25rem;
+        margin-bottom: 0.3rem;
+      }
+      .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+      }
+      .explore-btn {
+        font-size: 0.98rem;
+        padding: 0.5rem 1.2rem;
+        background: #2874f0 !important;
+        color: #fff !important;
+        border-radius: 8px !important;
+        box-shadow: 0 2px 8px rgba(40,116,240,0.10);
+        border: none;
+        font-weight: 700;
+        transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.12s;
+      }
+      .explore-btn:hover, .explore-btn:focus {
+        background: #0059c8 !important;
+        color: #fff !important;
+        box-shadow: 0 4px 16px rgba(40, 116, 240, 0.18);
+        transform: translateY(-2px) scale(1.04);
+      }
+      .fk-product-card {
+        border-radius: 1.1rem !important;
+        transition: box-shadow 0.18s, transform 0.13s;
+      }
+      .fk-product-card:hover {
+        box-shadow: 0 6px 24px rgba(40,116,240,0.13), 0 2px 8px rgba(0,0,0,0.07);
+        transform: translateY(-4px) scale(1.03);
+      }
+      .fk-product-grid {
+        gap: 22px !important;
+      }
+      .fk-logo-link {
+        color: #fff;
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-decoration: none;
+        letter-spacing: 1px;
+        margin-right: 22px;
+        white-space: nowrap;
+        transition: filter 0.18s;
+      }
+      .fk-logo-link:hover, .fk-logo-link:focus {
+        filter: brightness(1.15) drop-shadow(0 2px 8px rgba(40,116,240,0.10));
+      }
+      .fk-header-nav .fk-nav-link {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        padding: 6px 10px;
+        border-radius: 2px;
+        transition: background 0.2s;
+        display: flex;
+        align-items: center;
+        transition: background 0.18s, color 0.18s, box-shadow 0.13s;
+      }
+      .fk-header-nav .fk-nav-link:hover, .fk-header-nav .fk-nav-link:focus {
+        background: #fff;
+        color: #2874f0;
+        box-shadow: 0 2px 8px rgba(40,116,240,0.10);
+      }
+      .fk-product-card img {
+        box-shadow: 0 2px 12px rgba(40,116,240,0.10);
+        border-radius: 0.7rem;
+        transition: box-shadow 0.18s, transform 0.13s;
+      }
+      .fk-product-card img:hover {
+        box-shadow: 0 6px 24px rgba(40,116,240,0.18);
+        transform: scale(1.04);
+      }
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        font-size: 1.18rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+      .section-title-bar {
+        width: 5px;
+        height: 24px;
+        background: #2874f0;
+        border-radius: 3px;
+        display: inline-block;
+      }
+      .view-all-btn {
+        display: inline-block;
+        margin: 1.2rem auto 0 auto;
+        background: #2874f0;
+        color: #fff;
+        font-weight: 700;
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 1.5rem;
+        font-size: 1rem;
+        box-shadow: 0 2px 8px rgba(40,116,240,0.10);
+        cursor: pointer;
+        transition: background 0.18s, box-shadow 0.13s, transform 0.12s;
+      }
+      .view-all-btn:hover, .view-all-btn:focus {
+        background: #0059c8;
+        box-shadow: 0 4px 16px rgba(40,116,240,0.18);
+        transform: translateY(-2px) scale(1.04);
+      }
+      .main-footer {
+        border-top: 1.5px solid #e0e6ef;
+        margin-top: 2.5rem;
+      }
+      @media (max-width: 600px) {
+        .fk-header-content {
+          min-height: 38px;
+          padding: 0 3px;
+        }
+        .fk-logo-link img {
+          height: 28px !important;
+          width: 28px !important;
+        }
+        .fk-logo-text {
+          font-size: 1.08rem !important;
+        }
+        .hero {
+          min-height: 32px;
+          padding: 0.25rem 0 0.1rem 0;
+          margin-bottom: 0.6rem;
+          border-radius: 0.7rem;
+        }
+        .hero-title {
+          font-size: 1.05rem;
+        }
+        .hero-subtitle {
+          font-size: 0.92rem;
+        }
+        .explore-btn {
+          font-size: 0.92rem;
+          padding: 0.38rem 0.7rem;
+        }
+        .fk-product-grid {
+          gap: 10px !important;
+        }
+        .fk-product-card {
+          border-radius: 0.7rem !important;
         }
       }
     </style>
@@ -56,13 +269,14 @@
     <main>
         <section class="hero">
           <div class="hero-content">
+            <span class="hero-icon"><i class="fa fa-store"></i></span>
             <h1 class="hero-title">Welcome to Your One-Stop Construction Store</h1>
             <p class="hero-subtitle">Explore premium brands in Cement, TMT Rods, and Tools</p>
             <a href="products.html" class="explore-btn">Explore</a>
           </div>
         </section>
         <section class="categories">
-            <h2>Our Products</h2>
+            <h2 class="section-title"><span class="section-title-bar"></span>Our Products</h2>
             <p class="categories-desc">Browse top categories and brands for all your construction needs.</p>
             <div class="fk-product-grid">
                 <div class="fk-product-card">
@@ -86,9 +300,12 @@
                     <a href="tools.html" class="explore-btn">Explore Brands</a>
                 </div>
             </div>
+            <div style="text-align:center;">
+              <a href="products.html" class="view-all-btn">View All Products</a>
+            </div>
         </section>
         <section class="bulk-pricing">
-            <h2><i class="fa fa-truck bulk-icon"></i>Bulk Pricing for Contractors & Resellers</h2>
+            <h2 class="section-title"><span class="section-title-bar"></span><i class="fa fa-truck bulk-icon"></i>Bulk Pricing for Contractors & Resellers</h2>
             <p>Special prices and delivery options available for bulk orders. Contact us today!</p>
             <a href="contact.html" class="cta-btn">Contact Us for Bulk Orders</a>
         </section>
@@ -114,6 +331,48 @@
         'TMT Steel Rods': ['Tata Tiscon', 'JSW Neosteel', 'SAIL', 'Kamdhenu', 'SRMB'],
         'Tools & Equipment': ['Bosch', 'Makita', 'Stanley', 'Dewalt', 'Black+Decker']
       };
+      // Cement brand IDs and prices (should match cart.js)
+      const cementBrandData = {
+        'UltraTech': {id: 'cement-ultratech', name: 'UltraTech Cement', price: 420, image: 'images/cement.jpg'},
+        'ACC': {id: 'cement-acc', name: 'ACC Cement', price: 410, image: 'images/cement.jpg'},
+        'Ambuja': {id: 'cement-ambuja', name: 'Ambuja Cement', price: 415, image: 'images/cement.jpg'},
+        'Shree': {id: 'cement-shree', name: 'Shree Cement', price: 405, image: 'images/cement.jpg'},
+        'JK Lakshmi': {id: 'cement-jk-lakshmi', name: 'JK Lakshmi Cement', price: 400, image: 'images/cement.jpg'}
+      };
+      function addToCart(product) {
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        let item = cart.find(i => i.id === product.id);
+        if (item) {
+          item.qty += 1;
+        } else {
+          cart.push({...product, qty: 1});
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        showCartConfirm();
+      }
+      function showCartConfirm() {
+        let toast = document.querySelector('.cart-confirm');
+        if (!toast) {
+          toast = document.createElement('div');
+          toast.className = 'cart-confirm';
+          toast.style.position = 'fixed';
+          toast.style.left = '50%';
+          toast.style.bottom = '80px';
+          toast.style.transform = 'translateX(-50%)';
+          toast.style.background = '#FFD600';
+          toast.style.color = '#111';
+          toast.style.padding = '0.7rem 1.5rem';
+          toast.style.borderRadius = '8px';
+          toast.style.fontWeight = '700';
+          toast.style.boxShadow = '0 2px 8px rgba(34,34,34,0.10)';
+          toast.style.zIndex = '2001';
+          toast.style.fontSize = '1.08rem';
+          document.body.appendChild(toast);
+        }
+        toast.textContent = 'Added to cart!';
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 1200);
+      }
       document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.fk-product-card .explore-btn').forEach(function(btn) {
           btn.addEventListener('click', function(e) {
@@ -123,8 +382,27 @@
             const brands = productBrands[title] || [];
             document.getElementById('brandModalTitle').textContent = title + ' Brands';
             const list = document.getElementById('brandModalList');
-            list.innerHTML = brands.map(b => `<li style='margin-bottom:0.5rem;'><a href='products.html?brand=${encodeURIComponent(b)}&type=${encodeURIComponent(title)}' style='color:#FFD600; text-decoration:underline; font-weight:bold;'>${b}</a></li>`).join('') || '<li>No brands listed.</li>';
+            if (title === 'Cement') {
+              list.innerHTML = brands.map(b =>
+                `<li style='margin-bottom:0.7rem;display:flex;align-items:center;justify-content:space-between;gap:1.2rem;'>
+                  <span style='font-weight:600;color:#2874f0;'>${b}</span>
+                  <button class='order-cement-btn' data-brand='${b}' style='background:#2874f0;color:#fff;border:none;border-radius:6px;padding:0.4rem 1.1rem;font-weight:600;cursor:pointer;'>Order</button>
+                </li>`
+              ).join('') || '<li>No brands listed.</li>';
+            } else {
+              list.innerHTML = brands.map(b => `<li style='margin-bottom:0.5rem;'><a href='products.html?brand=${encodeURIComponent(b)}&type=${encodeURIComponent(title)}' style='color:#FFD600; text-decoration:underline; font-weight:bold;'>${b}</a></li>`).join('') || '<li>No brands listed.</li>';
+            }
             document.getElementById('brandModal').style.display = 'flex';
+            // Add event listeners for cement order buttons
+            if (title === 'Cement') {
+              list.querySelectorAll('.order-cement-btn').forEach(function(orderBtn) {
+                orderBtn.onclick = function() {
+                  const brand = orderBtn.getAttribute('data-brand');
+                  const prod = cementBrandData[brand];
+                  if (prod) addToCart(prod);
+                };
+              });
+            }
           });
         });
         document.getElementById('closeBrandModal').onclick = function() {
