@@ -82,6 +82,9 @@
     });
   }
 
+  // Update badge on page load
+  document.addEventListener('DOMContentLoaded', updateCartBadge);
+
   // --- Add to Cart Button Logic ---
   function setupAddToCartButtons() {
     document.querySelectorAll('.add-cart-btn').forEach((btn, idx) => {
@@ -219,13 +222,9 @@
         icon.classList.add('fa-shopping-cart');
       }
     });
-    // Optionally, add a checkmark badge
+    // Always show the number, not a checkmark
     document.querySelectorAll('.fk-cart-badge').forEach(badge => {
-      if (count > 0) {
-        badge.innerHTML = '<i class="fa fa-check"></i>';
-      } else {
-        badge.textContent = '0';
-      }
+      badge.textContent = count;
     });
   }
 

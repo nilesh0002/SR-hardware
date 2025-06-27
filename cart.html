@@ -80,56 +80,18 @@
   <nav class="fk-category-bar">
     <div class="fk-category-content">
       <a href="index.html" class="fk-category-link">Home</a>
-      <a href="#cement" class="fk-category-link">Cement</a>
-      <a href="#paints" class="fk-category-link">Paints</a>
-      <a href="#doors-windows" class="fk-category-link">Doors & Windows</a>
-      <a href="#tools-equipment" class="fk-category-link">Tools & Equipment</a>
-      <a href="#plumbing" class="fk-category-link">Plumbing</a>
-      <a href="#wall-putty" class="fk-category-link">Wall Putty & Adhesives</a>
-      <a href="#bulk-orders" class="fk-category-link">Bulk Orders</a>
+      <a href="products.html#cement" class="fk-category-link">Cement</a>
+      <a href="products.html#paints" class="fk-category-link">Paints</a>
+      <a href="products.html#doors-windows" class="fk-category-link">Doors & Windows</a>
+      <a href="products.html#tools-equipment" class="fk-category-link">Tools & Equipment</a>
+      <a href="products.html#plumbing" class="fk-category-link">Plumbing</a>
+      <a href="products.html#wall-putty" class="fk-category-link">Wall Putty & Adhesives</a>
+      <a href="products.html#bulk-orders" class="fk-category-link">Bulk Orders</a>
     </div>
   </nav>
   <main class="fk-cart-section" style="display:flex;gap:2.5rem;flex-wrap:wrap;align-items:flex-start;justify-content:center;">
     <div style="width:100%;max-width:900px;margin-bottom:2.5rem;">
-      <button id="explore-cement-btn" class="explore-btn" style="margin-bottom:1.2rem;">Explore Cement Brands</button>
-      <section id="cement" class="fk-product-grid-section" style="display:none;width:100%;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;">
-          <h2 style="font-size: 1.3rem; font-weight: 700; color: #2874f0; margin:0;">Cement Brands</h2>
-          <button id="close-cement-btn" style="background:none;border:none;font-size:1.5rem;color:#2874f0;cursor:pointer;">&times;</button>
-        </div>
-        <div class="fk-product-grid">
-          <div class="fk-product-card" id="cement-ultratech">
-            <img src="images/cement.jpg" alt="UltraTech Cement" class="fk-product-image">
-            <div class="fk-product-title">UltraTech Cement</div>
-            <div class="fk-product-price">₹420</div>
-            <button class="add-cart-btn">Add to Cart</button>
-          </div>
-          <div class="fk-product-card" id="cement-acc">
-            <img src="images/cement.jpg" alt="ACC Cement" class="fk-product-image">
-            <div class="fk-product-title">ACC Cement</div>
-            <div class="fk-product-price">₹410</div>
-            <button class="add-cart-btn">Add to Cart</button>
-          </div>
-          <div class="fk-product-card" id="cement-ambuja">
-            <img src="images/cement.jpg" alt="Ambuja Cement" class="fk-product-image">
-            <div class="fk-product-title">Ambuja Cement</div>
-            <div class="fk-product-price">₹415</div>
-            <button class="add-cart-btn">Add to Cart</button>
-          </div>
-          <div class="fk-product-card" id="cement-shree">
-            <img src="images/cement.jpg" alt="Shree Cement" class="fk-product-image">
-            <div class="fk-product-title">Shree Cement</div>
-            <div class="fk-product-price">₹405</div>
-            <button class="add-cart-btn">Add to Cart</button>
-          </div>
-          <div class="fk-product-card" id="cement-jk-lakshmi">
-            <img src="images/cement.jpg" alt="JK Lakshmi Cement" class="fk-product-image">
-            <div class="fk-product-title">JK Lakshmi Cement</div>
-            <div class="fk-product-price">₹400</div>
-            <button class="add-cart-btn">Add to Cart</button>
-          </div>
-        </div>
-      </section>
+      <!-- Cement explore button and section removed -->
     </div>
     <div class="fk-cart-items" style="flex:2;min-width:270px;">
       <h2 style="font-size: 1.5rem; font-weight: 700; color: #2874f0; margin-bottom: 1.5rem;">Your Cart</h2>
@@ -166,25 +128,6 @@
   </footer>
   <a href="https://wa.me/91XXXXXXXXXX" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
   <script src="cart.js"></script>
-  <script>
-    // Cement Explore/Close logic
-    document.addEventListener('DOMContentLoaded', function() {
-      var cementSection = document.getElementById('cement');
-      var exploreBtn = document.getElementById('explore-cement-btn');
-      var closeBtn = document.getElementById('close-cement-btn');
-      if (exploreBtn && cementSection) {
-        exploreBtn.addEventListener('click', function() {
-          cementSection.style.display = '';
-          exploreBtn.style.display = 'none';
-        });
-      }
-      if (closeBtn && cementSection) {
-        closeBtn.addEventListener('click', function() {
-          cementSection.style.display = 'none';
-          exploreBtn.style.display = '';
-        });
-      }
-    });
-  </script>
+  <!-- Cement Explore/Close logic removed -->
 </body>
 </html> 
