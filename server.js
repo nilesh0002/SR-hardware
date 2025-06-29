@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, '.')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(session({
-    secret: 'utu_hardware_secret',
+    secret: 'shreeraam_hardware_secret',
     resave: false,
     saveUninitialized: false,
     cookie: { maxAge: 24 * 60 * 60 * 1000 }
@@ -86,7 +86,7 @@ app.post('/signup', async (req, res) => {
     const mailOptions = {
         from: EMAIL_USER,
         to: ADMIN_EMAIL,
-        subject: 'New User Signup on Hardware & Equipment',
+        subject: 'New User Signup on Shree Raam Hardware',
         text: `A new user has signed up:\nEmail: ${email}\nTime: ${new Date().toLocaleString()}`
     };
     transporter.sendMail(mailOptions, (error, info) => {
@@ -115,7 +115,7 @@ app.post('/login', async (req, res) => {
     const mailOptions = {
         from: EMAIL_USER,
         to: ADMIN_EMAIL,
-        subject: 'New Login on UTU Hardware',
+        subject: 'New Login on Shree Raam Hardware',
         text: `A user logged in with email: ${email}\nTime: ${new Date().toLocaleString()}`
     };
     transporter.sendMail(mailOptions, (error, info) => {

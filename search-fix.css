@@ -47,16 +47,31 @@
 .fk-search-icon {
     position: absolute;
     left: 14px;
-    color: #999;
+    color: #fff;
     font-size: 1.1rem;
     pointer-events: none;
     z-index: 2;
     transition: color 0.3s ease;
     display: block !important;
+    color: #999;
+    background: none;
+    border: none;
+    box-shadow: none;
+    width: auto;
+    height: auto;
+    align-items: unset;
+    justify-content: unset;
 }
 
 .fk-search-bar:focus-within .fk-search-icon {
     color: #2874f0;
+    border: none;
+    box-shadow: none;
+    background: none;
+}
+
+.fk-search-icon i {
+    font-size: 1.1rem;
 }
 
 .fk-search-bar button {

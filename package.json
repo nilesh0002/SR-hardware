@@ -1,7 +1,7 @@
 {
-  "name": "utu-hardware-backend",
+  "name": "shreeraam-hardware-backend",
   "version": "1.0.0",
-  "description": "Backend for UTU Hardware login and email notification",
+  "description": "Backend for Shree Raam Hardware login and email notification",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Wholesale construction materials, tools, and equipment with brand-specific pages and bulk pricing for contractors.">
-    <meta name="keywords" content="cement, TMT rods, hardware wholesale, construction tools, UltraTech, Tata TMT, order online">
+    <meta name="keywords" content="cement, TMT rods, shree raam hardware, construction tools, UltraTech, Tata TMT, order online">
     <meta name="author" content="Your Company Name">
-    <title>Hardware Wholesale - Construction Materials & Tools</title>
+    <title>Shree Raam Hardware - Construction Materials & Tools</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="search-fix.css">
     <link rel="icon" href="images/hw-logo.svg" type="image/svg+xml">
@@ -138,6 +138,7 @@
         border: 1px solid rgba(255,255,255,0.1);
         border-radius: 12px;
         padding: 2rem;
+        animation: fadeInUp 1s cubic-bezier(0.23, 1, 0.32, 1);
       }
       
       .hero-icon {
@@ -188,7 +189,13 @@
         transition: all 0.3s ease;
         overflow: hidden;
         position: relative;
+        animation: fadeInUp 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        animation-fill-mode: both;
       }
+      
+      .fk-product-card:nth-child(1) { animation-delay: 0.1s; }
+      .fk-product-card:nth-child(2) { animation-delay: 0.2s; }
+      .fk-product-card:nth-child(3) { animation-delay: 0.3s; }
       
       .fk-product-card:hover {
         transform: translateY(-4px);
@@ -462,14 +469,35 @@
       body {
         background: #f7f9fb; /* or your preferred light color */
       }
+      
+      .search-container .search-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #2874f0;
+        color: #fff;
+        font-size: 0.85rem;
+        margin-right: 8px;
+      }
+      .search-container .search-icon i {
+        font-size: 0.85rem;
+      }
+      
+      @keyframes fadeInUp {
+        0% { opacity: 0; transform: translateY(24px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
     </style>
 </head>
 <body>
     <header class="fk-header">
         <div class="fk-header-content">
             <a href="index.html" class="fk-logo-link" aria-label="Home">
-                <img src="images/hw-logo.svg" alt="HW Logo" style="height:36px;width:36px;">
-                <span class="fk-logo-text">Hardware & Equipment</span>
+                <img src="images/hw-logo-red.svg" alt="HW Logo" style="height:36px;width:36px;">
+                <span class="fk-logo-text" style="font-weight:700;font-size:1.6rem;letter-spacing:1px;">Shree Raam Hardware</span>
             </a>
             <form class="fk-search-bar" action="#" method="get">
                 <span class="fk-search-icon"><i class="fa fa-search"></i></span>
@@ -494,7 +522,7 @@
     <section class="hero">
         <div class="hero-content">
             <div class="hero-text">
-                <h1 class="hero-title">Hardware & Equipment Wholesale</h1>
+                <h1 class="hero-title">Shree Raam Hardware Wholesale</h1>
                 <p class="hero-subtitle">Quality building materials, tools, and equipment for contractors, builders, and DIY enthusiasts. Get wholesale prices on premium brands.</p>
                 <div class="hero-search">
                     <div class="search-container">
@@ -641,7 +669,7 @@
     <footer class="main-footer">
         <div style="max-width: 1248px; margin: 0 auto; padding: 2rem 1rem; text-align: center;">
             <p style="color:#2874f0; font-weight:600; font-size:1.1rem;">
-                &copy; 2025 Hardware & Equipment. All rights reserved.
+                &copy; 2025 Shree Raam Hardware. All rights reserved.
             </p>
         </div>
     </footer>
