@@ -3,179 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Hardware & Equipment</title>
+    <title>Login or Register | Hardware & Equipment</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="search-fix.css">
+    <link rel="icon" href="images/hw-logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        body {
+            background: linear-gradient(135deg, #f7f9fb 0%, #e8f2ff 100%);
+            min-height: 100vh;
+            margin: 0;
+        }
         .fk-login-main {
-            min-height: 80vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #f1f3f6;
         }
         .fk-login-card {
-            display: flex;
             width: 100%;
-            max-width: 700px;
-            min-height: 420px;
+            max-width: 400px;
             background: #fff;
             border-radius: 1.2rem;
-            box-shadow: 0 2px 16px rgba(40,116,240,0.08), 0 1.5px 6px rgba(0,0,0,0.04);
-            overflow: hidden;
-        }
-        .fk-login-left {
-            background: #2874f0;
-            color: #fff;
-            flex: 1.1;
+            box-shadow: 0 4px 32px rgba(40,116,240,0.10), 0 1.5px 6px rgba(0,0,0,0.04);
+            padding: 2rem 1.2rem 1.7rem 1.2rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 2.2rem 1.2rem;
-            min-width: 180px;
+            gap: 1.1rem;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
-        .fk-login-left img {
-            height: 48px;
+        .fk-login-logo {
+            margin-bottom: 0.5rem;
+        }
+        .fk-login-logo img {
+            height: 44px;
+        }
+        .fk-login-tabs {
+            display: flex;
+            width: 100%;
             margin-bottom: 1.2rem;
+            border-radius: 0.7rem;
+            overflow: hidden;
+            box-shadow: 0 1px 6px rgba(40,116,240,0.04);
+            gap: 0.5rem;
         }
-        .fk-login-welcome {
-            font-size: 1.25rem;
+        .fk-login-tab {
+            flex: 1;
+            padding: 0.7rem 0;
+            text-align: center;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #2874f0;
+            background: #f7f9fb;
+            border: none;
+            cursor: pointer;
+            transition: background 0.18s, color 0.18s;
+            border-radius: 0.7rem;
+        }
+        .fk-login-tab.active {
+            background: #2874f0;
+            color: #fff;
+        }
+        .fk-login-section {
+            width: 100%;
+            display: none;
+        }
+        .fk-login-section.active {
+            display: block;
+        }
+        .fk-login-title {
+            font-size: 1.18rem;
             font-weight: 700;
-            margin-bottom: 0.7rem;
+            color: #2874f0;
+            margin-bottom: 0.1rem;
+            text-align: center;
         }
         .fk-login-desc {
-            font-size: 1rem;
+            font-size: 0.98rem;
+            color: #555;
             opacity: 0.93;
+            text-align: center;
+            margin-bottom: 0.5rem;
         }
-        .fk-login-right {
-            flex: 2;
-            padding: 2.2rem 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .fk-login-form {
+        .fk-login-form, .fk-register-form {
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 1.1rem;
+            gap: 0.9rem;
         }
-        .fk-login-input {
+        .fk-login-input, .fk-register-input {
             position: relative;
         }
-        .fk-login-input input {
+        .fk-login-input input, .fk-register-input input {
             width: 100%;
-            padding: 0.7rem 0.7rem 0.7rem 2.3rem;
+            min-width: 0;
+            padding: 0.65rem 0.7rem 0.65rem 2.1rem;
             border-radius: 0.6rem;
-            border: 1px solid #ccc;
-            font-size: 1rem;
+            border: 1px solid #dbeafe;
+            font-size: 0.98rem;
             background: #f7faff;
+            transition: border 0.18s;
+            overflow-wrap: break-word;
         }
-        .fk-login-input i {
+        .fk-login-input input:focus, .fk-register-input input:focus {
+            border: 1.5px solid #2874f0;
+            outline: none;
+        }
+        .fk-login-input i, .fk-register-input i {
             position: absolute;
             left: 0.8rem;
             top: 50%;
             transform: translateY(-50%);
             color: #2874f0;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             opacity: 0.8;
         }
-        .fk-login-form button.fk-form-button {
-            background: #2874f0;
-            color: #fff;
-            border: none;
-            border-radius: 0.6rem;
-            padding: 0.8rem 0;
-            font-size: 1.1rem;
-            font-weight: 700;
+        .fk-login-input .show-password, .fk-register-input .show-password {
+            position: absolute;
+            right: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 1.05rem;
             cursor: pointer;
-            transition: background 0.2s;
-        }
-        .fk-login-form button.fk-form-button:hover {
-            background: #174a99;
+            opacity: 0.7;
         }
         .fk-login-forgot {
             text-align: right;
-            margin-top: -0.7rem;
-            margin-bottom: 0.7rem;
+            margin-top: -0.5rem;
+            margin-bottom: 0.5rem;
+            overflow-wrap: break-word;
         }
         .fk-login-forgot a {
             color: #2874f0;
-            font-size: 0.98rem;
+            font-size: 0.95rem;
             text-decoration: none;
         }
         .fk-login-forgot a:hover {
             text-decoration: underline;
         }
-        .fk-login-divider {
-            display: flex;
-            align-items: center;
-            margin: 1.2rem 0 1.1rem 0;
-        }
-        .fk-login-divider span {
-            flex: 1;
-            height: 1px;
-            background: #e0e0e0;
-        }
-        .fk-login-divider p {
-            margin: 0 1rem;
-            color: #888;
-            font-size: 0.98rem;
-            font-weight: 500;
-        }
-        .fk-login-google {
-            background: #fff;
-            color: #222;
-            border: 1.5px solid #e0e0e0;
+        .fk-login-form button.fk-form-button, .fk-register-form button.fk-form-button {
+            background: linear-gradient(135deg, #2874f0 0%, #1e5bb8 100%);
+            color: #fff;
+            border: none;
             border-radius: 0.6rem;
             padding: 0.7rem 0;
-            font-size: 1.08rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.7rem;
-            transition: box-shadow 0.18s;
-        }
-        .fk-login-google img {
-            height: 22px;
-        }
-        .fk-login-google:hover {
-            box-shadow: 0 2px 8px rgba(40,116,240,0.10);
-        }
-        .fk-login-signup {
-            margin-top: 1.2rem;
             font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-shadow: 0 2px 8px rgba(40,116,240,0.08);
+        }
+        .fk-login-form button.fk-form-button:hover, .fk-register-form button.fk-form-button:hover {
+            background: #174a99;
+        }
+        .fk-register-address-row {
+            display: flex;
+            gap: 0.7rem;
+        }
+        .fk-register-address-row .fk-register-input {
+            flex: 1;
+        }
+        .fk-register-login {
+            margin-top: 1rem;
+            font-size: 0.98rem;
             color: #222;
             text-align: center;
+            overflow-wrap: break-word;
         }
-        .fk-login-signup a {
+        .fk-register-login a {
             color: #2874f0;
             text-decoration: none;
             font-weight: 600;
         }
-        .fk-login-signup a:hover {
+        .fk-register-login a:hover {
             text-decoration: underline;
         }
-        @media (max-width: 700px) {
-            .fk-login-card {
-                flex-direction: column;
-                min-width: 0;
-                min-height: unset;
+        @media (max-width: 600px) {
+            .fk-login-main {
+                display: block;
+                min-height: auto;
+                padding-bottom: 80px;
+                margin: 0;
+                padding-top: 0;
             }
-            .fk-login-left, .fk-login-right {
-                padding: 1.2rem 1rem;
-            }
-        }
-        @media (max-width: 480px) {
             .fk-login-card {
+                margin-top: 1rem;
+            }
+            .fk-login-card {
+                max-width: 99vw;
                 border-radius: 0.7rem;
                 box-shadow: 0 1.5px 6px rgba(0,0,0,0.07);
+                padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+                gap: 0.7rem;
             }
-            .fk-login-left, .fk-login-right {
-                padding: 1rem 0.5rem;
+            .fk-login-logo img {
+                height: 38px;
+            }
+            .fk-login-tabs {
+                font-size: 0.95rem;
+            }
+            .fk-login-title {
+                font-size: 1.05rem;
+            }
+            .fk-login-desc {
+                font-size: 0.93rem;
+            }
+            .fk-login-form button.fk-form-button, .fk-register-form button.fk-form-button {
+                font-size: 0.95rem;
+                padding: 0.6rem 0;
+            }
+            .fk-register-login {
+                font-size: 0.93rem;
+            }
+            .fk-register-address-row {
+                flex-direction: column;
+                gap: 0.5rem;
             }
         }
         .fk-logo-link {
@@ -236,55 +281,197 @@
                 <span class="fk-search-icon"><i class="fa fa-search"></i></span>
                 <input type="text" placeholder="Search for products, brands and more" name="q">
             </form>
-            <nav class="fk-header-nav">
-                <a href="products.html" class="fk-nav-link">Products</a>
-                <a href="cart.html" class="fk-nav-link"><i class="fa fa-shopping-cart"></i> Cart</a>
-                <a href="login.html" class="fk-nav-link">Login</a>
-            </nav>
         </div>
     </header>
-    <nav class="fk-category-bar">
-        <div class="fk-category-content">
-            <a href="index.html" class="fk-category-link">Home</a>
-            <a href="#cement" class="fk-category-link">Cement</a>
-            <a href="#paints" class="fk-category-link">Paints</a>
-            <a href="#doors-windows" class="fk-category-link">Doors & Windows</a>
-            <a href="#tools-equipment" class="fk-category-link">Tools & Equipment</a>
-            <a href="#plumbing" class="fk-category-link">Plumbing</a>
-            <a href="#wall-putty" class="fk-category-link">Wall Putty & Adhesives</a>
-            <a href="#bulk-orders" class="fk-category-link">Bulk Orders</a>
-        </div>
-    </nav>
+    
     <main class="fk-login-main">
         <div class="fk-login-card">
-            <div class="fk-login-left">
-                <img src="images/hw-logo.svg" alt="HW Logo">
-                <div class="fk-login-welcome">Welcome Back!</div>
-                <div class="fk-login-desc">Sign in to access your account and order hardware, tools, and more.</div>
+            <div class="fk-login-logo"><img src="images/hw-logo.svg" alt="HW Logo"></div>
+            <div class="fk-login-tabs">
+                <button class="fk-login-tab active" id="login-tab-btn" onclick="showLoginTab('login')">Login</button>
+                <button class="fk-login-tab" id="register-tab-btn" onclick="showLoginTab('register')">Register</button>
             </div>
-            <div class="fk-login-right">
-                <form class="fk-login-form">
+            <!-- Login Section -->
+            <div class="fk-login-section active" id="login-section">
+                <div class="fk-login-title">Welcome Back!</div>
+                <div class="fk-login-desc">Sign in to access your account and order hardware, tools, and more.</div>
+                <form class="fk-login-form" onsubmit="return handleLogin(event)">
                     <div class="fk-login-input">
                         <i class="fa fa-user"></i>
-                        <input type="text" placeholder="Email or Mobile Number" required>
+                        <input type="text" placeholder="Email or Mobile Number" name="loginId" required>
                     </div>
                     <div class="fk-login-input">
                         <i class="fa fa-lock"></i>
-                        <input type="password" placeholder="Password" required>
+                        <input type="password" placeholder="Password" name="loginPassword" id="login-password">
+                        <span class="show-password" onclick="togglePassword('login-password', this)"><i class="fa fa-eye"></i></span>
                     </div>
                     <div class="fk-login-forgot"><a href="#">Forgot password?</a></div>
                     <button type="submit" class="fk-form-button">Login</button>
                 </form>
-                <div class="fk-login-divider"><span></span><p>OR</p><span></span></div>
-                <button class="fk-login-google"><img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google Logo">Login with Google</button>
-                <div class="fk-login-signup">New user? <a href="#">Create an account</a></div>
+            </div>
+            <!-- Register Section -->
+            <div class="fk-login-section" id="register-section">
+                <div class="fk-login-title">Create Your Account</div>
+                <div class="fk-login-desc">Sign up to order hardware, tools, and more at wholesale prices.</div>
+                <form class="fk-register-form" autocomplete="off" onsubmit="return handleRegister(event)">
+                    <div class="fk-register-input">
+                        <i class="fa fa-user"></i>
+                        <input type="text" placeholder="Full Name" name="name" required>
+                    </div>
+                    <div class="fk-register-input">
+                        <i class="fa fa-envelope"></i>
+                        <input type="email" placeholder="Email" name="email" required>
+                    </div>
+                    <div class="fk-register-input">
+                        <i class="fa fa-phone"></i>
+                        <input type="tel" placeholder="Mobile Number" name="mobile" pattern="[0-9]{10}" required>
+                    </div>
+                    <div class="fk-register-input">
+                        <i class="fa fa-lock"></i>
+                        <input type="password" placeholder="Password" name="password" id="register-password" required minlength="6">
+                        <span class="show-password" onclick="togglePassword('register-password', this)"><i class="fa fa-eye"></i></span>
+                    </div>
+                    <div class="fk-register-input">
+                        <i class="fa fa-lock"></i>
+                        <input type="password" placeholder="Confirm Password" name="confirm" id="register-confirm" required minlength="6">
+                        <span class="show-password" onclick="togglePassword('register-confirm', this)"><i class="fa fa-eye"></i></span>
+                    </div>
+                    <div class="fk-register-input">
+                        <i class="fa fa-map-marker-alt"></i>
+                        <input type="text" placeholder="Address Line" name="address" required>
+                    </div>
+                    <div class="fk-register-address-row">
+                        <div class="fk-register-input">
+                            <i class="fa fa-city"></i>
+                            <input type="text" placeholder="City" name="city" required>
+                        </div>
+                        <div class="fk-register-input">
+                            <i class="fa fa-flag"></i>
+                            <input type="text" placeholder="State" name="state" required>
+                        </div>
+                        <div class="fk-register-input">
+                            <i class="fa fa-hashtag"></i>
+                            <input type="text" placeholder="Pincode" name="pincode" pattern="[0-9]{6}" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="fk-form-button">Create Account</button>
+                </form>
+                <div class="fk-register-login">Already have an account? <a href="#" onclick="showLoginTab('login');return false;">Login</a></div>
             </div>
         </div>
     </main>
+    <nav class="bottom-nav" id="main-bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="products.html" class="nav-item">
+            <i class="fa fa-th-large"></i>
+            <span>Products</span>
+        </a>
+        <a href="cart.html" class="nav-item">
+            <i class="fa fa-shopping-cart"></i>
+            <span>Cart</span>
+        </a>
+        <span id="nav-auth-item"></span>
+    </nav>
+    
     <footer class="main-footer">
-        <p style="text-align:center; color:#2874f0; font-weight:600;">&copy; 2024 Hardware & Equipment. All rights reserved.</p>
+        <div style="max-width: 1248px; margin: 0 auto; padding: 2rem 1rem; text-align: center;">
+            <p style="color:#2874f0; font-weight:600; font-size:1.1rem;">
+                &copy; 2025 Hardware & Equipment. All rights reserved.
+            </p>
+        </div>
     </footer>
     <a href="https://wa.me/91XXXXXXXXXX" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
-    <script src="cart.js"></script>
+    <script>
+        function showLoginTab(tab) {
+            document.getElementById('login-tab-btn').classList.remove('active');
+            document.getElementById('register-tab-btn').classList.remove('active');
+            document.getElementById('login-section').classList.remove('active');
+            document.getElementById('register-section').classList.remove('active');
+            if(tab === 'login') {
+                document.getElementById('login-tab-btn').classList.add('active');
+                document.getElementById('login-section').classList.add('active');
+            } else {
+                document.getElementById('register-tab-btn').classList.add('active');
+                document.getElementById('register-section').classList.add('active');
+            }
+        }
+        function togglePassword(id, el) {
+            var pwd = document.getElementById(id);
+            var icon = el.querySelector('i');
+            if (pwd.type === 'password') {
+                pwd.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                pwd.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+        // Demo login handler (replace with real backend logic)
+        function handleLogin(e) {
+            e.preventDefault();
+            var form = e.target;
+            var loginId = form.loginId.value.trim();
+            var loginPassword = form.loginPassword.value;
+            // For demo: check localStorage
+            var storedEmail = localStorage.getItem('userEmail');
+            var storedMobile = localStorage.getItem('userMobile');
+            var storedPassword = localStorage.getItem('userPassword');
+            if ((loginId === storedEmail || loginId === storedMobile) && loginPassword === storedPassword) {
+                localStorage.setItem('isLoggedIn', 'true');
+                alert('Login successful!');
+                window.location.href = 'account.html';
+            } else {
+                alert('Invalid credentials!');
+            }
+            return false;
+        }
+        // Demo registration handler (replace with real backend logic)
+        function handleRegister(e) {
+            e.preventDefault();
+            var form = e.target;
+            var name = form.name.value.trim();
+            var email = form.email.value.trim();
+            var mobile = form.mobile.value.trim();
+            var password = form.password.value;
+            var confirm = form.confirm.value;
+            var address = form.address.value.trim();
+            var city = form.city.value.trim();
+            var state = form.state.value.trim();
+            var pincode = form.pincode.value.trim();
+            if (password !== confirm) {
+                alert('Passwords do not match!');
+                return false;
+            }
+            // Save to localStorage for demo
+            localStorage.setItem('userName', name);
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userMobile', mobile);
+            localStorage.setItem('userPassword', password);
+            localStorage.setItem('userAddress', address);
+            localStorage.setItem('userCity', city);
+            localStorage.setItem('userState', state);
+            localStorage.setItem('userPincode', pincode);
+            localStorage.setItem('isLoggedIn', 'true');
+            alert('Account created! You are now logged in.');
+            window.location.href = 'account.html';
+            return false;
+        }
+        // Dynamic Login/Account nav item
+        function renderAuthNavItem() {
+            const navAuth = document.getElementById('nav-auth-item');
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn) {
+                navAuth.innerHTML = `<a href="account.html" class="nav-item"><i class="fa fa-user"></i><span>Account</span></a>`;
+            } else {
+                navAuth.innerHTML = `<a href="login.html" class="nav-item"><i class="fa fa-user"></i><span>Login</span></a>`;
+            }
+        }
+        document.addEventListener('DOMContentLoaded', renderAuthNavItem);
+    </script>
 </body>
 </html> 

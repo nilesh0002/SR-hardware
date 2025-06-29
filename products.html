@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products | Hardware & Equipment</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="search-fix.css">
+    <link rel="icon" href="images/hw-logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .section-hidden { display: none !important; }
@@ -17,759 +19,290 @@
         .paint-filters { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
         .paint-filters button { background: #e0eafc; border: none; border-radius: 0.7rem; padding: 0.5rem 1.1rem; font-size: 1rem; cursor: pointer; transition: background 0.18s; }
         .paint-filters button.active { background: #3b6cb7; color: #fff; }
+        
         .products-section {
-            max-width: 900px;
+            max-width: 1248px;
             margin: 0 auto;
-            padding: 1.5rem 1rem 5rem 1rem;
+            padding: 2rem 1rem 5rem 1rem;
+            padding-bottom: 80px;
         }
+        
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1.2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
+        
         .product-card {
             background: #fff;
             border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(34,34,34,0.10);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
             padding: 1rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: box-shadow 0.2s;
+            transition: all 0.3s ease;
             position: relative;
-            min-height: 220px;
+            min-height: 280px;
+            overflow: hidden;
         }
+        
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(40,116,240,0.15);
+            border-color: #2874f0;
+        }
+        
         .product-card img {
             width: 100%;
-            max-width: 120px;
-            height: 100px;
+            max-width: 140px;
+            height: 120px;
             object-fit: cover;
             border-radius: 8px;
-            margin-bottom: 0.7rem;
+            margin-bottom: 1rem;
             background: #f5f5f5;
+            transition: transform 0.3s ease;
         }
+        
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+        
         .product-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 0.2rem;
-            text-align: center;
-        }
-        .product-brand {
-            font-size: 0.98rem;
-            color: #888;
-            margin-bottom: 0.2rem;
-        }
-        .product-price {
-            font-size: 1.05rem;
-            color: #FFD600;
             font-weight: 600;
-            margin-bottom: 0.7rem;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            color: #181a1b;
+            line-height: 1.3;
         }
-        .add-cart-btn {
-            background: #FFD600;
-            color: #111;
+        
+        .product-brand {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .rating-stars {
+            color: #ffa41c;
+            font-size: 0.9rem;
+        }
+        
+        .rating-text {
+            color: #388e3c;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .product-price {
+            font-size: 1.2rem;
+            color: #181a1b;
             font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .original-price {
+            color: #666;
+            text-decoration: line-through;
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+        }
+        
+        .discount {
+            color: #388e3c;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        .add-cart-btn {
+            background: #ffe500;
+            color: #181a1b;
+            font-weight: 600;
             border: none;
             border-radius: 6px;
-            padding: 0.7rem 1.4rem;
+            padding: 10px 16px;
             cursor: pointer;
-            font-size: 1.08rem;
-            transition: background 0.2s, color 0.2s;
+            font-size: 1rem;
+            transition: all 0.3s ease;
             margin-top: auto;
             min-width: 120px;
             min-height: 44px;
         }
-        .add-cart-btn:active {
-            background: #111;
-            color: #FFD600;
+        
+        .add-cart-btn:hover {
+            background: #ffd600;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255,229,0,0.3);
         }
+        
+        .add-cart-btn:active {
+            transform: translateY(0);
+        }
+        
         .cart-confirm {
             position: fixed;
             left: 50%;
             bottom: 80px;
             transform: translateX(-50%);
-            background: #FFD600;
-            color: #111;
-            padding: 0.7rem 1.5rem;
+            background: #2874f0;
+            color: #fff;
+            padding: 1rem 2rem;
             border-radius: 8px;
-            font-weight: 700;
-            box-shadow: 0 2px 8px rgba(34,34,34,0.10);
+            font-weight: 600;
+            box-shadow: 0 4px 16px rgba(40,116,240,0.3);
             z-index: 1000;
             display: none;
-            font-size: 1.08rem;
+            font-size: 1rem;
+            animation: slideUp 0.3s ease;
         }
-        .bottom-nav {
-            position: fixed;
-            left: 0; right: 0; bottom: 0;
-            background: #fff;
-            box-shadow: 0 -2px 12px rgba(34,34,34,0.10);
+        
+        @keyframes slideUp {
+            from { transform: translateX(-50%) translateY(20px); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #181a1b;
+            margin-bottom: 1rem;
             display: flex;
-            justify-content: space-around;
             align-items: center;
-            height: 64px;
-            z-index: 100;
+            gap: 0.5rem;
         }
-        .nav-item {
-            flex: 1;
-            text-align: center;
-            color: #888;
-            text-decoration: none;
-            font-size: 1.08rem;
-            padding: 0.4rem 0 0 0;
-            transition: color 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-width: 60px;
-            min-height: 56px;
+        
+        .section-title-bar {
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(135deg, #2874f0, #0059c8);
+            border-radius: 2px;
         }
-        .nav-item i {
-            font-size: 1.5rem;
-            margin-bottom: 0.1rem;
-        }
-        .nav-item.active, .nav-item:active {
-            color: #FFD600;
-        }
-        main, .products-section {
-            padding-bottom: 90px;
-        }
-        @media (max-width: 600px) {
+        
+        @media (max-width: 768px) {
             .products-section {
-                padding: 1rem 0.2rem 5rem 0.2rem;
+                padding: 1rem 0.5rem 5rem 0.5rem;
             }
             .products-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 0.7rem;
+                gap: 1rem;
             }
             .product-card {
-                padding: 0.7rem;
-                min-height: 160px;
+                padding: 0.75rem;
+                min-height: 240px;
             }
             .product-card img {
-                max-width: 90px;
-                height: 70px;
+                max-width: 100px;
+                height: 80px;
             }
             .add-cart-btn {
-                font-size: 0.98rem;
-                min-width: 90px;
+                font-size: 0.9rem;
+                min-width: 100px;
                 min-height: 40px;
-                padding: 0.6rem 0.7rem;
+                padding: 8px 12px;
             }
             .cart-confirm {
-                font-size: 0.98rem;
+                font-size: 0.9rem;
                 bottom: 70px;
-            }
-            .bottom-nav {
-                height: 60px;
-            }
-            .nav-item {
-                font-size: 0.98rem;
-                min-width: 44px;
-                min-height: 44px;
-            }
-            main, .products-section {
-                padding-bottom: 80px;
+                padding: 0.75rem 1.5rem;
             }
         }
-        /* Add to styles.css or inside <style> in products.html */
-
-        /* Make sure body doesn't overflow horizontally */
-        body {
-            overflow-x: hidden;
-        }
-
-        /* Responsive container for main content */
-        .products-section, .fk-product-grid-section {
-            max-width: 100vw;
-            width: 100%;
-            margin: 0 auto;
-            padding: 1.5rem 1rem 5rem 1rem;
-            box-sizing: border-box;
-        }
-
-        /* Responsive product grid */
-        .fk-product-grid, .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1.2rem;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        /* Responsive product card */
-        .fk-product-card, .product-card {
-            min-width: 0;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        /* Responsive images */
-        .fk-product-card img, .product-card img {
-            max-width: 100%;
-            max-height: 120px;
-            height: 120px;
-            object-fit: contain;
-            margin-bottom: 1rem;
-        }
-
-        /* Responsive header/footer/nav */
-        .fk-header, .main-footer, .fk-category-bar, .bottom-nav {
-            max-width: 100vw;
-            width: 100%;
-            box-sizing: border-box;
-            overflow-x: auto;
-        }
-
-        /* Extra mobile tweaks */
-        @media (max-width: 600px) {
-            .products-section, .fk-product-grid-section {
-                padding: 1rem 0.2rem 5rem 0.2rem;
-            }
-            .fk-product-grid, .products-grid {
+        
+        @media (max-width: 480px) {
+            .products-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 0.7rem;
+                gap: 0.75rem;
             }
-            .fk-header, .main-footer, .fk-category-bar, .bottom-nav {
-                padding-left: 0.2rem;
-                padding-right: 0.2rem;
-            }
-        }
-        .fk-header {
-            background: #2874f0;
-            color: #fff;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-        }
-        .fk-header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 1248px;
-            margin: 0 auto;
-            padding: 0 16px;
-            min-height: 56px;
-        }
-        .fk-logo-link {
-            color: #fff;
-            font-size: 1.3rem;
-            font-weight: 700;
-            text-decoration: none;
-            letter-spacing: 1px;
-            transition: filter 0.18s;
-        }
-        .fk-logo-link:hover, .fk-logo-link:focus {
-            filter: brightness(1.15) drop-shadow(0 2px 8px rgba(40,116,240,0.10));
-        }
-        .fk-header-nav {
-            display: flex;
-            gap: 18px;
-        }
-        .fk-nav-link {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 500;
-            padding: 6px 10px;
-            border-radius: 2px;
-            transition: background 0.18s, color 0.18s, box-shadow 0.13s;
-        }
-        .fk-nav-link:hover, .fk-nav-link:focus {
-            background: #fff;
-            color: #2874f0;
-            box-shadow: 0 2px 8px rgba(40,116,240,0.10);
-        }
-        .fk-logo-link {
-            margin-right: 22px;
-        }
-        .fk-product-card img {
-            box-shadow: 0 2px 12px rgba(40,116,240,0.10);
-            border-radius: 0.7rem;
-            transition: box-shadow 0.18s, transform 0.13s;
-        }
-        .fk-product-card img:hover {
-            box-shadow: 0 6px 24px rgba(40,116,240,0.18);
-            transform: scale(1.04);
-        }
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-            font-size: 1.18rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        .section-title-bar {
-            width: 5px;
-            height: 24px;
-            background: #2874f0;
-            border-radius: 3px;
-            display: inline-block;
-        }
-        .main-footer {
-            border-top: 1.5px solid #e0e6ef;
-            margin-top: 2.5rem;
-        }
-        @media (max-width: 600px) {
-            .fk-header-content {
-                flex-direction: column;
-                align-items: stretch;
-                padding: 0 6px;
-                min-height: unset;
-            }
-            .fk-logo-link {
-                font-size: 1.1rem;
-                margin-bottom: 6px;
-            }
-            .fk-header-nav {
-                flex-direction: row;
-                justify-content: flex-start;
-                gap: 10px;
-            }
-        }
-        /* General button improvements */
-        button,
-        .add-cart-btn,
-        .fk-add-to-cart,
-        .fk-form-button,
-        .cta-btn {
-            background: linear-gradient(90deg, #2874f0 0%, #ffe500 100%);
-            color: #222;
-            font-weight: 700;
-            font-size: 1.08rem;
-            border: none;
-            border-radius: 8px;
-            padding: 0.75rem 1.6rem;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(40, 116, 240, 0.08);
-            transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.12s;
-            outline: none;
-            margin: 0.2rem 0;
-            display: inline-block;
-        }
-
-        button:active,
-        .add-cart-btn:active,
-        .fk-add-to-cart:active,
-        .fk-form-button:active,
-        .cta-btn:active {
-            background: linear-gradient(90deg, #ffe500 0%, #2874f0 100%);
-            color: #2874f0;
-            transform: scale(0.97);
-            box-shadow: 0 1px 4px rgba(40, 116, 240, 0.13);
-        }
-
-        button:hover,
-        .add-cart-btn:hover,
-        .fk-add-to-cart:hover,
-        .fk-form-button:hover,
-        .cta-btn:hover {
-            background: #ffe500;
-            color: #2874f0;
-            box-shadow: 0 4px 16px rgba(40, 116, 240, 0.18);
-            transform: translateY(-2px) scale(1.04);
-        }
-
-        /* Make sure buttons are full width on mobile for easy tapping */
-        @media (max-width: 600px) {
-            button,
-            .add-cart-btn,
-            .fk-add-to-cart,
-            .fk-form-button,
-            .cta-btn {
-                width: 100%;
-                font-size: 1rem;
-                padding: 0.9rem 0.5rem;
-            }
-        }
-
-        .fk-category-bar {
-            background: #fff;
-            padding: 12px 0;
-            border-bottom: 1px solid #e0e0e0;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-        .fk-category-content {
-            max-width: 1248px;
-            margin: 0 auto;
-            padding: 0 16px;
-            display: flex;
-            gap: 32px;
-        }
-        .fk-category-link {
-            color: #212121;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            padding: 8px 0;
-            border-bottom: 2px solid transparent;
-            transition: border-color 0.2s, color 0.2s;
-            white-space: nowrap;
-        }
-        .fk-category-link:hover,
-        .fk-category-link.active {
-            border-bottom-color: #2874f0;
-            color: #2874f0;
-        }
-        @media (max-width: 600px) {
-            .fk-category-content {
-                gap: 18px;
-                padding: 0 6px;
-            }
-            .fk-category-link {
-                font-size: 1rem;
-                padding: 6px 0;
-            }
-        }
-        .fk-product-container {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 16px rgba(40,116,240,0.08), 0 1.5px 6px rgba(0,0,0,0.04);
-            padding: 2rem 1.2rem;
-            margin: 2rem auto;
-            max-width: 1100px;
-            width: 95vw;
-        }
-        @media (max-width: 600px) {
-            .fk-product-container {
-                padding: 1rem 0.3rem;
-                margin: 1rem 0.1rem;
+            .product-card {
                 border-radius: 8px;
+                min-height: 200px;
             }
-        }
-        .explore-btn {
-            background: #2874f0;
-            color: #fff;
-            font-weight: 700;
-            font-size: 1.15rem;
-            border: none;
-            border-radius: 24px;
-            padding: 0.9rem 2.2rem;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(40, 116, 240, 0.13);
-            transition: background 0.18s, box-shadow 0.18s, transform 0.12s;
-            outline: none;
-            margin: 1rem 0;
-            display: inline-block;
-            letter-spacing: 0.5px;
-        }
-        .explore-btn:hover, .explore-btn:focus {
-            background: #0059c8;
-            box-shadow: 0 4px 16px rgba(40, 116, 240, 0.18);
-            transform: translateY(-2px) scale(1.04);
+            .product-title {
+            font-size: 1rem;
+            }
+            .product-price {
+                font-size: 1.1rem;
+            }
+            .add-cart-btn {
+                padding: 8px;
+                font-size: 0.85rem;
+                min-width: 80px;
+            }
         }
     </style>
 </head>
-<body style="background:#181a1b; color:#f3f3f3;">
-    <!-- Flipkart-style Header -->
+<body>
     <header class="fk-header">
         <div class="fk-header-content">
-            <a href="index.html" class="fk-logo-link" aria-label="Home" style="display:flex;align-items:center;gap:8px;">
-                <img src="images/hw-logo.svg" alt="HW Logo" style="height:32px;width:32px;vertical-align:middle;">
-                <span class="fk-logo-text" style="font-weight:700;font-size:1.2rem;letter-spacing:1px;">Hardware & Equipment</span>
+            <a href="index.html" class="fk-logo-link" aria-label="Home">
+                <img src="images/hw-logo.svg" alt="HW Logo" style="height:36px;width:36px;">
+                <span class="fk-logo-text">Hardware & Equipment</span>
             </a>
             <form class="fk-search-bar" action="#" method="get">
                 <span class="fk-search-icon"><i class="fa fa-search"></i></span>
-                <input type="text" placeholder="Search for products, brands and more" name="q">
+                <input type="text" placeholder="Search for products, brands and more" name="q" autocomplete="off">
+                <button type="submit"><i class="fa fa-search"></i></button>
             </form>
-            <nav class="fk-header-nav">
-                <a href="products.html" class="fk-nav-link">Products</a>
-                <a href="cart.html" class="fk-nav-link" style="position:relative;">
-                  <i class="fa fa-shopping-cart"></i>
-                  <span class="fk-cart-badge" style="position:absolute;top:-7px;right:-10px;background:#ff3d00;color:#fff;font-size:0.78rem;font-weight:700;padding:1.5px 6px;border-radius:12px;min-width:18px;text-align:center;line-height:1;">0</span>
-                  Cart
-                </a>
-                <a href="login.html" class="fk-nav-link">Login</a>
-            </nav>
         </div>
     </header>
 
-    <!-- Flipkart-style Category Bar -->
     <nav class="fk-category-bar">
         <div class="fk-category-content">
-            <a href="index.html" class="fk-category-link">Home</a>
-            <a href="#cement" class="fk-category-link active">Cement</a>
-            <a href="#paints" class="fk-category-link">Paints</a>
-            <a href="#doors-windows" class="fk-category-link">Doors & Windows</a>
-            <a href="#tools-equipment" class="fk-category-link">Tools & Equipment</a>
-            <a href="#plumbing" class="fk-category-link">Plumbing</a>
-            <a href="#wall-putty" class="fk-category-link">Wall Putty & Adhesives</a>
-            <a href="#bulk-orders" class="fk-category-link">Bulk Orders</a>
+            <a href="products.html?category=cement" class="fk-category-link" data-category="cement">Cement</a>
+            <a href="products.html?category=paints" class="fk-category-link" data-category="paints">Paints</a>
+            <a href="products.html?category=doors-windows" class="fk-category-link" data-category="doors-windows">Doors & Windows</a>
+            <a href="products.html?category=tools-equipment" class="fk-category-link" data-category="tools-equipment">Tools & Equipment</a>
+            <a href="products.html?category=plumbing" class="fk-category-link" data-category="plumbing">Plumbing</a>
+            <a href="products.html?category=wall-putty" class="fk-category-link" data-category="wall-putty">Wall Putty</a>
         </div>
     </nav>
 
-    <!-- Flipkart-style Product Grid Section -->
-    <div class="fk-main-card">
-    <section class="fk-product-grid-section">
-        <h2 style="font-size: 24px; font-weight: 500; margin-bottom: 24px; color: #212121;">Available Products</h2>
-        <div class="fk-product-container">
-            <div class="fk-product-grid">
-                <!-- Cement Products -->
-                <div class="fk-product-card" id="cement-ultratech">
-                    <img src="images/cement.jpg" alt="UltraTech Cement" class="fk-product-image">
-                    <div class="fk-product-title">UltraTech Cement</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.8</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹420</span>
-                    </div>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="fk-product-card" id="cement-acc">
-                    <img src="images/cement.jpg" alt="ACC Cement" class="fk-product-image">
-                    <div class="fk-product-title">ACC Cement</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.7</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹410</span>
-                    </div>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="fk-product-card" id="cement-ambuja">
-                    <img src="images/cement.jpg" alt="Ambuja Cement" class="fk-product-image">
-                    <div class="fk-product-title">Ambuja Cement</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.7</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹415</span>
-                    </div>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="fk-product-card" id="cement-shree">
-                    <img src="images/cement.jpg" alt="Shree Cement" class="fk-product-image">
-                    <div class="fk-product-title">Shree Cement</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.6</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹405</span>
-                    </div>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="fk-product-card" id="cement-jk-lakshmi">
-                    <img src="images/cement.jpg" alt="JK Lakshmi Cement" class="fk-product-image">
-                    <div class="fk-product-title">JK Lakshmi Cement</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.5</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹400</span>
-                    </div>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <!-- Paints -->
-                <div class="fk-product-card" id="paint-asian-paints">
-                    <img src="images/paint.jpg" alt="Asian Paints" class="fk-product-image">
-                    <div class="fk-product-title">Asian Paints</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.8</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹850</span>
-                    </div>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="fk-product-card" id="paint-berger">
-                    <img src="images/paint.jpg" alt="Berger" class="fk-product-image">
-                    <div class="fk-product-title">Berger</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.7</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹820</span>
-                    </div>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="fk-product-card" id="paint-nerolac">
-                    <img src="images/paint.jpg" alt="Nerolac" class="fk-product-image">
-                    <div class="fk-product-title">Nerolac</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.7</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹800</span>
-                    </div>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="fk-product-card" id="paint-dulux">
-                    <img src="images/paint.jpg" alt="Dulux" class="fk-product-image">
-                    <div class="fk-product-title">Dulux</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.6</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹780</span>
-                    </div>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="fk-product-card" id="paint-indigo">
-                    <img src="images/paint.jpg" alt="Indigo" class="fk-product-image">
-                    <div class="fk-product-title">Indigo</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.5</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹760</span>
-                    </div>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <!-- Doors & Windows -->
-                <div class="fk-product-card" id="door-wooden">
-                    <img src="images/woodendoor.jpg" alt="Classic Wooden Door" class="fk-product-image">
-                    <div class="fk-product-title">Classic Wooden Door</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.7</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹2,499</span>
-                    </div>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="fk-product-card" id="door-steel">
-                    <img src="images/steel door.jpg" alt="Steel Door" class="fk-product-image">
-                    <div class="fk-product-title">Steel Door</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.6</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹3,200</span>
-                    </div>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="fk-product-card" id="door-glass">
-                    <img src="images/glass door.webp" alt="Glass Door" class="fk-product-image">
-                    <div class="fk-product-title">Glass Door</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.5</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹3,800</span>
-                    </div>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="fk-product-card" id="door-wood">
-                    <img src="images/door.jpg" alt="Wooden Door" class="fk-product-image">
-                    <div class="fk-product-title">Wooden Door</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.6</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹2,799</span>
-                    </div>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <!-- Tools & Equipment -->
-                <div class="fk-product-card" id="tools-hand">
-                    <img src="images/tools.jpg" alt="Hand Tools Set" class="fk-product-image">
-                    <div class="fk-product-title">Hand Tools Set</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.8</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹1,299</span>
-                    </div>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <div class="fk-product-card" id="tools-bosch">
-                    <img src="images/powertoolspic.jpg" alt="Bosch Power Tools" class="fk-product-image">
-                    <div class="fk-product-title">Bosch Power Tools</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.8</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹5,500</span>
-                    </div>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <!-- Wall Putty & Adhesives -->
-                <div class="fk-product-card" id="putty">
-                    <img src="images/wall putty.jpg" alt="Wall Putty/Primer" class="fk-product-image">
-                    <div class="fk-product-title">Wall Putty/Primer</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.5</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">₹299</span>
-                    </div>
-                    <button class="add-cart-btn">Add to Cart</button>
-                </div>
-                <!-- Plumbing (placeholder) -->
-                <div class="fk-product-card" id="plumbing">
-                    <img src="images/hp.jpg" alt="Plumbing Solutions" class="fk-product-image">
-                    <div class="fk-product-title">Plumbing Solutions</div>
-                    <div class="fk-product-rating">
-                        <span class="fk-rating-stars">★★★★☆</span>
-                        <span class="fk-rating-text">4.4</span>
-                    </div>
-                    <div class="fk-product-price">
-                        <span class="fk-current-price">Contact for Price</span>
-                    </div>
-                    <button class="add-cart-btn">Enquire</button>
-                </div>
+    <main>
+        <div class="products-section">
+            <h2 class="section-title">
+                <span class="section-title-bar"></span>
+                <i class="fa fa-th-large" style="color:#2874f0;"></i>
+                <span id="category-title">All Products</span>
+            </h2>
+            
+            <div class="products-grid" id="products-container">
+                <!-- Products will be loaded here based on category -->
             </div>
         </div>
-    </section>
-    <!-- Dedicated Bulk Orders Section -->
-    <section class="fk-bulk-section">
-      <div class="fk-bulk-card">
-        <span class="bulk-icon"><i class="fa fa-truck" aria-hidden="true"></i></span>
-        <div class="fk-bulk-title">Bulk Orders & Special Pricing</div>
-        <div class="fk-bulk-desc">Get exclusive rates and delivery options for contractors, resellers, and large projects. Contact us for a custom quote!</div>
-        <a href="contact.html" class="fk-bulk-btn" aria-label="Contact us for bulk orders">Contact Us for Bulk Orders</a>
-      </div>
-    </section>
-    </div>
+    </main>
 
-    <!-- Flipkart-style Footer -->
-    <footer class="fk-footer">
-        <div class="fk-footer-content">
-            <div class="fk-footer-section">
-                <h3>About</h3>
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="#">Careers</a></li>
-                </ul>
-            </div>
-            <div class="fk-footer-section">
-                <h3>Help</h3>
-                <ul>
-                    <li><a href="#">Payments</a></li>
-                    <li><a href="#">Shipping</a></li>
-                    <li><a href="#">FAQ</a></li>
-                </ul>
-            </div>
-            <div class="fk-footer-section">
-                <h3>Policy</h3>
-                <ul>
-                    <li><a href="#">Return Policy</a></li>
-                    <li><a href="#">Terms of Use</a></li>
-                    <li><a href="#">Privacy</a></li>
-                </ul>
-            </div>
+    <nav class="bottom-nav" id="main-bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="products.html?category=cement" class="nav-item active">
+            <i class="fa fa-th-large"></i>
+            <span>Products</span>
+        </a>
+        <a href="cart.html" class="nav-item">
+            <i class="fa fa-shopping-cart"></i>
+            <span>Cart</span>
+        </a>
+        <span id="nav-auth-item"></span>
+    </nav>
+
+    <!-- Simple Footer -->
+    <footer class="main-footer">
+        <div style="max-width: 1248px; margin: 0 auto; padding: 2rem 1rem; text-align: center;">
+            <p style="color:#2874f0; font-weight:600; font-size:1.1rem;">
+                &copy; 2025 Hardware & Equipment. All rights reserved.
+            </p>
         </div>
     </footer>
 
@@ -780,109 +313,329 @@
 
     <script src="cart.js"></script>
     <script>
-    // Show all paint brands if type=Paint, otherwise filter as before
-    function getQueryParam(name) {
-      const url = new URL(window.location.href);
-      return url.searchParams.get(name);
-    }
-    document.addEventListener('DOMContentLoaded', function() {
-      const brand = getQueryParam('brand');
-      const type = getQueryParam('type');
-      const cards = document.querySelectorAll('.fk-product-card');
-      if (type && type.toLowerCase() === 'paint' && !brand) {
-        // Show all paint brands
-        cards.forEach(card => {
-          const title = card.querySelector('.fk-product-title');
-          if (title && ['asian paints','berger','nerolac','dulux','indigo'].includes(title.textContent.trim().toLowerCase())) {
-            card.style.display = '';
-            card.style.boxShadow = '';
-          } else {
-            card.style.display = 'none';
-          }
-        });
+        // Product data for different categories
+        const PRODUCTS_DATA = {
+            'cement': [
+                { id: 'cement-ultratech', name: 'UltraTech Cement', brand: 'UltraTech', price: 420, originalPrice: 480, image: 'images/cement.jpg', rating: 4.8, reviews: 2150 },
+                { id: 'cement-acc', name: 'ACC Cement', brand: 'ACC', price: 410, originalPrice: 470, image: 'images/cement.jpg', rating: 4.7, reviews: 1890 },
+                { id: 'cement-ambuja', name: 'Ambuja Cement', brand: 'Ambuja', price: 415, originalPrice: 475, image: 'images/cement.jpg', rating: 4.6, reviews: 1650 },
+                { id: 'cement-shree', name: 'Shree Cement', brand: 'Shree', price: 405, originalPrice: 465, image: 'images/cement.jpg', rating: 4.5, reviews: 1420 },
+                { id: 'cement-jk-lakshmi', name: 'JK Lakshmi Cement', brand: 'JK Lakshmi', price: 400, originalPrice: 460, image: 'images/cement.jpg', rating: 4.4, reviews: 1280 },
+                { id: 'cement-birla', name: 'Birla Cement', brand: 'Birla', price: 425, originalPrice: 485, image: 'images/cement.jpg', rating: 4.6, reviews: 1750 },
+                { id: 'cement-ramco', name: 'Ramco Cement', brand: 'Ramco', price: 395, originalPrice: 455, image: 'images/cement.jpg', rating: 4.3, reviews: 1150 },
+                { id: 'cement-dalmia', name: 'Dalmia Cement', brand: 'Dalmia', price: 418, originalPrice: 478, image: 'images/cement.jpg', rating: 4.5, reviews: 1380 },
+                { id: 'cement-heidelberg', name: 'Heidelberg Cement', brand: 'Heidelberg', price: 430, originalPrice: 490, image: 'images/cement.jpg', rating: 4.7, reviews: 1920 },
+                { id: 'cement-zuari', name: 'Zuari Cement', brand: 'Zuari', price: 408, originalPrice: 468, image: 'images/cement.jpg', rating: 4.4, reviews: 1250 },
+                { id: 'cement-ppc-ultratech', name: 'UltraTech PPC Cement', brand: 'UltraTech', price: 435, originalPrice: 495, image: 'images/cement.jpg', rating: 4.8, reviews: 2100 },
+                { id: 'cement-ppc-acc', name: 'ACC PPC Cement', brand: 'ACC', price: 428, originalPrice: 488, image: 'images/cement.jpg', rating: 4.7, reviews: 1850 },
+                { id: 'cement-opc-ultratech', name: 'UltraTech OPC Cement', brand: 'UltraTech', price: 445, originalPrice: 505, image: 'images/cement.jpg', rating: 4.9, reviews: 2250 },
+                { id: 'cement-opc-acc', name: 'ACC OPC Cement', brand: 'ACC', price: 438, originalPrice: 498, image: 'images/cement.jpg', rating: 4.8, reviews: 1950 },
+                { id: 'cement-white-ultratech', name: 'UltraTech White Cement', brand: 'UltraTech', price: 850, originalPrice: 950, image: 'images/cement.jpg', rating: 4.6, reviews: 980 },
+                { id: 'cement-white-acc', name: 'ACC White Cement', brand: 'ACC', price: 820, originalPrice: 920, image: 'images/cement.jpg', rating: 4.5, reviews: 850 },
+                { id: 'cement-slag-ultratech', name: 'UltraTech Slag Cement', brand: 'UltraTech', price: 380, originalPrice: 440, image: 'images/cement.jpg', rating: 4.4, reviews: 720 },
+                { id: 'cement-slag-acc', name: 'ACC Slag Cement', brand: 'ACC', price: 375, originalPrice: 435, image: 'images/cement.jpg', rating: 4.3, reviews: 680 },
+                { id: 'cement-masonry-ultratech', name: 'UltraTech Masonry Cement', brand: 'UltraTech', price: 460, originalPrice: 520, image: 'images/cement.jpg', rating: 4.5, reviews: 890 },
+                { id: 'cement-masonry-acc', name: 'ACC Masonry Cement', brand: 'ACC', price: 455, originalPrice: 515, image: 'images/cement.jpg', rating: 4.4, reviews: 820 }
+            ],
+            'paints': [
+                { id: 'paint-asian-paints', name: 'Asian Paints', brand: 'Asian Paints', price: 850, originalPrice: 1000, image: 'images/paint.jpg', rating: 4.7, reviews: 1820 },
+                { id: 'paint-berger', name: 'Berger Paints', brand: 'Berger', price: 820, originalPrice: 970, image: 'images/paint.jpg', rating: 4.6, reviews: 1650 },
+                { id: 'paint-nerolac', name: 'Nerolac Paints', brand: 'Nerolac', price: 800, originalPrice: 950, image: 'images/paint.jpg', rating: 4.5, reviews: 1480 },
+                { id: 'paint-dulux', name: 'Dulux Paints', brand: 'Dulux', price: 780, originalPrice: 930, image: 'images/paint.jpg', rating: 4.4, reviews: 1320 },
+                { id: 'paint-indigo', name: 'Indigo Paints', brand: 'Indigo', price: 760, originalPrice: 910, image: 'images/paint.jpg', rating: 4.3, reviews: 1180 },
+                { id: 'paint-kansai', name: 'Kansai Nerolac', brand: 'Kansai', price: 790, originalPrice: 940, image: 'images/paint.jpg', rating: 4.4, reviews: 1250 },
+                { id: 'paint-shalimar', name: 'Shalimar Paints', brand: 'Shalimar', price: 750, originalPrice: 900, image: 'images/paint.jpg', rating: 4.2, reviews: 980 },
+                { id: 'paint-crown', name: 'Crown Paints', brand: 'Crown', price: 720, originalPrice: 870, image: 'images/paint.jpg', rating: 4.1, reviews: 850 },
+                { id: 'paint-sherwin', name: 'Sherwin Williams', brand: 'Sherwin', price: 920, originalPrice: 1070, image: 'images/paint.jpg', rating: 4.6, reviews: 1450 },
+                { id: 'paint-jotun', name: 'Jotun Paints', brand: 'Jotun', price: 880, originalPrice: 1030, image: 'images/paint.jpg', rating: 4.5, reviews: 1350 },
+                { id: 'paint-primer-asian', name: 'Asian Paints Primer', brand: 'Asian Paints', price: 450, originalPrice: 550, image: 'images/paint.jpg', rating: 4.4, reviews: 920 },
+                { id: 'paint-primer-berger', name: 'Berger Primer', brand: 'Berger', price: 420, originalPrice: 520, image: 'images/paint.jpg', rating: 4.3, reviews: 850 },
+                { id: 'paint-sealer-asian', name: 'Asian Paints Sealer', brand: 'Asian Paints', price: 380, originalPrice: 480, image: 'images/paint.jpg', rating: 4.2, reviews: 780 },
+                { id: 'paint-texture-asian', name: 'Asian Paints Texture', brand: 'Asian Paints', price: 650, originalPrice: 750, image: 'images/paint.jpg', rating: 4.5, reviews: 1100 },
+                { id: 'paint-texture-berger', name: 'Berger Texture', brand: 'Berger', price: 620, originalPrice: 720, image: 'images/paint.jpg', rating: 4.4, reviews: 980 },
+                { id: 'paint-emulsion-asian', name: 'Asian Paints Emulsion', brand: 'Asian Paints', price: 580, originalPrice: 680, image: 'images/paint.jpg', rating: 4.6, reviews: 1250 },
+                { id: 'paint-emulsion-berger', name: 'Berger Emulsion', brand: 'Berger', price: 550, originalPrice: 650, image: 'images/paint.jpg', rating: 4.5, reviews: 1150 },
+                { id: 'paint-enamel-asian', name: 'Asian Paints Enamel', brand: 'Asian Paints', price: 720, originalPrice: 820, image: 'images/paint.jpg', rating: 4.4, reviews: 980 },
+                { id: 'paint-enamel-berger', name: 'Berger Enamel', brand: 'Berger', price: 690, originalPrice: 790, image: 'images/paint.jpg', rating: 4.3, reviews: 920 },
+                { id: 'paint-exterior-asian', name: 'Asian Paints Exterior', brand: 'Asian Paints', price: 680, originalPrice: 780, image: 'images/paint.jpg', rating: 4.5, reviews: 1150 },
+                { id: 'paint-exterior-berger', name: 'Berger Exterior', brand: 'Berger', price: 650, originalPrice: 750, image: 'images/paint.jpg', rating: 4.4, reviews: 1080 },
+                { id: 'paint-interior-asian', name: 'Asian Paints Interior', brand: 'Asian Paints', price: 620, originalPrice: 720, image: 'images/paint.jpg', rating: 4.6, reviews: 1350 },
+                { id: 'paint-interior-berger', name: 'Berger Interior', brand: 'Berger', price: 590, originalPrice: 690, image: 'images/paint.jpg', rating: 4.5, reviews: 1280 },
+                { id: 'paint-ceiling-asian', name: 'Asian Paints Ceiling', brand: 'Asian Paints', price: 480, originalPrice: 580, image: 'images/paint.jpg', rating: 4.3, reviews: 850 },
+                { id: 'paint-ceiling-berger', name: 'Berger Ceiling', brand: 'Berger', price: 450, originalPrice: 550, image: 'images/paint.jpg', rating: 4.2, reviews: 780 }
+            ],
+            'tools-equipment': [
+                { id: 'tools-bosch', name: 'Bosch Drill Machine', brand: 'Bosch', price: 1299, originalPrice: 1599, image: 'images/tools.jpg', rating: 4.6, reviews: 1680 },
+                { id: 'tools-makita', name: 'Makita Hammer Drill', brand: 'Makita', price: 1499, originalPrice: 1799, image: 'images/tools.jpg', rating: 4.5, reviews: 1450 },
+                { id: 'tools-dewalt', name: 'DeWalt Circular Saw', brand: 'DeWalt', price: 1899, originalPrice: 2199, image: 'images/tools.jpg', rating: 4.7, reviews: 1920 },
+                { id: 'tools-hilti', name: 'Hilti Impact Driver', brand: 'Hilti', price: 2499, originalPrice: 2799, image: 'images/tools.jpg', rating: 4.8, reviews: 2100 },
+                { id: 'tools-milwaukee', name: 'Milwaukee Tool Set', brand: 'Milwaukee', price: 3299, originalPrice: 3699, image: 'images/tools.jpg', rating: 4.6, reviews: 1780 },
+                { id: 'tools-black-decker', name: 'Black & Decker Drill', brand: 'Black & Decker', price: 899, originalPrice: 1099, image: 'images/tools.jpg', rating: 4.3, reviews: 1250 },
+                { id: 'tools-hitachi', name: 'Hitachi Hammer Drill', brand: 'Hitachi', price: 1399, originalPrice: 1699, image: 'images/tools.jpg', rating: 4.4, reviews: 1380 },
+                { id: 'tools-ryobi', name: 'Ryobi Cordless Drill', brand: 'Ryobi', price: 1199, originalPrice: 1499, image: 'images/tools.jpg', rating: 4.2, reviews: 980 },
+                { id: 'tools-metabo', name: 'Metabo Angle Grinder', brand: 'Metabo', price: 1699, originalPrice: 1999, image: 'images/tools.jpg', rating: 4.5, reviews: 1520 },
+                { id: 'tools-fein', name: 'Fein Multi Tool', brand: 'Fein', price: 2899, originalPrice: 3199, image: 'images/tools.jpg', rating: 4.7, reviews: 1850 },
+                { id: 'tools-circular-bosch', name: 'Bosch Circular Saw', brand: 'Bosch', price: 1599, originalPrice: 1899, image: 'images/tools.jpg', rating: 4.6, reviews: 1650 },
+                { id: 'tools-circular-dewalt', name: 'DeWalt Circular Saw', brand: 'DeWalt', price: 1799, originalPrice: 2099, image: 'images/tools.jpg', rating: 4.7, reviews: 1780 },
+                { id: 'tools-jigsaw-bosch', name: 'Bosch Jigsaw', brand: 'Bosch', price: 899, originalPrice: 1099, image: 'images/tools.jpg', rating: 4.4, reviews: 1200 },
+                { id: 'tools-jigsaw-makita', name: 'Makita Jigsaw', brand: 'Makita', price: 999, originalPrice: 1199, image: 'images/tools.jpg', rating: 4.5, reviews: 1350 },
+                { id: 'tools-sander-bosch', name: 'Bosch Orbital Sander', brand: 'Bosch', price: 699, originalPrice: 899, image: 'images/tools.jpg', rating: 4.3, reviews: 980 },
+                { id: 'tools-sander-dewalt', name: 'DeWalt Orbital Sander', brand: 'DeWalt', price: 799, originalPrice: 999, image: 'images/tools.jpg', rating: 4.4, reviews: 1150 },
+                { id: 'tools-welder-arc', name: 'Arc Welding Machine', brand: 'Lincoln', price: 8999, originalPrice: 10999, image: 'images/tools.jpg', rating: 4.6, reviews: 850 },
+                { id: 'tools-welder-mig', name: 'MIG Welding Machine', brand: 'Miller', price: 12999, originalPrice: 14999, image: 'images/tools.jpg', rating: 4.7, reviews: 720 },
+                { id: 'tools-compressor', name: 'Air Compressor', brand: 'Ingersoll Rand', price: 15999, originalPrice: 17999, image: 'images/tools.jpg', rating: 4.5, reviews: 650 },
+                { id: 'tools-generator', name: 'Portable Generator', brand: 'Honda', price: 24999, originalPrice: 26999, image: 'images/tools.jpg', rating: 4.8, reviews: 580 },
+                { id: 'tools-scaffolding', name: 'Aluminum Scaffolding', brand: 'Werner', price: 8999, originalPrice: 10999, image: 'images/tools.jpg', rating: 4.4, reviews: 420 },
+                { id: 'tools-ladder', name: 'Extension Ladder', brand: 'Werner', price: 2999, originalPrice: 3599, image: 'images/tools.jpg', rating: 4.3, reviews: 780 },
+                { id: 'tools-level', name: 'Digital Level', brand: 'Bosch', price: 899, originalPrice: 1099, image: 'images/tools.jpg', rating: 4.2, reviews: 650 },
+                { id: 'tools-measuring', name: 'Laser Distance Meter', brand: 'Bosch', price: 1299, originalPrice: 1499, image: 'images/tools.jpg', rating: 4.5, reviews: 920 },
+                { id: 'tools-safety', name: 'Safety Equipment Set', brand: '3M', price: 1499, originalPrice: 1799, image: 'images/tools.jpg', rating: 4.6, reviews: 1150 }
+            ],
+            'doors-windows': [
+                { id: 'door-wooden', name: 'Classic Wooden Door', brand: 'Premium Woods', price: 2499, originalPrice: 3199, image: 'images/door.jpg', rating: 4.5, reviews: 1250 },
+                { id: 'door-steel', name: 'Steel Security Door', brand: 'Secure Steel', price: 1899, originalPrice: 2399, image: 'images/steel door.jpg', rating: 4.4, reviews: 980 },
+                { id: 'door-glass', name: 'Glass Panel Door', brand: 'Crystal Glass', price: 3299, originalPrice: 3999, image: 'images/glass door.webp', rating: 4.6, reviews: 1450 },
+                { id: 'window-aluminum', name: 'Aluminum Window', brand: 'AluTech', price: 899, originalPrice: 1199, image: 'images/door.jpg', rating: 4.3, reviews: 890 },
+                { id: 'door-composite', name: 'Composite Door', brand: 'CompoTech', price: 1799, originalPrice: 2299, image: 'images/door.jpg', rating: 4.5, reviews: 1120 },
+                { id: 'door-fiberglass', name: 'Fiberglass Door', brand: 'FiberTech', price: 2199, originalPrice: 2699, image: 'images/door.jpg', rating: 4.4, reviews: 850 },
+                { id: 'door-upvc', name: 'uPVC Door', brand: 'UPVCTech', price: 1599, originalPrice: 1999, image: 'images/door.jpg', rating: 4.3, reviews: 720 },
+                { id: 'door-bamboo', name: 'Bamboo Door', brand: 'EcoBamboo', price: 1899, originalPrice: 2399, image: 'images/door.jpg', rating: 4.2, reviews: 580 },
+                { id: 'door-sliding', name: 'Sliding Glass Door', brand: 'SlideTech', price: 4499, originalPrice: 5299, image: 'images/glass door.webp', rating: 4.7, reviews: 1650 },
+                { id: 'door-folding', name: 'Folding Door', brand: 'FoldTech', price: 3899, originalPrice: 4599, image: 'images/door.jpg', rating: 4.6, reviews: 1380 },
+                { id: 'window-wooden', name: 'Wooden Window', brand: 'WoodTech', price: 1299, originalPrice: 1599, image: 'images/door.jpg', rating: 4.4, reviews: 920 },
+                { id: 'window-steel', name: 'Steel Window', brand: 'SteelTech', price: 799, originalPrice: 999, image: 'images/door.jpg', rating: 4.2, reviews: 680 },
+                { id: 'window-upvc', name: 'uPVC Window', brand: 'UPVCTech', price: 1099, originalPrice: 1399, image: 'images/door.jpg', rating: 4.5, reviews: 1150 },
+                { id: 'window-fiberglass', name: 'Fiberglass Window', brand: 'FiberTech', price: 1499, originalPrice: 1799, image: 'images/door.jpg', rating: 4.3, reviews: 850 },
+                { id: 'window-bay', name: 'Bay Window', brand: 'BayTech', price: 8999, originalPrice: 10999, image: 'images/door.jpg', rating: 4.8, reviews: 420 },
+                { id: 'window-casement', name: 'Casement Window', brand: 'CasementTech', price: 699, originalPrice: 899, image: 'images/door.jpg', rating: 4.1, reviews: 580 },
+                { id: 'window-double-hung', name: 'Double Hung Window', brand: 'HungTech', price: 899, originalPrice: 1099, image: 'images/door.jpg', rating: 4.2, reviews: 720 },
+                { id: 'window-sliding', name: 'Sliding Window', brand: 'SlideTech', price: 799, originalPrice: 999, image: 'images/door.jpg', rating: 4.3, reviews: 650 },
+                { id: 'window-fixed', name: 'Fixed Window', brand: 'FixedTech', price: 599, originalPrice: 799, image: 'images/door.jpg', rating: 4.0, reviews: 480 },
+                { id: 'window-awning', name: 'Awning Window', brand: 'AwningTech', price: 849, originalPrice: 1049, image: 'images/door.jpg', rating: 4.1, reviews: 520 },
+                { id: 'hardware-hinges', name: 'Door Hinges Set', brand: 'HingeTech', price: 299, originalPrice: 399, image: 'images/tools.jpg', rating: 4.4, reviews: 1250 },
+                { id: 'hardware-locks', name: 'Security Locks', brand: 'LockTech', price: 499, originalPrice: 699, image: 'images/tools.jpg', rating: 4.6, reviews: 1680 },
+                { id: 'hardware-handles', name: 'Door Handles', brand: 'HandleTech', price: 199, originalPrice: 299, image: 'images/tools.jpg', rating: 4.3, reviews: 980 },
+                { id: 'hardware-closers', name: 'Door Closers', brand: 'CloserTech', price: 399, originalPrice: 499, image: 'images/tools.jpg', rating: 4.5, reviews: 720 },
+                { id: 'hardware-stoppers', name: 'Door Stoppers', brand: 'StopperTech', price: 99, originalPrice: 149, image: 'images/tools.jpg', rating: 4.2, reviews: 850 }
+            ],
+            'plumbing': [
+                { id: 'pipe-pvc', name: 'PVC Pipes Set', brand: 'PipeTech', price: 299, originalPrice: 399, image: 'images/tools.jpg', rating: 4.4, reviews: 890 },
+                { id: 'tap-brass', name: 'Brass Tap Set', brand: 'TapMaster', price: 599, originalPrice: 799, image: 'images/tools.jpg', rating: 4.5, reviews: 1120 },
+                { id: 'sink-stainless', name: 'Stainless Steel Sink', brand: 'SinkPro', price: 899, originalPrice: 1199, image: 'images/tools.jpg', rating: 4.6, reviews: 1450 },
+                { id: 'toilet-ceramic', name: 'Ceramic Toilet', brand: 'ToiletTech', price: 1499, originalPrice: 1899, image: 'images/tools.jpg', rating: 4.3, reviews: 780 },
+                { id: 'shower-head', name: 'Rain Shower Head', brand: 'ShowerPro', price: 399, originalPrice: 599, image: 'images/tools.jpg', rating: 4.4, reviews: 920 }
+            ],
+            'wall-putty': [
+                { id: 'putty-asian', name: 'Asian Paints Putty', brand: 'Asian Paints', price: 299, originalPrice: 399, image: 'images/wall putty.jpg', rating: 4.4, reviews: 980 },
+                { id: 'putty-berger', name: 'Berger Wall Putty', brand: 'Berger', price: 279, originalPrice: 379, image: 'images/wall putty.jpg', rating: 4.3, reviews: 850 },
+                { id: 'putty-jk', name: 'JK Putty', brand: 'JK Cement', price: 259, originalPrice: 359, image: 'images/wall putty.jpg', rating: 4.2, reviews: 720 },
+                { id: 'putty-ultratech', name: 'UltraTech Putty', brand: 'UltraTech', price: 289, originalPrice: 389, image: 'images/wall putty.jpg', rating: 4.5, reviews: 1100 },
+                { id: 'putty-ambuja', name: 'Ambuja Putty', brand: 'Ambuja', price: 269, originalPrice: 369, image: 'images/wall putty.jpg', rating: 4.1, reviews: 680 }
+            ]
+        };
+
+        // Function to get URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Function to render products
+        function renderProducts(category) {
+            const container = document.getElementById('products-container');
+            const titleElement = document.getElementById('category-title');
+            
+            // Set category title
+            const categoryNames = {
+                'cement': 'Cement & Building Materials',
+                'paints': 'Paints & Coatings',
+                'tools-equipment': 'Tools & Equipment',
+                'doors-windows': 'Doors & Windows',
+                'plumbing': 'Plumbing & Fixtures',
+                'wall-putty': 'Wall Putty & Adhesives'
+            };
+            
+            titleElement.textContent = categoryNames[category] || 'All Products';
+            
+            // Get products for the category
+            const products = PRODUCTS_DATA[category] || [];
+            
+            if (products.length === 0) {
+                container.innerHTML = '<div style="text-align:center; padding:2rem; color:#666;">No products found for this category.</div>';
         return;
       }
-      if (brand || type) {
-        let found = false;
-        cards.forEach(card => {
-          const title = card.querySelector('.fk-product-title');
-          if (title && ((brand && title.textContent.trim().toLowerCase() === brand.toLowerCase()) || (type && title.textContent.trim().toLowerCase().includes(type.toLowerCase())))) {
-            card.style.display = '';
-            card.scrollIntoView({behavior:'smooth', block:'center'});
-            card.style.boxShadow = '0 0 0 4px #ffe500, 0 3px 16px rgba(0,0,0,0.1)';
-            card.style.transition = 'box-shadow 0.5s';
-            found = true;
+            
+            // Render products
+            container.innerHTML = products.map(product => {
+                const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+                return `
+                    <div class="product-card" id="${product.id}">
+                        <img src="${product.image}" alt="${product.name}">
+                        <div class="product-title">${product.name}</div>
+                        <div class="product-brand">${product.brand}</div>
+                        <div class="product-rating">
+                            <span class="rating-stars">${'★'.repeat(Math.floor(product.rating))}${'☆'.repeat(5-Math.floor(product.rating))}</span>
+                            <span class="rating-text">${product.rating} (${product.reviews})</span>
+                        </div>
+                        <div class="product-price">
+                            ₹${product.price.toLocaleString()}
+                            <span class="original-price">₹${product.originalPrice.toLocaleString()}</span>
+                            <span class="discount">${discount}% off</span>
+                        </div>
+                        <button class="add-cart-btn" data-id="${product.id}">Add to Cart</button>
+                    </div>
+                `;
+            }).join('');
+            
+            // Setup Add to Cart buttons after rendering
+            if (window.cartFunctions && window.cartFunctions.setupAddToCartButtons) {
+                window.cartFunctions.setupAddToCartButtons();
           } else {
-            card.style.display = 'none';
+                // Fallback: try to call the function directly
+                setTimeout(() => {
+                    if (typeof setupAddToCartButtons === 'function') {
+                        setupAddToCartButtons();
+                    } else if (window.cartFunctions && window.cartFunctions.setupAddToCartButtons) {
+                        window.cartFunctions.setupAddToCartButtons();
+                    }
+                }, 200);
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation bar functionality
+            const categoryLinks = document.querySelectorAll('.fk-category-link');
+
+            // Set active state based on current page and URL parameter
+            function setActiveNavLink() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const category = urlParams.get('category');
+                categoryLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (category && link.dataset.category === category) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // Initialize active state
+            setActiveNavLink();
+
+            // Force the active category to be visible immediately
+            const categoryContent = document.querySelector('.fk-category-content');
+            if (categoryContent) {
+                const activeCategory = document.querySelector('.fk-category-link.active');
+                if (activeCategory) {
+                    // Immediate scroll to active category
+                    activeCategory.scrollIntoView({ 
+                        behavior: 'instant', 
+                        block: 'nearest', 
+                        inline: 'center' 
+                    });
+                    
+                    // Also force scroll position as backup
+                    setTimeout(() => {
+                        const categoryBar = document.querySelector('.fk-category-bar');
+                        if (categoryBar && categoryContent) {
+                            const barWidth = categoryBar.offsetWidth;
+                            const activeLeft = activeCategory.offsetLeft;
+                            const activeWidth = activeCategory.offsetWidth;
+                            const scrollLeft = activeLeft - (barWidth / 2) + (activeWidth / 2);
+                            const maxScroll = Math.max(0, categoryContent.scrollWidth - barWidth);
+                            const finalScrollLeft = Math.max(0, Math.min(scrollLeft, maxScroll));
+                            categoryContent.scrollLeft = finalScrollLeft;
+                        }
+                    }, 50);
+                    
+                    // Multiple attempts to ensure it works
+                    setTimeout(() => {
+                        activeCategory.scrollIntoView({ 
+                            behavior: 'instant', 
+                            block: 'nearest', 
+                            inline: 'center' 
+                        });
+                    }, 200);
+                    
+                    setTimeout(() => {
+                        activeCategory.scrollIntoView({ 
+                            behavior: 'instant', 
+                            block: 'nearest', 
+                            inline: 'center' 
+                        });
+                    }, 500);
+                }
+            }
+
+            // Update active state on popstate (browser navigation)
+            window.addEventListener('popstate', setActiveNavLink);
+
+            // Enhanced category link interactions
+            categoryLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Remove active class from all links
+                    categoryLinks.forEach(l => l.classList.remove('active'));
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    // Add smooth transition effect
+                    this.style.transform = 'translateY(-2px)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                });
+                // Hover effects
+                link.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('active')) {
+                        this.style.transform = 'translateY(-1px)';
+                    }
+                });
+                link.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('active')) {
+                        this.style.transform = '';
+                    }
+                });
+            });
+            
+            // Mobile navigation enhancement
+            if (window.innerWidth <= 768) {
+                const categoryBar = document.querySelector('.fk-category-bar');
+                let isScrolling = false;
+                
+                // Add smooth scroll for mobile
+                categoryBar.addEventListener('scroll', function() {
+                    if (!isScrolling) {
+                        isScrolling = true;
+                        setTimeout(() => {
+                            isScrolling = false;
+                        }, 100);
           }
         });
-        if (!found) {
-          const grid = document.querySelector('.fk-product-grid');
-          if (grid) grid.innerHTML = '<div style="padding:2rem;text-align:center;color:#2874f0;font-weight:bold;">No matching products found.</div>';
-        }
       }
+
+            const categoryRaw = getUrlParameter('category');
+            // Fallback: treat 'putty' as 'wall-putty'
+            const category = (categoryRaw === 'putty') ? 'wall-putty' : categoryRaw;
+            if (category) {
+                renderProducts(category);
+            } else {
+                // Redirect to home if no category specified
+                window.location.href = 'index.html';
+            }
     });
 
-    // Category filtering for product grid
-    document.addEventListener('DOMContentLoaded', function() {
-      const navLinks = document.querySelectorAll('.fk-category-link');
-      const productCards = document.querySelectorAll('.fk-product-card');
-      // --- New: Filter by ?category=... on page load ---
-      function getQueryParam(name) {
-        const url = new URL(window.location.href);
-        return url.searchParams.get(name);
-      }
-      const category = getQueryParam('category');
-      if (category) {
-        navLinks.forEach(l => l.classList.remove('active'));
-        let found = false;
-        navLinks.forEach(link => {
-          if (link.getAttribute('href').replace('#','').toLowerCase() === category.toLowerCase()) {
-            link.classList.add('active');
-            found = true;
-          }
-        });
-        // Special handling for plural categories like 'paints'
-        let matchPrefix = category;
-        if (category === 'paints') matchPrefix = 'paint';
-        if (category === 'doors-windows') matchPrefix = 'door';
-        if (category === 'tools-equipment') matchPrefix = 'tools';
-        productCards.forEach(card => {
-          if (card.id && (card.id === category || card.id.startsWith(matchPrefix+'-'))) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      }
-      // --- Existing: Filter by nav bar click ---
-      navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-          if (link.getAttribute('href').startsWith('#')) {
-            e.preventDefault();
-            navLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-            const cat = link.getAttribute('href').replace('#','');
-            if (cat === 'home' || cat === '') {
-              productCards.forEach(card => card.style.display = '');
-            } else {
-              // Special handling for plural categories like 'paints'
-              let matchPrefix = cat;
-              if (cat === 'paints') matchPrefix = 'paint';
-              if (cat === 'doors-windows') matchPrefix = 'door';
-              if (cat === 'tools-equipment') matchPrefix = 'tools';
-              productCards.forEach(card => {
-                if (card.id && (card.id === cat || card.id.startsWith(matchPrefix+'-'))) {
-                  card.style.display = '';
-                } else {
-                  card.style.display = 'none';
-                }
-              });
-            }
-          }
-        });
-      });
-    });
+    // Dynamic Login/Account nav item
+    function renderAuthNavItem() {
+        const navAuth = document.getElementById('nav-auth-item');
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        if (isLoggedIn) {
+            navAuth.innerHTML = `<a href="account.html" class="nav-item"><i class="fa fa-user"></i><span>Account</span></a>`;
+        } else {
+            navAuth.innerHTML = `<a href="login.html" class="nav-item"><i class="fa fa-user"></i><span>Login</span></a>`;
+        }
+    }
+    document.addEventListener('DOMContentLoaded', renderAuthNavItem);
     </script>
 </body>
 </html> 

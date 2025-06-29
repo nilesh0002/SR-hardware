@@ -20,14 +20,129 @@
             </a>
         </div>
     </header>
+    
+    <!-- Flipkart-style Category Bar -->
+    <nav class="fk-category-bar">
+        <div class="fk-category-content">
+            <a href="index.html" class="fk-category-link" data-category="home">Home</a>
+            <a href="products.html?category=cement" class="fk-category-link" data-category="cement">Cement</a>
+            <a href="products.html?category=paints" class="fk-category-link" data-category="paints">Paints</a>
+            <a href="products.html?category=doors-windows" class="fk-category-link" data-category="doors-windows">Doors & Windows</a>
+            <a href="products.html?category=tools-equipment" class="fk-category-link" data-category="tools-equipment">Tools & Equipment</a>
+            <a href="products.html?category=plumbing" class="fk-category-link" data-category="plumbing">Plumbing</a>
+            <a href="products.html?category=wall-putty" class="fk-category-link" data-category="wall-putty">Wall Putty</a>
+        </div>
+    </nav>
+
     <main>
         <h2>About Us</h2>
         <p>Welcome to Hardware Wholesale! We provide premium construction materials, tools, and equipment at wholesale prices for contractors and resellers. Our mission is to deliver quality products and excellent service to help you build better, faster, and smarter.</p>
     </main>
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav" id="main-bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="products.html" class="nav-item">
+            <i class="fa fa-th-large"></i>
+            <span>Products</span>
+        </a>
+        <a href="cart.html" class="nav-item">
+            <i class="fa fa-shopping-cart"></i>
+            <span>Cart</span>
+        </a>
+        <span id="nav-auth-item"></span>
+    </nav>
     <footer class="main-footer">
         <p style="text-align:center; color:#2874f0; font-weight:600;">&copy; 2024 Hardware & Equipment. All rights reserved.</p>
     </footer>
     <a href="https://wa.me/91XXXXXXXXXX" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
     <script src="cart.js"></script>
+    <script>
+        // Enhanced navigation bar functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation bar functionality
+            const categoryLinks = document.querySelectorAll('.fk-category-link');
+            
+            // Set active state based on current page
+            function setActiveNavLink() {
+                const currentPath = window.location.pathname;
+                const urlParams = new URLSearchParams(window.location.search);
+                const category = urlParams.get('category');
+                
+                categoryLinks.forEach(link => {
+                    link.classList.remove('active');
+                    
+                    // Check if current page matches the link
+                    if (currentPath.includes('index.html') && link.dataset.category === 'home') {
+                        link.classList.add('active');
+                    } else if (category && link.dataset.category === category) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            // Initialize active state
+            setActiveNavLink();
+            
+            // Enhanced category link interactions
+            categoryLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Remove active class from all links
+                    categoryLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Add smooth transition effect
+                    this.style.transform = 'translateY(-2px)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                });
+                
+                // Hover effects
+                link.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('active')) {
+                        this.style.transform = 'translateY(-1px)';
+                    }
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('active')) {
+                        this.style.transform = '';
+                    }
+                });
+            });
+            
+            // Mobile navigation enhancement
+            if (window.innerWidth <= 768) {
+                const categoryBar = document.querySelector('.fk-category-bar');
+                let isScrolling = false;
+                
+                // Add smooth scroll for mobile
+                categoryBar.addEventListener('scroll', function() {
+                    if (!isScrolling) {
+                        isScrolling = true;
+                        setTimeout(() => {
+                            isScrolling = false;
+                        }, 100);
+                    }
+                });
+            }
+        });
+        // Dynamic Login/Account nav item
+        function renderAuthNavItem() {
+            const navAuth = document.getElementById('nav-auth-item');
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn) {
+                navAuth.innerHTML = `<a href="account.html" class="nav-item"><i class="fa fa-user"></i><span>Account</span></a>`;
+            } else {
+                navAuth.innerHTML = `<a href="login.html" class="nav-item"><i class="fa fa-user"></i><span>Login</span></a>`;
+            }
+        }
+        document.addEventListener('DOMContentLoaded', renderAuthNavItem);
+    </script>
 </body>
 </html> 
