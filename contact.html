@@ -8,6 +8,57 @@
     <link rel="stylesheet" href="search-fix.css">
     <link rel="icon" href="images/hw-logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      @media (max-width: 600px) {
+        .fk-contact-card {
+          flex-direction: column;
+          align-items: stretch;
+          padding: 1rem 0.5rem;
+          gap: 1.2rem;
+        }
+        .fk-contact-left, .fk-contact-right {
+          width: 100%;
+          min-width: 0;
+          padding: 0;
+        }
+        .fk-contact-logo {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 0.7rem;
+        }
+        .fk-contact-logo img {
+          height: 38px !important;
+          width: 38px !important;
+        }
+        .fk-contact-brand {
+          font-size: 1.1rem;
+          text-align: center;
+        }
+        .fk-contact-info {
+          font-size: 0.98rem;
+          gap: 0.4rem;
+          margin-bottom: 1.2rem;
+        }
+        .fk-contact-title {
+          font-size: 1.2rem;
+          text-align: center;
+          margin-bottom: 1rem;
+        }
+        .fk-contact-form {
+          gap: 0.7rem;
+        }
+        .fk-input-group input,
+        .fk-input-group textarea {
+          font-size: 1rem;
+          padding: 0.7rem 0.9rem;
+        }
+        .fk-contact-btn {
+          font-size: 1.05rem;
+          padding: 0.8rem 0;
+        }
+      }
+    </style>
 </head>
 <body>
     <header class="fk-header">
@@ -20,11 +71,6 @@
                 <span class="fk-search-icon"><i class="fa fa-search"></i></span>
                 <input type="text" placeholder="Search for products, brands and more" name="q">
             </form>
-            <nav class="fk-header-nav">
-                <a href="products.html" class="fk-nav-link">Products</a>
-                <a href="cart.html" class="fk-nav-link"><i class="fa fa-shopping-cart"></i> Cart</a>
-                <a href="login.html" class="fk-nav-link">Login</a>
-            </nav>
         </div>
     </header>
     
@@ -47,7 +93,6 @@
           <div class="fk-contact-left">
             <div class="fk-contact-logo">
               <img src="images/hw-logo-red.svg" alt="HW Logo">
-              <img src="images/hw-logo-orange.svg" alt="HW Logo">
               <div class="fk-contact-brand">Shree Raam Hardware</div>
             </div>
             <div class="fk-contact-info">
