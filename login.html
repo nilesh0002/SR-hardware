@@ -6,8 +6,10 @@
     <title>Login or Register | Shree Raam Hardware</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="search-fix.css">
+    <link rel="stylesheet" href="notifications.css">
     <link rel="icon" href="images/hw-logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="auth.js" defer></script>
     <style>
         body {
             background: linear-gradient(135deg, #f7f9fb 0%, #e8f2ff 100%);
@@ -295,10 +297,10 @@
             <div class="fk-login-section active" id="login-section">
                 <div class="fk-login-title">Welcome Back!</div>
                 <div class="fk-login-desc">Sign in to access your account and order hardware, tools, and more.</div>
-                <form class="fk-login-form" onsubmit="return handleLogin(event)">
+                <form class="fk-login-form">
                     <div class="fk-login-input">
                         <i class="fa fa-user"></i>
-                        <input type="text" placeholder="Email or Mobile Number" name="loginId" required>
+                        <input type="email" placeholder="Email" name="email" required>
                     </div>
                     <div class="fk-login-input">
                         <i class="fa fa-lock"></i>
@@ -313,7 +315,7 @@
             <div class="fk-login-section" id="register-section">
                 <div class="fk-login-title">Create Your Account</div>
                 <div class="fk-login-desc">Sign up to order hardware, tools, and more at wholesale prices.</div>
-                <form class="fk-register-form" autocomplete="off" onsubmit="return handleRegister(event)">
+                <form class="fk-register-form" autocomplete="off">
                     <div class="fk-register-input">
                         <i class="fa fa-user"></i>
                         <input type="text" placeholder="Full Name" name="name" required>
@@ -324,7 +326,7 @@
                     </div>
                     <div class="fk-register-input">
                         <i class="fa fa-phone"></i>
-                        <input type="tel" placeholder="Mobile Number" name="mobile" pattern="[0-9]{10}" required>
+                        <input type="tel" placeholder="Mobile Number" name="phone" pattern="[0-9]{10}" required>
                     </div>
                     <div class="fk-register-input">
                         <i class="fa fa-lock"></i>
@@ -411,67 +413,8 @@
                 icon.classList.add('fa-eye');
             }
         }
-        // Demo login handler (replace with real backend logic)
-        function handleLogin(e) {
-            e.preventDefault();
-            var form = e.target;
-            var loginId = form.loginId.value.trim();
-            var loginPassword = form.loginPassword.value;
-            // For demo: check localStorage
-            var storedEmail = localStorage.getItem('userEmail');
-            var storedMobile = localStorage.getItem('userMobile');
-            var storedPassword = localStorage.getItem('userPassword');
-            if ((loginId === storedEmail || loginId === storedMobile) && loginPassword === storedPassword) {
-                localStorage.setItem('isLoggedIn', 'true');
-                alert('Login successful!');
-                window.location.href = 'account.html';
-            } else {
-                alert('Invalid credentials!');
-            }
-            return false;
-        }
-        // Demo registration handler (replace with real backend logic)
-        function handleRegister(e) {
-            e.preventDefault();
-            var form = e.target;
-            var name = form.name.value.trim();
-            var email = form.email.value.trim();
-            var mobile = form.mobile.value.trim();
-            var password = form.password.value;
-            var confirm = form.confirm.value;
-            var address = form.address.value.trim();
-            var city = form.city.value.trim();
-            var state = form.state.value.trim();
-            var pincode = form.pincode.value.trim();
-            if (password !== confirm) {
-                alert('Passwords do not match!');
-                return false;
-            }
-            // Save to localStorage for demo
-            localStorage.setItem('userName', name);
-            localStorage.setItem('userEmail', email);
-            localStorage.setItem('userMobile', mobile);
-            localStorage.setItem('userPassword', password);
-            localStorage.setItem('userAddress', address);
-            localStorage.setItem('userCity', city);
-            localStorage.setItem('userState', state);
-            localStorage.setItem('userPincode', pincode);
-            localStorage.setItem('isLoggedIn', 'true');
-            alert('Account created! You are now logged in.');
-            window.location.href = 'account.html';
-            return false;
-        }
-        // Dynamic Login/Account nav item
-        function renderAuthNavItem() {
-            const navAuth = document.getElementById('nav-auth-item');
-            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-            if (isLoggedIn) {
-                navAuth.innerHTML = `<a href="account.html" class="nav-item"><i class="fa fa-user"></i><span>Account</span></a>`;
-            } else {
-                navAuth.innerHTML = `<a href="login.html" class="nav-item"><i class="fa fa-user"></i><span>Login</span></a>`;
-            }
-        }
-        document.addEventListener('DOMContentLoaded', renderAuthNavItem);
+
+
     </script>
 </body>
 </html> 

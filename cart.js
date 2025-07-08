@@ -60,152 +60,150 @@
     { id: 'putty-ambuja', name: 'Ambuja Putty', price: 269, image: 'images/wall putty.jpg', rating: 4.1, reviews: 680 }
   ];
 
-  // --- Cart Storage ---
-  function getCart() {
-    return JSON.parse(localStorage.getItem('cart') || '[]');
+  // Backend-powered Cart logic for Add to Cart, cart badge, and cart page rendering
+  const API_BASE = 'http://localhost:3000/api/cart';
+
+  function getToken() {
+    return localStorage.getItem('authToken');
   }
-  
-  function setCart(cart) {
-    localStorage.setItem('cart', JSON.stringify(cart));
+
+  async function fetchCart() {
+    const token = getToken();
+    if (!token) return null;
+    const res = await fetch(API_BASE, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    const data = await res.json();
+    return data.success ? data.data : null;
   }
-  
-  function addToCart(productId) {
-    const cart = getCart();
-    const item = cart.find(i => i.id === productId);
-    if (item) {
-      item.qty += 1;
+
+  async function addToCart(productId, quantity = 1) {
+    const token = getToken();
+    if (!token) {
+      alert('Please log in to add items to cart.');
+      return;
+    }
+    const res = await fetch(API_BASE, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ productId, quantity })
+    });
+    const data = await res.json();
+    if (data.success) {
+      updateCartBadge();
+      showCartConfirm();
     } else {
-      const prod = PRODUCTS.find(p => p.id === productId);
-      if (prod) cart.push({ ...prod, qty: 1 });
+      alert(data.error || 'Failed to add to cart.');
     }
-    setCart(cart);
-    updateCartBadge();
-    showCartConfirm();
-    
-    // Enhanced Add to Cart Button Feedback
-    const btn = document.querySelector(
-      `.add-cart-btn[data-id='${productId}'], .fk-add-to-cart[data-id='${productId}']`
-    ) || document.querySelector(`#${productId} .add-cart-btn, #${productId} .fk-add-to-cart`);
-    
-    if (btn) {
-      btn.classList.add('added-to-cart');
-      btn.innerHTML = '<i class="fa fa-check"></i> Added';
-      btn.style.background = '#388e3c';
-      btn.style.color = '#fff';
-      
-      setTimeout(() => {
-        btn.classList.remove('added-to-cart');
-        btn.innerHTML = 'Add to Cart';
-        btn.style.background = '#ffe500';
-        btn.style.color = '#181a1b';
-      }, 1500);
-    }
-    
-    // Update Cart Icon Symbol with animation
-    updateCartIconSymbol();
   }
-  
-  function removeFromCart(productId) {
-    let cart = getCart();
-    cart = cart.filter(i => i.id !== productId);
-    setCart(cart);
-    updateCartBadge();
-    renderCartPage();
-  }
-  
-  function updateQty(productId, delta) {
-    const cart = getCart();
-    const item = cart.find(i => i.id === productId);
-    if (item) {
-      item.qty += delta;
-      if (item.qty < 1) item.qty = 1;
-      setCart(cart);
+
+  async function removeFromCart(productId) {
+    const token = getToken();
+    if (!token) return;
+    const res = await fetch(`${API_BASE}/${productId}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    const data = await res.json();
+    if (data.success) {
       renderCartPage();
       updateCartBadge();
     }
   }
 
-  // --- Enhanced Cart Badge ---
-  function updateCartBadge() {
-    const cart = getCart();
-    const count = cart.reduce((sum, i) => sum + i.qty, 0);
-    const badges = document.querySelectorAll('.fk-cart-badge');
-    
-    badges.forEach(badge => {
-      const oldCount = parseInt(badge.textContent) || 0;
-      badge.textContent = count;
-      
-      // Add animation if count increased
-      if (count > oldCount) {
-        badge.style.transform = 'scale(1.3)';
-        badge.style.background = '#ff6b35';
-        setTimeout(() => {
-          badge.style.transform = 'scale(1)';
-          badge.style.background = '#ff3d00';
-        }, 300);
-      }
+  async function updateQty(productId, quantity) {
+    const token = getToken();
+    if (!token) return;
+    const res = await fetch(`${API_BASE}/${productId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ quantity })
     });
-  }
-
-  // Update badge on page load
-  document.addEventListener('DOMContentLoaded', updateCartBadge);
-
-  // --- Enhanced Add to Cart Button Logic ---
-  function setupAddToCartButtons() {
-    // Remove existing event listeners to avoid duplicates
-    document.querySelectorAll('.add-cart-btn, .fk-add-to-cart').forEach(btn => {
-      btn.removeEventListener('click', handleAddToCart);
-    });
-    
-    // Add event listeners to all current buttons
-    document.querySelectorAll('.add-cart-btn, .fk-add-to-cart').forEach((btn, idx) => {
-      // Skip explore buttons that are meant for navigation
-      if (btn.classList.contains('fk-explore-btn')) return;
-      
-      btn.addEventListener('click', handleAddToCart);
-    });
-  }
-
-  // Separate function to handle add to cart clicks
-  function handleAddToCart(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    // Try to get product id from parent card or data attribute
-    let card = this.closest('.fk-product-card') || this.closest('.product-card');
-    let id = this.dataset.id || (card && card.id);
-    
-    if (id) {
-      addToCart(id);
-      
-      // Add ripple effect
-      const ripple = document.createElement('span');
-      ripple.style.position = 'absolute';
-      ripple.style.borderRadius = '50%';
-      ripple.style.background = 'rgba(255,255,255,0.6)';
-      ripple.style.transform = 'scale(0)';
-      ripple.style.animation = 'ripple 0.6s linear';
-      ripple.style.left = '50%';
-      ripple.style.top = '50%';
-      ripple.style.width = '20px';
-      ripple.style.height = '20px';
-      ripple.style.marginLeft = '-10px';
-      ripple.style.marginTop = '-10px';
-      ripple.style.pointerEvents = 'none';
-      
-      this.style.position = 'relative';
-      this.style.overflow = 'hidden';
-      this.appendChild(ripple);
-      
-      setTimeout(() => {
-        if (this.contains(ripple)) {
-          this.removeChild(ripple);
-        }
-      }, 600);
+    const data = await res.json();
+    if (data.success) {
+      renderCartPage();
+      updateCartBadge();
     }
   }
 
-  // --- Enhanced Cart Confirm Toast ---
+  async function updateCartBadge() {
+    const token = getToken();
+    if (!token) return;
+    const res = await fetch(`${API_BASE}/count`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    const data = await res.json();
+    const count = data.success ? data.data.count : 0;
+    document.querySelectorAll('.fk-cart-badge').forEach(badge => {
+      badge.textContent = count;
+    });
+  }
+
+  async function renderCartPage() {
+    const cart = await fetchCart();
+    const cartList = document.getElementById('cart-list');
+    const priceDetail = document.querySelector('.cart-price-detail');
+    const discountDetail = document.querySelector('.cart-discount-detail');
+    const totalDetail = document.querySelector('.cart-total');
+    const savingsText = document.querySelector('.savings-text');
+    if (!cartList) return;
+    cartList.innerHTML = '';
+    if (!cart || !cart.items || cart.items.length === 0) {
+      cartList.innerHTML = `<div class='empty-cart'><i class='fa fa-shopping-cart'></i><h3>Your cart is empty!</h3><p>Add items to it now.</p><a href='products.html' class='continue-shopping-btn'>Shop Now</a></div>`;
+      if (priceDetail) priceDetail.textContent = '₹0';
+      if (discountDetail) discountDetail.textContent = '-₹0';
+      if (totalDetail) totalDetail.textContent = '₹0';
+      if (savingsText) savingsText.textContent = 'You will save ₹0 on this order';
+      return;
+    }
+    let originalTotal = 0, discount = 0;
+    cart.items.forEach(item => {
+      const product = item.product;
+      const originalPrice = Math.round(product.price * 1.12);
+      originalTotal += originalPrice * item.quantity;
+      discount += (originalPrice - product.price) * item.quantity;
+      const div = document.createElement('div');
+      div.className = 'cart-item';
+      div.innerHTML = `
+        <img src="${product.images && product.images[0] ? product.images[0] : 'images/no-image.png'}" alt="${product.name}" />
+        <div class="cart-item-details">
+          <div class="cart-item-title">${product.name}</div>
+          <div class="cart-item-brand">${product.brand || ''}</div>
+          <div class="cart-item-price">₹${product.price.toLocaleString()} <span class="cart-item-original-price">₹${originalPrice.toLocaleString()}</span> <span class="cart-item-discount">${Math.round((originalPrice-product.price)/originalPrice*100)}% off</span></div>
+          <div class="cart-item-quantity">
+            <input type="number" min="1" value="${item.quantity}" data-id="${product._id}" class="qty-input" />
+            <button class="cart-item-remove" data-id="${product._id}"><i class="fa fa-trash"></i></button>
+          </div>
+        </div>
+      `;
+      cartList.appendChild(div);
+    });
+    // Add event listeners
+    cartList.querySelectorAll('.cart-item-remove').forEach(btn => {
+      btn.addEventListener('click', function() {
+        removeFromCart(this.dataset.id);
+      });
+    });
+    cartList.querySelectorAll('.qty-input').forEach(input => {
+      input.addEventListener('change', function() {
+        let val = parseInt(this.value);
+        if (isNaN(val) || val < 1) val = 1;
+        this.value = val;
+        updateQty(this.dataset.id, val);
+      });
+    });
+    if (priceDetail) priceDetail.textContent = '₹' + originalTotal.toLocaleString();
+    if (discountDetail) discountDetail.textContent = '-₹' + discount.toLocaleString();
+    if (totalDetail) totalDetail.textContent = '₹' + cart.totalAmount.toLocaleString();
+    if (savingsText) savingsText.textContent = `You will save ₹${discount.toLocaleString()} on this order`;
+  }
+
   function showCartConfirm() {
     let toast = document.querySelector('.cart-confirm');
     if (!toast) {
@@ -244,161 +242,6 @@
       toast.style.transform = 'translateX(-50%) translateY(20px)';
       setTimeout(() => { toast.style.display = 'none'; }, 350);
     }, 2000);
-  }
-
-  // --- Enhanced Cart Page Rendering ---
-  function renderCartPage() {
-    const cartList = document.querySelector('.fk-cart-list');
-    const summary = document.querySelector('.fk-cart-summary');
-    const priceDetail = document.querySelector('.fk-cart-price-detail');
-    const discountDetail = document.querySelector('.fk-cart-discount-detail');
-    const totalDetail = document.querySelector('.fk-cart-total');
-    const savingsDetail = document.querySelector('.fk-cart-savings');
-    const emptyState = document.querySelector('.fk-cart-empty');
-    
-    if (!cartList) return;
-    
-    const cart = getCart();
-    cartList.innerHTML = '';
-    let total = 0, originalTotal = 0, discount = 0;
-    
-    if (cart.length === 0) {
-      if (summary) summary.style.display = 'none';
-      if (emptyState) emptyState.style.display = '';
-      else {
-        // Enhanced empty state
-        const emptyDiv = document.createElement('div');
-        emptyDiv.className = 'fk-cart-empty';
-        emptyDiv.style.cssText = `
-          text-align: center;
-          padding: 3rem 0;
-          color: #666;
-        `;
-        emptyDiv.innerHTML = `
-          <i class="fa fa-shopping-cart" style="font-size:4rem;color:#2874f0;margin-bottom:1.5rem;opacity:0.7;"></i>
-          <div style="font-size:1.4rem;font-weight:600;color:#181a1b;margin-bottom:0.5rem;">Your cart is empty!</div>
-          <div style="margin-bottom:2rem;color:#666;">Add items to it now.</div>
-          <a href="products.html" class="fk-checkout-btn" style="
-            margin-top:1.5rem;
-            display:inline-block;
-            background: linear-gradient(135deg, #2874f0, #0059c8);
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 4px 16px rgba(40,116,240,0.2);
-            transition: all 0.3s ease;
-          ">Shop Now</a>
-        `;
-        cartList.appendChild(emptyDiv);
-      }
-      
-      if (priceDetail) priceDetail.textContent = '₹0';
-      if (discountDetail) discountDetail.textContent = '-₹0';
-      if (totalDetail) totalDetail.textContent = '₹0';
-      if (savingsDetail) savingsDetail.textContent = 'You will save ₹0 on this order';
-      return;
-    } else {
-      if (summary) summary.style.display = '';
-      if (emptyState) emptyState.style.display = 'none';
-    }
-    
-    cart.forEach(item => {
-      // Simulate original price for discount (12% higher)
-      const originalPrice = Math.round(item.price * 1.12);
-      originalTotal += originalPrice * item.qty;
-      total += item.price * item.qty;
-      discount += (originalPrice - item.price) * item.qty;
-      
-      const div = document.createElement('div');
-      div.className = 'fk-cart-item';
-      div.style.cssText = `
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 1.5rem;
-        padding: 1rem;
-        background: #fff;
-        border-radius: 12px;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-        margin-bottom: 1rem;
-        border: 1px solid #f0f0f0;
-        transition: all 0.3s ease;
-      `;
-      
-      div.innerHTML = `
-        <div class="fk-cart-image-wrap">
-          <img src="${item.image}" alt="${item.name}" class="fk-cart-image" style="
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-          ">
-        </div>
-        <div class="fk-cart-details" style="flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem;">
-          <span class="fk-cart-title" style="font-weight: 600; font-size: 1.1rem; color: #181a1b;">${item.name}</span>
-          <span class="fk-cart-price" style="font-size: 1.1rem; font-weight: 700; color: #181a1b;">
-            ₹${item.price.toLocaleString()} 
-            <span style="color:#666;font-size:1rem;font-weight:400;text-decoration:line-through;margin-left:8px;">₹${originalPrice.toLocaleString()}</span> 
-            <span style="color:#388e3c;font-size:0.98rem;font-weight:600;margin-left:8px;">${Math.round((originalPrice-item.price)/originalPrice*100)}% off</span>
-          </span>
-          <span style="color: #388e3c; font-size: 0.98rem; font-weight: 600;">You save ₹${((originalPrice-item.price)*item.qty).toLocaleString()} on this item</span>
-          <div style="display: flex; align-items: center; gap: 0.7rem; margin-top: 0.2rem;">
-            <input type="number" class="fk-qty-input" data-id="${item.id}" min="1" value="${item.qty}" style="
-              width: 56px;
-              padding: 6px 8px;
-              border-radius: 6px;
-              border: 1.5px solid #dbeafe;
-              font-size: 1rem;
-              text-align: center;
-            ">
-            <button class="fk-cart-remove" data-id="${item.id}" style="
-              background: #ff3d00;
-              color: #fff;
-              border: none;
-              border-radius: 50%;
-              width: 40px;
-              height: 40px;
-              cursor: pointer;
-              transition: all 0.3s ease;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-            "><i class="fa fa-trash"></i></button>
-          </div>
-        </div>
-      `;
-      
-      cartList.appendChild(div);
-
-      // Add event listener for quantity input
-      setTimeout(() => {
-        const qtyInput = div.querySelector('.fk-qty-input');
-        if (qtyInput) {
-          qtyInput.addEventListener('change', function() {
-            let val = parseInt(this.value);
-            if (isNaN(val) || val < 1) val = 1;
-            this.value = val;
-            updateQty(item.id, val - item.qty);
-          });
-        }
-      }, 0);
-    });
-    
-    if (priceDetail) priceDetail.textContent = '₹' + originalTotal.toLocaleString();
-    if (discountDetail) discountDetail.textContent = '-₹' + discount.toLocaleString();
-    if (totalDetail) totalDetail.textContent = '₹' + total.toLocaleString();
-    if (savingsDetail) savingsDetail.textContent = `You will save ₹${discount.toLocaleString()} on this order`;
-    
-    // Enhanced Remove/Qty listeners
-    document.querySelectorAll('.fk-cart-remove').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const id = this.dataset.id;
-        removeFromCart(id);
-      });
-    });
   }
 
   // --- Enhanced Cart Icon Symbol Update ---
@@ -444,9 +287,7 @@
     addToCart,
     removeFromCart,
     updateQty,
-    getCart,
     updateCartBadge,
-    setupAddToCartButtons,
     renderCartPage
   };
   

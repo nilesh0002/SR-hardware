@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Shree Raam Hardware</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="images/hw-logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="auth.js" defer></script>
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .admin-header {
+            background: linear-gradient(135deg, #2874f0 0%, #1e5bb8 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2874f0;
+        }
+        .users-table {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .users-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .users-table th,
+        .users-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .users-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+        .user-role {
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .user-role.admin {
+            background: #dc3545;
+            color: white;
+        }
+        .user-role.user {
+            background: #28a745;
+            color: white;
+        }
+        .refresh-btn {
+            background: #2874f0;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+        .refresh-btn:hover {
+            background: #1e5bb8;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1><i class="fa fa-shield-alt"></i> Admin Dashboard</h1>
+            <p>Manage users and view system statistics</p>
+        </div>
+
+        <button class="refresh-btn" onclick="loadUsers()">
+            <i class="fa fa-refresh"></i> Refresh Users
+        </button>
+
+        <div class="admin-stats">
+            <div class="stat-card">
+                <div class="stat-number" id="total-users">-</div>
+                <div>Total Users</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="admin-users">-</div>
+                <div>Admin Users</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="regular-users">-</div>
+                <div>Regular Users</div>
+            </div>
+        </div>
+
+        <div class="users-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Role</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="users-tbody">
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 2rem;">
+                            Loading users...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is admin
+        function checkAdminAccess() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('Please login as admin first');
+                window.location.href = 'login.html';
+                return false;
+            }
+
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            if (!user.isAdmin) {
+                alert('Access denied. Admin privileges required.');
+                window.location.href = 'index.html';
+                return false;
+            }
+
+            return true;
+        }
+
+        // Load all users
+        async function loadUsers() {
+            if (!checkAdminAccess()) return;
+
+            try {
+                const token = localStorage.getItem('token');
+                const response = await fetch('http://localhost:3000/api/admin/users', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to load users');
+                }
+
+                const result = await response.json();
+                const users = result.data || result;
+                displayUsers(users);
+                updateStats(users);
+            } catch (error) {
+                console.error('Error loading users:', error);
+                document.getElementById('users-tbody').innerHTML = 
+                    '<tr><td colspan="6" style="text-align: center; color: red;">Error loading users</td></tr>';
+            }
+        }
+
+        // Display users in table
+        function displayUsers(users) {
+            const tbody = document.getElementById('users-tbody');
+            
+            if (users.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No users found</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = users.map(user => `
+                <tr>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.phone || 'N/A'}</td>
+                    <td>
+                        <span class="user-role ${user.isAdmin ? 'admin' : 'user'}">
+                            ${user.isAdmin ? 'Admin' : 'User'}
+                        </span>
+                    </td>
+                    <td>${new Date(user.createdAt).toLocaleDateString()}</td>
+                    <td>
+                        <button onclick="viewUserDetails('${user._id}')" style="background: #17a2b8; color: white; border: none; padding: 0.25rem 0.5rem; border-radius: 0.25rem; cursor: pointer; margin-right: 0.5rem;">
+                            <i class="fa fa-eye"></i> View
+                        </button>
+                        <button onclick="toggleUserRole('${user._id}', ${!user.isAdmin})" style="background: ${user.isAdmin ? '#dc3545' : '#28a745'}; color: white; border: none; padding: 0.25rem 0.5rem; border-radius: 0.25rem; cursor: pointer;">
+                            ${user.isAdmin ? 'Remove Admin' : 'Make Admin'}
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Update statistics
+        function updateStats(users) {
+            const totalUsers = users.length;
+            const adminUsers = users.filter(user => user.isAdmin).length;
+            const regularUsers = totalUsers - adminUsers;
+
+            document.getElementById('total-users').textContent = totalUsers;
+            document.getElementById('admin-users').textContent = adminUsers;
+            document.getElementById('regular-users').textContent = regularUsers;
+        }
+
+        // View user details
+        function viewUserDetails(userId) {
+            // You can implement a modal or redirect to a detailed view
+            alert('User details feature coming soon!');
+        }
+
+        // Toggle user role (admin/user)
+        async function toggleUserRole(userId, makeAdmin) {
+            if (!checkAdminAccess()) return;
+
+            try {
+                const token = localStorage.getItem('token');
+                const response = await fetch(`http://localhost:3000/api/admin/users/${userId}/role`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ isAdmin: makeAdmin })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to update user role');
+                }
+
+                alert(`User role updated successfully!`);
+                loadUsers(); // Refresh the list
+            } catch (error) {
+                console.error('Error updating user role:', error);
+                alert('Error updating user role');
+            }
+        }
+
+        // Load users when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            if (checkAdminAccess()) {
+                loadUsers();
+            }
+        });
+    </script>
+</body>
+</html> 

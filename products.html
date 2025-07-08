@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products | Shree Raam Hardware</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="search-fix.css">
     <link rel="icon" href="images/hw-logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -239,6 +238,74 @@
                 min-width: 80px;
             }
         }
+
+        .fk-search-bar {
+            border: 1.5px solid #2874f0;
+            border-radius: 8px;
+            padding: 0.3rem 1rem;
+            background: #f7f9fb;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .fk-search-bar input {
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 1rem;
+            flex: 1;
+        }
+
+        .notification {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: #2874f0;
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(40,116,240,0.2);
+            z-index: 2000;
+            font-size: 1rem;
+            display: none;
+        }
+        .notification.active {
+            display: block;
+        }
+
+        .dropdown-user-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1rem 0.5rem 1rem;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 0.5rem;
+        }
+        .dropdown-avatar {
+            width: 40px;
+            height: 40px;
+            background: #2874f0;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        .dropdown-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .dropdown-email {
+            font-size: 0.95rem;
+            color: #666;
+        }
+        .dropdown-role {
+            font-size: 0.9rem;
+            color: #2874f0;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -260,8 +327,8 @@
         <div class="fk-category-content">
             <a href="products.html?category=cement" class="fk-category-link" data-category="cement">Cement</a>
             <a href="products.html?category=paints" class="fk-category-link" data-category="paints">Paints</a>
-            <a href="products.html?category=doors-windows" class="fk-category-link" data-category="doors-windows">Doors & Windows</a>
-            <a href="products.html?category=tools-equipment" class="fk-category-link" data-category="tools-equipment">Tools & Equipment</a>
+            <a href="products.html?category=doors" class="fk-category-link" data-category="doors">Doors & Windows</a>
+            <a href="products.html?category=tools" class="fk-category-link" data-category="tools">Tools & Equipment</a>
             <a href="products.html?category=plumbing" class="fk-category-link" data-category="plumbing">Plumbing</a>
             <a href="products.html?category=wall-putty" class="fk-category-link" data-category="wall-putty">Wall Putty</a>
         </div>
@@ -294,7 +361,28 @@
             <i class="fa fa-shopping-cart"></i>
             <span>Cart</span>
         </a>
-        <span id="nav-auth-item"></span>
+        <div class="nav-item dropdown">
+            <a href="#" class="nav-link">
+                <i class="fa fa-user"></i>
+                <span>Nilesh Singh (Admin)</span>
+                <i class="fa fa-chevron-down"></i>
+            </a>
+            <div class="dropdown-menu">
+                <div class="dropdown-user-card">
+                    <div class="dropdown-avatar">N</div>
+                    <div>
+                        <div class="dropdown-name">Nilesh Singh</div>
+                        <div class="dropdown-email">nilesh.singh0032@gmail.com</div>
+                        <div class="dropdown-role">Admin</div>
+                    </div>
+                </div>
+                <a href="admin.html" class="dropdown-item"><i class="fa fa-cog"></i> Admin Panel</a>
+                <a href="manage-products.html" class="dropdown-item"><i class="fa fa-box"></i> Manage Products</a>
+                <a href="manage-orders.html" class="dropdown-item"><i class="fa fa-list"></i> Manage Orders</a>
+                <a href="manage-users.html" class="dropdown-item"><i class="fa fa-users"></i> Manage Users</a>
+                <a href="#" class="dropdown-item logout-link"><i class="fa fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
     </nav>
 
     <!-- Simple Footer -->
@@ -312,330 +400,9 @@
     </a>
 
     <script src="cart.js"></script>
-    <script>
-        // Product data for different categories
-        const PRODUCTS_DATA = {
-            'cement': [
-                { id: 'cement-ultratech', name: 'UltraTech Cement', brand: 'UltraTech', price: 420, originalPrice: 480, image: 'images/cement.jpg', rating: 4.8, reviews: 2150 },
-                { id: 'cement-acc', name: 'ACC Cement', brand: 'ACC', price: 410, originalPrice: 470, image: 'images/cement.jpg', rating: 4.7, reviews: 1890 },
-                { id: 'cement-ambuja', name: 'Ambuja Cement', brand: 'Ambuja', price: 415, originalPrice: 475, image: 'images/cement.jpg', rating: 4.6, reviews: 1650 },
-                { id: 'cement-shree', name: 'Shree Cement', brand: 'Shree', price: 405, originalPrice: 465, image: 'images/cement.jpg', rating: 4.5, reviews: 1420 },
-                { id: 'cement-jk-lakshmi', name: 'JK Lakshmi Cement', brand: 'JK Lakshmi', price: 400, originalPrice: 460, image: 'images/cement.jpg', rating: 4.4, reviews: 1280 },
-                { id: 'cement-birla', name: 'Birla Cement', brand: 'Birla', price: 425, originalPrice: 485, image: 'images/cement.jpg', rating: 4.6, reviews: 1750 },
-                { id: 'cement-ramco', name: 'Ramco Cement', brand: 'Ramco', price: 395, originalPrice: 455, image: 'images/cement.jpg', rating: 4.3, reviews: 1150 },
-                { id: 'cement-dalmia', name: 'Dalmia Cement', brand: 'Dalmia', price: 418, originalPrice: 478, image: 'images/cement.jpg', rating: 4.5, reviews: 1380 },
-                { id: 'cement-heidelberg', name: 'Heidelberg Cement', brand: 'Heidelberg', price: 430, originalPrice: 490, image: 'images/cement.jpg', rating: 4.7, reviews: 1920 },
-                { id: 'cement-zuari', name: 'Zuari Cement', brand: 'Zuari', price: 408, originalPrice: 468, image: 'images/cement.jpg', rating: 4.4, reviews: 1250 },
-                { id: 'cement-ppc-ultratech', name: 'UltraTech PPC Cement', brand: 'UltraTech', price: 435, originalPrice: 495, image: 'images/cement.jpg', rating: 4.8, reviews: 2100 },
-                { id: 'cement-ppc-acc', name: 'ACC PPC Cement', brand: 'ACC', price: 428, originalPrice: 488, image: 'images/cement.jpg', rating: 4.7, reviews: 1850 },
-                { id: 'cement-opc-ultratech', name: 'UltraTech OPC Cement', brand: 'UltraTech', price: 445, originalPrice: 505, image: 'images/cement.jpg', rating: 4.9, reviews: 2250 },
-                { id: 'cement-opc-acc', name: 'ACC OPC Cement', brand: 'ACC', price: 438, originalPrice: 498, image: 'images/cement.jpg', rating: 4.8, reviews: 1950 },
-                { id: 'cement-white-ultratech', name: 'UltraTech White Cement', brand: 'UltraTech', price: 850, originalPrice: 950, image: 'images/cement.jpg', rating: 4.6, reviews: 980 },
-                { id: 'cement-white-acc', name: 'ACC White Cement', brand: 'ACC', price: 820, originalPrice: 920, image: 'images/cement.jpg', rating: 4.5, reviews: 850 },
-                { id: 'cement-slag-ultratech', name: 'UltraTech Slag Cement', brand: 'UltraTech', price: 380, originalPrice: 440, image: 'images/cement.jpg', rating: 4.4, reviews: 720 },
-                { id: 'cement-slag-acc', name: 'ACC Slag Cement', brand: 'ACC', price: 375, originalPrice: 435, image: 'images/cement.jpg', rating: 4.3, reviews: 680 },
-                { id: 'cement-masonry-ultratech', name: 'UltraTech Masonry Cement', brand: 'UltraTech', price: 460, originalPrice: 520, image: 'images/cement.jpg', rating: 4.5, reviews: 890 },
-                { id: 'cement-masonry-acc', name: 'ACC Masonry Cement', brand: 'ACC', price: 455, originalPrice: 515, image: 'images/cement.jpg', rating: 4.4, reviews: 820 }
-            ],
-            'paints': [
-                { id: 'paint-asian-paints', name: 'Asian Paints', brand: 'Asian Paints', price: 850, originalPrice: 1000, image: 'images/paint.jpg', rating: 4.7, reviews: 1820 },
-                { id: 'paint-berger', name: 'Berger Paints', brand: 'Berger', price: 820, originalPrice: 970, image: 'images/paint.jpg', rating: 4.6, reviews: 1650 },
-                { id: 'paint-nerolac', name: 'Nerolac Paints', brand: 'Nerolac', price: 800, originalPrice: 950, image: 'images/paint.jpg', rating: 4.5, reviews: 1480 },
-                { id: 'paint-dulux', name: 'Dulux Paints', brand: 'Dulux', price: 780, originalPrice: 930, image: 'images/paint.jpg', rating: 4.4, reviews: 1320 },
-                { id: 'paint-indigo', name: 'Indigo Paints', brand: 'Indigo', price: 760, originalPrice: 910, image: 'images/paint.jpg', rating: 4.3, reviews: 1180 },
-                { id: 'paint-kansai', name: 'Kansai Nerolac', brand: 'Kansai', price: 790, originalPrice: 940, image: 'images/paint.jpg', rating: 4.4, reviews: 1250 },
-                { id: 'paint-shalimar', name: 'Shalimar Paints', brand: 'Shalimar', price: 750, originalPrice: 900, image: 'images/paint.jpg', rating: 4.2, reviews: 980 },
-                { id: 'paint-crown', name: 'Crown Paints', brand: 'Crown', price: 720, originalPrice: 870, image: 'images/paint.jpg', rating: 4.1, reviews: 850 },
-                { id: 'paint-sherwin', name: 'Sherwin Williams', brand: 'Sherwin', price: 920, originalPrice: 1070, image: 'images/paint.jpg', rating: 4.6, reviews: 1450 },
-                { id: 'paint-jotun', name: 'Jotun Paints', brand: 'Jotun', price: 880, originalPrice: 1030, image: 'images/paint.jpg', rating: 4.5, reviews: 1350 },
-                { id: 'paint-primer-asian', name: 'Asian Paints Primer', brand: 'Asian Paints', price: 450, originalPrice: 550, image: 'images/paint.jpg', rating: 4.4, reviews: 920 },
-                { id: 'paint-primer-berger', name: 'Berger Primer', brand: 'Berger', price: 420, originalPrice: 520, image: 'images/paint.jpg', rating: 4.3, reviews: 850 },
-                { id: 'paint-sealer-asian', name: 'Asian Paints Sealer', brand: 'Asian Paints', price: 380, originalPrice: 480, image: 'images/paint.jpg', rating: 4.2, reviews: 780 },
-                { id: 'paint-texture-asian', name: 'Asian Paints Texture', brand: 'Asian Paints', price: 650, originalPrice: 750, image: 'images/paint.jpg', rating: 4.5, reviews: 1100 },
-                { id: 'paint-texture-berger', name: 'Berger Texture', brand: 'Berger', price: 620, originalPrice: 720, image: 'images/paint.jpg', rating: 4.4, reviews: 980 },
-                { id: 'paint-emulsion-asian', name: 'Asian Paints Emulsion', brand: 'Asian Paints', price: 580, originalPrice: 680, image: 'images/paint.jpg', rating: 4.6, reviews: 1250 },
-                { id: 'paint-emulsion-berger', name: 'Berger Emulsion', brand: 'Berger', price: 550, originalPrice: 650, image: 'images/paint.jpg', rating: 4.5, reviews: 1150 },
-                { id: 'paint-enamel-asian', name: 'Asian Paints Enamel', brand: 'Asian Paints', price: 720, originalPrice: 820, image: 'images/paint.jpg', rating: 4.4, reviews: 980 },
-                { id: 'paint-enamel-berger', name: 'Berger Enamel', brand: 'Berger', price: 690, originalPrice: 790, image: 'images/paint.jpg', rating: 4.3, reviews: 920 },
-                { id: 'paint-exterior-asian', name: 'Asian Paints Exterior', brand: 'Asian Paints', price: 680, originalPrice: 780, image: 'images/paint.jpg', rating: 4.5, reviews: 1150 },
-                { id: 'paint-exterior-berger', name: 'Berger Exterior', brand: 'Berger', price: 650, originalPrice: 750, image: 'images/paint.jpg', rating: 4.4, reviews: 1080 },
-                { id: 'paint-interior-asian', name: 'Asian Paints Interior', brand: 'Asian Paints', price: 620, originalPrice: 720, image: 'images/paint.jpg', rating: 4.6, reviews: 1350 },
-                { id: 'paint-interior-berger', name: 'Berger Interior', brand: 'Berger', price: 590, originalPrice: 690, image: 'images/paint.jpg', rating: 4.5, reviews: 1280 },
-                { id: 'paint-ceiling-asian', name: 'Asian Paints Ceiling', brand: 'Asian Paints', price: 480, originalPrice: 580, image: 'images/paint.jpg', rating: 4.3, reviews: 850 },
-                { id: 'paint-ceiling-berger', name: 'Berger Ceiling', brand: 'Berger', price: 450, originalPrice: 550, image: 'images/paint.jpg', rating: 4.2, reviews: 780 }
-            ],
-            'tools-equipment': [
-                { id: 'tools-bosch', name: 'Bosch Drill Machine', brand: 'Bosch', price: 1299, originalPrice: 1599, image: 'images/tools.jpg', rating: 4.6, reviews: 1680 },
-                { id: 'tools-makita', name: 'Makita Hammer Drill', brand: 'Makita', price: 1499, originalPrice: 1799, image: 'images/tools.jpg', rating: 4.5, reviews: 1450 },
-                { id: 'tools-dewalt', name: 'DeWalt Circular Saw', brand: 'DeWalt', price: 1899, originalPrice: 2199, image: 'images/tools.jpg', rating: 4.7, reviews: 1920 },
-                { id: 'tools-hilti', name: 'Hilti Impact Driver', brand: 'Hilti', price: 2499, originalPrice: 2799, image: 'images/tools.jpg', rating: 4.8, reviews: 2100 },
-                { id: 'tools-milwaukee', name: 'Milwaukee Tool Set', brand: 'Milwaukee', price: 3299, originalPrice: 3699, image: 'images/tools.jpg', rating: 4.6, reviews: 1780 },
-                { id: 'tools-black-decker', name: 'Black & Decker Drill', brand: 'Black & Decker', price: 899, originalPrice: 1099, image: 'images/tools.jpg', rating: 4.3, reviews: 1250 },
-                { id: 'tools-hitachi', name: 'Hitachi Hammer Drill', brand: 'Hitachi', price: 1399, originalPrice: 1699, image: 'images/tools.jpg', rating: 4.4, reviews: 1380 },
-                { id: 'tools-ryobi', name: 'Ryobi Cordless Drill', brand: 'Ryobi', price: 1199, originalPrice: 1499, image: 'images/tools.jpg', rating: 4.2, reviews: 980 },
-                { id: 'tools-metabo', name: 'Metabo Angle Grinder', brand: 'Metabo', price: 1699, originalPrice: 1999, image: 'images/tools.jpg', rating: 4.5, reviews: 1520 },
-                { id: 'tools-fein', name: 'Fein Multi Tool', brand: 'Fein', price: 2899, originalPrice: 3199, image: 'images/tools.jpg', rating: 4.7, reviews: 1850 },
-                { id: 'tools-circular-bosch', name: 'Bosch Circular Saw', brand: 'Bosch', price: 1599, originalPrice: 1899, image: 'images/tools.jpg', rating: 4.6, reviews: 1650 },
-                { id: 'tools-circular-dewalt', name: 'DeWalt Circular Saw', brand: 'DeWalt', price: 1799, originalPrice: 2099, image: 'images/tools.jpg', rating: 4.7, reviews: 1780 },
-                { id: 'tools-jigsaw-bosch', name: 'Bosch Jigsaw', brand: 'Bosch', price: 899, originalPrice: 1099, image: 'images/tools.jpg', rating: 4.4, reviews: 1200 },
-                { id: 'tools-jigsaw-makita', name: 'Makita Jigsaw', brand: 'Makita', price: 999, originalPrice: 1199, image: 'images/tools.jpg', rating: 4.5, reviews: 1350 },
-                { id: 'tools-sander-bosch', name: 'Bosch Orbital Sander', brand: 'Bosch', price: 699, originalPrice: 899, image: 'images/tools.jpg', rating: 4.3, reviews: 980 },
-                { id: 'tools-sander-dewalt', name: 'DeWalt Orbital Sander', brand: 'DeWalt', price: 799, originalPrice: 999, image: 'images/tools.jpg', rating: 4.4, reviews: 1150 },
-                { id: 'tools-welder-arc', name: 'Arc Welding Machine', brand: 'Lincoln', price: 8999, originalPrice: 10999, image: 'images/tools.jpg', rating: 4.6, reviews: 850 },
-                { id: 'tools-welder-mig', name: 'MIG Welding Machine', brand: 'Miller', price: 12999, originalPrice: 14999, image: 'images/tools.jpg', rating: 4.7, reviews: 720 },
-                { id: 'tools-compressor', name: 'Air Compressor', brand: 'Ingersoll Rand', price: 15999, originalPrice: 17999, image: 'images/tools.jpg', rating: 4.5, reviews: 650 },
-                { id: 'tools-generator', name: 'Portable Generator', brand: 'Honda', price: 24999, originalPrice: 26999, image: 'images/tools.jpg', rating: 4.8, reviews: 580 },
-                { id: 'tools-scaffolding', name: 'Aluminum Scaffolding', brand: 'Werner', price: 8999, originalPrice: 10999, image: 'images/tools.jpg', rating: 4.4, reviews: 420 },
-                { id: 'tools-ladder', name: 'Extension Ladder', brand: 'Werner', price: 2999, originalPrice: 3599, image: 'images/tools.jpg', rating: 4.3, reviews: 780 },
-                { id: 'tools-level', name: 'Digital Level', brand: 'Bosch', price: 899, originalPrice: 1099, image: 'images/tools.jpg', rating: 4.2, reviews: 650 },
-                { id: 'tools-measuring', name: 'Laser Distance Meter', brand: 'Bosch', price: 1299, originalPrice: 1499, image: 'images/tools.jpg', rating: 4.5, reviews: 920 },
-                { id: 'tools-safety', name: 'Safety Equipment Set', brand: '3M', price: 1499, originalPrice: 1799, image: 'images/tools.jpg', rating: 4.6, reviews: 1150 }
-            ],
-            'doors-windows': [
-                { id: 'door-wooden', name: 'Classic Wooden Door', brand: 'Premium Woods', price: 2499, originalPrice: 3199, image: 'images/door.jpg', rating: 4.5, reviews: 1250 },
-                { id: 'door-steel', name: 'Steel Security Door', brand: 'Secure Steel', price: 1899, originalPrice: 2399, image: 'images/steel door.jpg', rating: 4.4, reviews: 980 },
-                { id: 'door-glass', name: 'Glass Panel Door', brand: 'Crystal Glass', price: 3299, originalPrice: 3999, image: 'images/glass door.webp', rating: 4.6, reviews: 1450 },
-                { id: 'window-aluminum', name: 'Aluminum Window', brand: 'AluTech', price: 899, originalPrice: 1199, image: 'images/door.jpg', rating: 4.3, reviews: 890 },
-                { id: 'door-composite', name: 'Composite Door', brand: 'CompoTech', price: 1799, originalPrice: 2299, image: 'images/door.jpg', rating: 4.5, reviews: 1120 },
-                { id: 'door-fiberglass', name: 'Fiberglass Door', brand: 'FiberTech', price: 2199, originalPrice: 2699, image: 'images/door.jpg', rating: 4.4, reviews: 850 },
-                { id: 'door-upvc', name: 'uPVC Door', brand: 'UPVCTech', price: 1599, originalPrice: 1999, image: 'images/door.jpg', rating: 4.3, reviews: 720 },
-                { id: 'door-bamboo', name: 'Bamboo Door', brand: 'EcoBamboo', price: 1899, originalPrice: 2399, image: 'images/door.jpg', rating: 4.2, reviews: 580 },
-                { id: 'door-sliding', name: 'Sliding Glass Door', brand: 'SlideTech', price: 4499, originalPrice: 5299, image: 'images/glass door.webp', rating: 4.7, reviews: 1650 },
-                { id: 'door-folding', name: 'Folding Door', brand: 'FoldTech', price: 3899, originalPrice: 4599, image: 'images/door.jpg', rating: 4.6, reviews: 1380 },
-                { id: 'window-wooden', name: 'Wooden Window', brand: 'WoodTech', price: 1299, originalPrice: 1599, image: 'images/door.jpg', rating: 4.4, reviews: 920 },
-                { id: 'window-steel', name: 'Steel Window', brand: 'SteelTech', price: 799, originalPrice: 999, image: 'images/door.jpg', rating: 4.2, reviews: 680 },
-                { id: 'window-upvc', name: 'uPVC Window', brand: 'UPVCTech', price: 1099, originalPrice: 1399, image: 'images/door.jpg', rating: 4.5, reviews: 1150 },
-                { id: 'window-fiberglass', name: 'Fiberglass Window', brand: 'FiberTech', price: 1499, originalPrice: 1799, image: 'images/door.jpg', rating: 4.3, reviews: 850 },
-                { id: 'window-bay', name: 'Bay Window', brand: 'BayTech', price: 8999, originalPrice: 10999, image: 'images/door.jpg', rating: 4.8, reviews: 420 },
-                { id: 'window-casement', name: 'Casement Window', brand: 'CasementTech', price: 699, originalPrice: 899, image: 'images/door.jpg', rating: 4.1, reviews: 580 },
-                { id: 'window-double-hung', name: 'Double Hung Window', brand: 'HungTech', price: 899, originalPrice: 1099, image: 'images/door.jpg', rating: 4.2, reviews: 720 },
-                { id: 'window-sliding', name: 'Sliding Window', brand: 'SlideTech', price: 799, originalPrice: 999, image: 'images/door.jpg', rating: 4.3, reviews: 650 },
-                { id: 'window-fixed', name: 'Fixed Window', brand: 'FixedTech', price: 599, originalPrice: 799, image: 'images/door.jpg', rating: 4.0, reviews: 480 },
-                { id: 'window-awning', name: 'Awning Window', brand: 'AwningTech', price: 849, originalPrice: 1049, image: 'images/door.jpg', rating: 4.1, reviews: 520 },
-                { id: 'hardware-hinges', name: 'Door Hinges Set', brand: 'HingeTech', price: 299, originalPrice: 399, image: 'images/tools.jpg', rating: 4.4, reviews: 1250 },
-                { id: 'hardware-locks', name: 'Security Locks', brand: 'LockTech', price: 499, originalPrice: 699, image: 'images/tools.jpg', rating: 4.6, reviews: 1680 },
-                { id: 'hardware-handles', name: 'Door Handles', brand: 'HandleTech', price: 199, originalPrice: 299, image: 'images/tools.jpg', rating: 4.3, reviews: 980 },
-                { id: 'hardware-closers', name: 'Door Closers', brand: 'CloserTech', price: 399, originalPrice: 499, image: 'images/tools.jpg', rating: 4.5, reviews: 720 },
-                { id: 'hardware-stoppers', name: 'Door Stoppers', brand: 'StopperTech', price: 99, originalPrice: 149, image: 'images/tools.jpg', rating: 4.2, reviews: 850 }
-            ],
-            'plumbing': [
-                { id: 'pipe-pvc', name: 'PVC Pipes Set', brand: 'PipeTech', price: 299, originalPrice: 399, image: 'images/tools.jpg', rating: 4.4, reviews: 890 },
-                { id: 'tap-brass', name: 'Brass Tap Set', brand: 'TapMaster', price: 599, originalPrice: 799, image: 'images/tools.jpg', rating: 4.5, reviews: 1120 },
-                { id: 'sink-stainless', name: 'Stainless Steel Sink', brand: 'SinkPro', price: 899, originalPrice: 1199, image: 'images/tools.jpg', rating: 4.6, reviews: 1450 },
-                { id: 'toilet-ceramic', name: 'Ceramic Toilet', brand: 'ToiletTech', price: 1499, originalPrice: 1899, image: 'images/tools.jpg', rating: 4.3, reviews: 780 },
-                { id: 'shower-head', name: 'Rain Shower Head', brand: 'ShowerPro', price: 399, originalPrice: 599, image: 'images/tools.jpg', rating: 4.4, reviews: 920 }
-            ],
-            'wall-putty': [
-                { id: 'putty-asian', name: 'Asian Paints Putty', brand: 'Asian Paints', price: 299, originalPrice: 399, image: 'images/wall putty.jpg', rating: 4.4, reviews: 980 },
-                { id: 'putty-berger', name: 'Berger Wall Putty', brand: 'Berger', price: 279, originalPrice: 379, image: 'images/wall putty.jpg', rating: 4.3, reviews: 850 },
-                { id: 'putty-jk', name: 'JK Putty', brand: 'JK Cement', price: 259, originalPrice: 359, image: 'images/wall putty.jpg', rating: 4.2, reviews: 720 },
-                { id: 'putty-ultratech', name: 'UltraTech Putty', brand: 'UltraTech', price: 289, originalPrice: 389, image: 'images/wall putty.jpg', rating: 4.5, reviews: 1100 },
-                { id: 'putty-ambuja', name: 'Ambuja Putty', brand: 'Ambuja', price: 269, originalPrice: 369, image: 'images/wall putty.jpg', rating: 4.1, reviews: 680 }
-            ]
-        };
+    <script src="products.js"></script>
+    <script src="auth.js"></script>
 
-        // Function to get URL parameters
-        function getUrlParameter(name) {
-            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
-            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-        }
-
-        // Function to render products
-        function renderProducts(category) {
-            const container = document.getElementById('products-container');
-            const titleElement = document.getElementById('category-title');
-            
-            // Set category title
-            const categoryNames = {
-                'cement': 'Cement & Building Materials',
-                'paints': 'Paints & Coatings',
-                'tools-equipment': 'Tools & Equipment',
-                'doors-windows': 'Doors & Windows',
-                'plumbing': 'Plumbing & Fixtures',
-                'wall-putty': 'Wall Putty & Adhesives'
-            };
-            
-            titleElement.textContent = categoryNames[category] || 'All Products';
-            
-            // Get products for the category
-            const products = PRODUCTS_DATA[category] || [];
-            
-            if (products.length === 0) {
-                container.innerHTML = '<div style="text-align:center; padding:2rem; color:#666;">No products found for this category.</div>';
-        return;
-      }
-            
-            // Render products
-            container.innerHTML = products.map(product => {
-                const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
-                return `
-                    <div class="product-card" id="${product.id}">
-                        <img src="${product.image}" alt="${product.name}">
-                        <div class="product-title">${product.name}</div>
-                        <div class="product-brand">${product.brand}</div>
-                        <div class="product-rating">
-                            <span class="rating-stars">${'★'.repeat(Math.floor(product.rating))}${'☆'.repeat(5-Math.floor(product.rating))}</span>
-                            <span class="rating-text">${product.rating} (${product.reviews})</span>
-                        </div>
-                        <div class="product-price">
-                            ₹${product.price.toLocaleString()}
-                            <span class="original-price">₹${product.originalPrice.toLocaleString()}</span>
-                            <span class="discount">${discount}% off</span>
-                        </div>
-                        <button class="add-cart-btn" data-id="${product.id}">Add to Cart</button>
-                    </div>
-                `;
-            }).join('');
-            
-            // Setup Add to Cart buttons after rendering
-            if (window.cartFunctions && window.cartFunctions.setupAddToCartButtons) {
-                window.cartFunctions.setupAddToCartButtons();
-          } else {
-                // Fallback: try to call the function directly
-                setTimeout(() => {
-                    if (typeof setupAddToCartButtons === 'function') {
-                        setupAddToCartButtons();
-                    } else if (window.cartFunctions && window.cartFunctions.setupAddToCartButtons) {
-                        window.cartFunctions.setupAddToCartButtons();
-                    }
-                }, 200);
-            }
-        }
-
-        // Initialize page
-        document.addEventListener('DOMContentLoaded', function() {
-            // Navigation bar functionality
-            const categoryLinks = document.querySelectorAll('.fk-category-link');
-
-            // Set active state based on current page and URL parameter
-            function setActiveNavLink() {
-                const urlParams = new URLSearchParams(window.location.search);
-                const category = urlParams.get('category');
-                categoryLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (category && link.dataset.category === category) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-
-            // Initialize active state
-            setActiveNavLink();
-
-            // Force the active category to be visible immediately
-            const categoryContent = document.querySelector('.fk-category-content');
-            if (categoryContent) {
-                const activeCategory = document.querySelector('.fk-category-link.active');
-                if (activeCategory) {
-                    // Immediate scroll to active category
-                    activeCategory.scrollIntoView({ 
-                        behavior: 'instant', 
-                        block: 'nearest', 
-                        inline: 'center' 
-                    });
-                    
-                    // Also force scroll position as backup
-                    setTimeout(() => {
-                        const categoryBar = document.querySelector('.fk-category-bar');
-                        if (categoryBar && categoryContent) {
-                            const barWidth = categoryBar.offsetWidth;
-                            const activeLeft = activeCategory.offsetLeft;
-                            const activeWidth = activeCategory.offsetWidth;
-                            const scrollLeft = activeLeft - (barWidth / 2) + (activeWidth / 2);
-                            const maxScroll = Math.max(0, categoryContent.scrollWidth - barWidth);
-                            const finalScrollLeft = Math.max(0, Math.min(scrollLeft, maxScroll));
-                            categoryContent.scrollLeft = finalScrollLeft;
-                        }
-                    }, 50);
-                    
-                    // Multiple attempts to ensure it works
-                    setTimeout(() => {
-                        activeCategory.scrollIntoView({ 
-                            behavior: 'instant', 
-                            block: 'nearest', 
-                            inline: 'center' 
-                        });
-                    }, 200);
-                    
-                    setTimeout(() => {
-                        activeCategory.scrollIntoView({ 
-                            behavior: 'instant', 
-                            block: 'nearest', 
-                            inline: 'center' 
-                        });
-                    }, 500);
-                }
-            }
-
-            // Update active state on popstate (browser navigation)
-            window.addEventListener('popstate', setActiveNavLink);
-
-            // Enhanced category link interactions
-            categoryLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    // Remove active class from all links
-                    categoryLinks.forEach(l => l.classList.remove('active'));
-                    // Add active class to clicked link
-                    this.classList.add('active');
-                    // Add smooth transition effect
-                    this.style.transform = 'translateY(-2px)';
-                    setTimeout(() => {
-                        this.style.transform = '';
-                    }, 200);
-                });
-                // Hover effects
-                link.addEventListener('mouseenter', function() {
-                    if (!this.classList.contains('active')) {
-                        this.style.transform = 'translateY(-1px)';
-                    }
-                });
-                link.addEventListener('mouseleave', function() {
-                    if (!this.classList.contains('active')) {
-                        this.style.transform = '';
-                    }
-                });
-            });
-            
-            // Mobile navigation enhancement
-            if (window.innerWidth <= 768) {
-                const categoryBar = document.querySelector('.fk-category-bar');
-                let isScrolling = false;
-                
-                // Add smooth scroll for mobile
-                categoryBar.addEventListener('scroll', function() {
-                    if (!isScrolling) {
-                        isScrolling = true;
-                        setTimeout(() => {
-                            isScrolling = false;
-                        }, 100);
-          }
-        });
-      }
-
-            const categoryRaw = getUrlParameter('category');
-            // Fallback: treat 'putty' as 'wall-putty'
-            const category = (categoryRaw === 'putty') ? 'wall-putty' : categoryRaw;
-            if (category) {
-                renderProducts(category);
-            } else {
-                // Redirect to home if no category specified
-                window.location.href = 'index.html';
-            }
-    });
-
-    // Dynamic Login/Account nav item
-    function renderAuthNavItem() {
-        const navAuth = document.getElementById('nav-auth-item');
-        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-        if (isLoggedIn) {
-            navAuth.innerHTML = `<a href="account.html" class="nav-item"><i class="fa fa-user"></i><span>Account</span></a>`;
-        } else {
-            navAuth.innerHTML = `<a href="login.html" class="nav-item"><i class="fa fa-user"></i><span>Login</span></a>`;
-        }
-    }
-    document.addEventListener('DOMContentLoaded', renderAuthNavItem);
-    </script>
+    <span id="nav-auth-item"></span>
 </body>
 </html> 

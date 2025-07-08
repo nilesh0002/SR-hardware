@@ -6,8 +6,10 @@
     <title>Create Account | Shree Raam Hardware</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="search-fix.css">
+    <link rel="stylesheet" href="notifications.css">
     <link rel="icon" href="images/hw-logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="api-integration.js" defer></script>
     <style>
         body {
             background: linear-gradient(135deg, #f7f9fb 0%, #e8f2ff 100%);
@@ -253,17 +255,6 @@
             window.location.href = 'account.html';
             return false;
         }
-        // Dynamic Login/Account nav item
-        function renderAuthNavItem() {
-            const navAuth = document.getElementById('nav-auth-item');
-            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-            if (isLoggedIn) {
-                navAuth.innerHTML = `<a href="account.html" class="nav-item"><i class="fa fa-user"></i><span>Account</span></a>`;
-            } else {
-                navAuth.innerHTML = `<a href="login.html" class="nav-item"><i class="fa fa-user"></i><span>Login</span></a>`;
-            }
-        }
-        document.addEventListener('DOMContentLoaded', renderAuthNavItem);
     </script>
 </body>
 </html> 
