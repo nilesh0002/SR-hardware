@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel | Shree Raam Hardware</title>
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div id="admin-dashboard" class="admin-dashboard">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">Admin Panel</div>
+      <nav>
+        <ul>
+          <li data-section="overview" class="active"><i class="fa fa-chart-bar"></i> Dashboard Overview</li>
+          <li data-section="users"><i class="fa fa-users"></i> Users</li>
+          <li data-section="products"><i class="fa fa-box"></i> Products</li>
+          <li data-section="orders"><i class="fa fa-shopping-bag"></i> Orders</li>
+          <li data-section="reviews"><i class="fa fa-star"></i> Reviews</li>
+          <li data-section="settings"><i class="fa fa-cog"></i> Settings</li>
+          <li id="admin-logout"><i class="fa fa-sign-out-alt"></i> Logout</li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <span id="admin-info"></span>
+        <button id="admin-logout-top" class="admin-logout-btn"><i class="fa fa-sign-out-alt"></i> Logout</button>
+      </header>
+      <section id="admin-content" class="admin-content">
+        <!-- Dynamic content will be loaded here -->
+      </section>
+    </main>
+  </div>
+  <script src="auth-service.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html> 

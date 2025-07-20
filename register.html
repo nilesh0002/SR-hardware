@@ -159,15 +159,44 @@
                 font-size: 0.93rem;
             }
         }
+        .fk-search-bar button[type="submit"] {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2874f0;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 0.2rem;
+            transition: background 0.18s;
+            box-shadow: 0 2px 8px 0 rgba(40,116,240,0.08);
+            cursor: pointer;
+        }
+        .fk-search-bar button[type="submit"]:hover {
+            background: #0059c8;
+        }
+        .fk-search-bar button[type="submit"] i {
+            color: #fff;
+            font-size: 1.35rem;
+        }
     </style>
 </head>
 <body>
+    <header class="fk-header">
+        <div class="fk-header-content">
+            <a href="index.html" class="fk-logo-link" aria-label="Home" style="display:flex;align-items:center;gap:8px;">
+                <img src="images/raam.avif" alt="Raam Logo" style="height:36px;width:36px;border-radius:50%;object-fit:cover;box-shadow:0 2px 8px rgba(40,116,240,0.10);">
+                <span class="fk-logo-text" style="font-weight:700;font-size:1.6rem;letter-spacing:1px;">Shree Raam Hardware</span>
+            </a>
+        </div>
+    </header>
     <main class="fk-register-main">
         <div class="fk-register-card">
-            <div class="fk-register-logo"><img src="images/hw-logo-red.svg" alt="HW Logo"></div>
+            <div class="fk-register-logo"><img src="images/raam.avif" alt="Raam Logo"></div>
             <div class="fk-register-title">Create Your Account</div>
             <div class="fk-register-desc">Sign up to order hardware, tools, and more at wholesale prices.</div>
-            <form class="fk-register-form" autocomplete="off" onsubmit="return handleRegister(event)">
+            <form class="fk-register-form" autocomplete="off">
                 <div class="fk-register-input">
                     <i class="fa fa-user"></i>
                     <input type="text" placeholder="Full Name" name="name" required>
@@ -178,38 +207,30 @@
                 </div>
                 <div class="fk-register-input">
                     <i class="fa fa-phone"></i>
-                    <input type="tel" placeholder="Mobile Number" name="mobile" pattern="[0-9]{10}" required>
+                    <input type="tel" placeholder="Mobile Number" name="phone" pattern="[0-9]{10}" required>
                 </div>
                 <div class="fk-register-input">
                     <i class="fa fa-lock"></i>
                     <input type="password" placeholder="Password" name="password" id="register-password" required minlength="6">
-                    <span class="show-password" onclick="toggleRegisterPassword('register-password', this)"><i class="fa fa-eye"></i></span>
+                    <span class="show-password" onclick="this.previousElementSibling.type = this.previousElementSibling.type === 'password' ? 'text' : 'password'; this.querySelector('i').classList.toggle('fa-eye'); this.querySelector('i').classList.toggle('fa-eye-slash');"><i class="fa fa-eye"></i></span>
                 </div>
                 <div class="fk-register-input">
                     <i class="fa fa-lock"></i>
                     <input type="password" placeholder="Confirm Password" name="confirm" id="register-confirm" required minlength="6">
-                    <span class="show-password" onclick="toggleRegisterPassword('register-confirm', this)"><i class="fa fa-eye"></i></span>
+                    <span class="show-password" onclick="this.previousElementSibling.type = this.previousElementSibling.type === 'password' ? 'text' : 'password'; this.querySelector('i').classList.toggle('fa-eye'); this.querySelector('i').classList.toggle('fa-eye-slash');"><i class="fa fa-eye"></i></span>
                 </div>
                 <button type="submit" class="fk-form-button">Create Account</button>
             </form>
             <div class="fk-register-login">Already have an account? <a href="login.html">Login</a></div>
         </div>
     </main>
-    <nav class="bottom-nav" id="main-bottom-nav">
-        <a href="index.html" class="nav-item">
-            <i class="fa fa-home"></i>
-            <span>Home</span>
-        </a>
-        <a href="products.html" class="nav-item">
-            <i class="fa fa-th-large"></i>
-            <span>Products</span>
-        </a>
-        <a href="cart.html" class="nav-item">
-            <i class="fa fa-shopping-cart"></i>
-            <span>Cart</span>
-        </a>
-        <span id="nav-auth-item"></span>
-    </nav>
+    <div class="account-modal-overlay" id="accountModalOverlay">
+      <div class="account-modal" id="accountModalContent">
+        <button class="account-modal-close" id="accountModalClose" aria-label="Close">&times;</button>
+        <div id="accountModalBody"></div>
+      </div>
+    </div>
+    <span id="nav-auth-item"></span>
     <footer class="main-footer">
         <div style="max-width: 1248px; margin: 0 auto; padding: 2rem 1rem; text-align: center;">
             <p style="color:#2874f0; font-weight:600; font-size:1.1rem;">
@@ -218,43 +239,52 @@
         </div>
     </footer>
     <a href="https://wa.me/91XXXXXXXXXX" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <nav class="bottom-nav">
+      <a href="index.html" class="bottom-nav-link"><i class="fa fa-home"></i><span>Home</span></a>
+      <a href="cart.html" class="bottom-nav-link"><i class="fa fa-shopping-cart"></i><span>Cart</span></a>
+      <a href="account.html" class="bottom-nav-link"><i class="fa fa-user"></i><span>Account</span></a>
+    </nav>
+    <style>
+      .bottom-nav {
+        position: fixed;
+        left: 0; right: 0; bottom: 0;
+        background: #fff;
+        border-top: 1.5px solid #e0e6ef;
+        box-shadow: 0 -2px 12px rgba(40,116,240,0.07);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 5000;
+        height: 56px;
+      }
+      .bottom-nav-link {
+        flex: 1;
+        text-align: center;
+        color: #2874f0;
+        text-decoration: none;
+        font-size: 1.1rem;
+        font-weight: 600;
+        padding: 6px 0 2px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: color 0.18s;
+      }
+      .bottom-nav-link i {
+        font-size: 1.35rem;
+        margin-bottom: 2px;
+      }
+      .bottom-nav-link:hover, .bottom-nav-link.active {
+        color: #0059c8;
+      }
+      body { padding-bottom: 60px; }
+      @media (max-width: 600px) {
+        .bottom-nav { height: 54px; }
+        .bottom-nav-link { font-size: 1rem; }
+        .bottom-nav-link i { font-size: 1.2rem; }
+      }
+    </style>
     <script>
-        function toggleRegisterPassword(id, el) {
-            var pwd = document.getElementById(id);
-            var icon = el.querySelector('i');
-            if (pwd.type === 'password') {
-                pwd.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                pwd.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
-        }
-        // Demo registration handler (replace with real backend logic)
-        function handleRegister(e) {
-            e.preventDefault();
-            var form = e.target;
-            var name = form.name.value.trim();
-            var email = form.email.value.trim();
-            var mobile = form.mobile.value.trim();
-            var password = form.password.value;
-            var confirm = form.confirm.value;
-            if (password !== confirm) {
-                alert('Passwords do not match!');
-                return false;
-            }
-            // Save to localStorage for demo
-            localStorage.setItem('userName', name);
-            localStorage.setItem('userEmail', email);
-            localStorage.setItem('userMobile', mobile);
-            localStorage.setItem('userPassword', password);
-            localStorage.setItem('isLoggedIn', 'true');
-            alert('Account created! You are now logged in.');
-            window.location.href = 'account.html';
-            return false;
-        }
     </script>
 </body>
 </html> 

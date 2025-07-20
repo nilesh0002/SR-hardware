@@ -8,11 +8,12 @@
 </head>
 <body>
     <header class="fk-header">
-        <div class="fk-header-left">
+        <div class="fk-header-content">
             <a href="index.html" class="fk-logo-link" aria-label="Home" style="display:flex;align-items:center;gap:8px;">
-                <img src="images/hw-logo-red.svg" alt="HW Logo" style="height:32px;width:32px;vertical-align:middle;">
+                <img src="images/raam.avif" alt="Raam Logo" style="height:36px;width:36px;vertical-align:middle;border-radius:50%;object-fit:cover;box-shadow:0 2px 8px rgba(40,116,240,0.10);">
                 <span class="fk-logo-text" style="font-weight:700;font-size:1.6rem;letter-spacing:1px;">Shree Raam Hardware</span>
             </a>
+            <button id="openAdminModal" class="fk-form-button" style="margin-left:1.5rem;" onclick="window.location.href='admin/admin-login.html'">Admin</button>
         </div>
         <div class="fk-header-cart">
             <a href="cart.html" class="fk-cart-link">
@@ -39,22 +40,6 @@
         <h2>About Us</h2>
         <p>Welcome to Shree Raam Hardware! We provide premium construction materials, tools, and equipment at wholesale prices for contractors and resellers. Our mission is to deliver quality products and excellent service to help you build better, faster, and smarter.</p>
     </main>
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav" id="main-bottom-nav">
-        <a href="index.html" class="nav-item">
-            <i class="fa fa-home"></i>
-            <span>Home</span>
-        </a>
-        <a href="products.html" class="nav-item">
-            <i class="fa fa-th-large"></i>
-            <span>Products</span>
-        </a>
-        <a href="cart.html" class="nav-item">
-            <i class="fa fa-shopping-cart"></i>
-            <span>Cart</span>
-        </a>
-        <span id="nav-auth-item"></span>
-    </nav>
     <footer class="main-footer">
         <p style="text-align:center; color:#2874f0; font-weight:600;">&copy; 2024 Shree Raam Hardware. All rights reserved.</p>
     </footer>
@@ -133,17 +118,78 @@
                 });
             }
         });
-        // Dynamic Login/Account nav item
-        function renderAuthNavItem() {
-            const navAuth = document.getElementById('nav-auth-item');
-            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-            if (isLoggedIn) {
-                navAuth.innerHTML = `<a href="account.html" class="nav-item"><i class="fa fa-user"></i><span>Account</span></a>`;
-            } else {
-                navAuth.innerHTML = `<a href="login.html" class="nav-item"><i class="fa fa-user"></i><span>Login</span></a>`;
-            }
-        }
-        document.addEventListener('DOMContentLoaded', renderAuthNavItem);
     </script>
+    <div class="account-modal-overlay" id="accountModalOverlay">
+      <div class="account-modal" id="accountModalContent">
+        <button class="account-modal-close" id="accountModalClose" aria-label="Close">&times;</button>
+        <div id="accountModalBody"></div>
+      </div>
+    </div>
+    <nav class="bottom-nav">
+      <a href="index.html" class="bottom-nav-link"><i class="fa fa-home"></i><span>Home</span></a>
+      <a href="cart.html" class="bottom-nav-link"><i class="fa fa-shopping-cart"></i><span>Cart</span></a>
+      <a href="account.html" class="bottom-nav-link"><i class="fa fa-user"></i><span>Account</span></a>
+    </nav>
+    <style>
+      .bottom-nav {
+        position: fixed;
+        left: 0; right: 0; bottom: 0;
+        background: #fff;
+        border-top: 1.5px solid #e0e6ef;
+        box-shadow: 0 -2px 12px rgba(40,116,240,0.07);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 5000;
+        height: 56px;
+      }
+      .bottom-nav-link {
+        flex: 1;
+        text-align: center;
+        color: #2874f0;
+        text-decoration: none;
+        font-size: 1.1rem;
+        font-weight: 600;
+        padding: 6px 0 2px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: color 0.18s;
+      }
+      .bottom-nav-link i {
+        font-size: 1.35rem;
+        margin-bottom: 2px;
+      }
+      .bottom-nav-link:hover, .bottom-nav-link.active {
+        color: #0059c8;
+      }
+      body { padding-bottom: 60px; }
+      @media (max-width: 600px) {
+        .bottom-nav { height: 54px; }
+        .bottom-nav-link { font-size: 1rem; }
+        .bottom-nav-link i { font-size: 1.2rem; }
+      }
+      .fk-search-bar button[type="submit"] {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #2874f0;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 0.2rem;
+        transition: background 0.18s;
+        box-shadow: 0 2px 8px 0 rgba(40,116,240,0.08);
+        cursor: pointer;
+      }
+      .fk-search-bar button[type="submit"]:hover {
+        background: #0059c8;
+      }
+      .fk-search-bar button[type="submit"] i {
+        color: #fff;
+        font-size: 1.35rem;
+      }
+    </style>
 </body>
 </html> 

@@ -243,7 +243,7 @@
             border: 1.5px solid #2874f0;
             border-radius: 8px;
             padding: 0.3rem 1rem;
-            background: #f7f9fb;
+            background: #fff;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -254,6 +254,33 @@
             background: transparent;
             font-size: 1rem;
             flex: 1;
+        }
+
+        .fk-search-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px 0 rgba(40,116,240,0.08);
+            border: 1px solid #e3eafc;
+            margin-right: 8px;
+            transition: box-shadow 0.18s, border 0.18s, background 0.18s;
+            cursor: pointer;
+        }
+        .fk-search-icon:hover {
+            box-shadow: 0 4px 16px rgba(40,116,240,0.13);
+            border: 1px solid #b3d1fa;
+            background: #fff;
+        }
+        .fk-search-icon i {
+            color: #2874f0;
+            font-size: 1.35rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .notification {
@@ -306,25 +333,156 @@
             color: #2874f0;
             font-weight: 500;
         }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            min-width: 220px;
+            max-width: 95vw;
+            max-height: 70vh;
+            overflow-y: auto;
+            background: #fff;
+            box-shadow: 0 8px 32px rgba(40,116,240,0.13);
+            border-radius: 0.8rem;
+            z-index: 3000;
+            display: none;
+            margin-top: 0.5rem;
+        }
+        .nav-item.dropdown { position: relative; }
+
+        /* Flipkart-style account popup modal */
+        .account-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.35);
+            z-index: 4000;
+            align-items: center;
+            justify-content: center;
+        }
+        .account-modal-overlay.active {
+            display: flex;
+        }
+        .account-modal {
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 8px 32px rgba(40,116,240,0.13);
+            max-width: 95vw;
+            width: 350px;
+            padding: 2rem 1.5rem 1.2rem 1.5rem;
+            position: relative;
+            animation: modalPopIn 0.22s cubic-bezier(.4,1.6,.6,1) both;
+        }
+        @keyframes modalPopIn {
+            from { transform: scale(0.95) translateY(30px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        .account-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #2874f0;
+            cursor: pointer;
+        }
+        .account-modal .dropdown-user-card { border-bottom: none; margin-bottom: 1.2rem; }
+        .account-modal .dropdown-item { display: flex; align-items: center; gap: 0.7rem; padding: 0.7rem 0; color: #222; text-decoration: none; font-size: 1.05rem; border-radius: 0.5rem; transition: background 0.18s; }
+        .account-modal .dropdown-item:hover { background: #f0f4ff; color: #2874f0; }
+        .account-modal .logout-link { color: #dc3545; }
+        .account-modal .logout-link:hover { background: #ffeaea; color: #b71c1c; }
+        /* Hide old dropdown */
+        .nav-item.dropdown .dropdown-menu { display: none !important; }
+
+        .bottom-nav {
+            position: fixed;
+            left: 0; right: 0; bottom: 0;
+            background: #fff;
+            border-top: 1.5px solid #e0e6ef;
+            box-shadow: 0 -2px 12px rgba(40,116,240,0.07);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 5000;
+            height: 56px;
+        }
+        .bottom-nav-link {
+            flex: 1;
+            text-align: center;
+            color: #2874f0;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 6px 0 2px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: color 0.18s;
+        }
+        .bottom-nav-link i {
+            font-size: 1.35rem;
+            margin-bottom: 2px;
+        }
+        .bottom-nav-link:hover, .bottom-nav-link.active {
+            color: #0059c8;
+        }
+        body { padding-bottom: 60px; }
+        @media (max-width: 600px) {
+            .bottom-nav { height: 54px; }
+            .bottom-nav-link { font-size: 1rem; }
+            .bottom-nav-link i { font-size: 1.2rem; }
+        }
+
+        .fk-search-bar button[type="submit"] {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2874f0;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 0.2rem;
+            transition: background 0.18s;
+            box-shadow: 0 2px 8px 0 rgba(40,116,240,0.08);
+            cursor: pointer;
+        }
+        .fk-search-bar button[type="submit"]:hover {
+            background: #0059c8;
+        }
+        .fk-search-bar button[type="submit"] i {
+            color: #fff;
+            font-size: 1.35rem;
+        }
+        
+        /* Active category link styling */
+        .fk-category-link.active {
+            background: #2874f0;
+            color: #fff;
+            border-radius: 6px;
+        }
     </style>
 </head>
 <body>
     <header class="fk-header">
         <div class="fk-header-content">
-            <a href="index.html" class="fk-logo-link" aria-label="Home">
-                <img src="images/hw-logo-red.svg" alt="HW Logo" style="height:36px;width:36px;">
-                <span class="fk-logo-text">Shree Raam Hardware</span>
+            <a href="index.html" class="fk-logo-link" aria-label="Home" style="display:flex;align-items:center;gap:8px;">
+                <img src="images/raam.avif" alt="Raam Logo" style="height:36px;width:36px;vertical-align:middle;border-radius:50%;object-fit:cover;box-shadow:0 2px 8px rgba(40,116,240,0.10);">
+                <span class="fk-logo-text" style="font-weight:700;font-size:1.6rem;letter-spacing:1px;">Shree Raam Hardware</span>
             </a>
             <form class="fk-search-bar" action="#" method="get">
-                <span class="fk-search-icon"><i class="fa fa-search"></i></span>
-                <input type="text" placeholder="Search for products, brands and more" name="q" autocomplete="off">
+                <input type="text" placeholder="Search for products, brands and more" name="q">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
+            <button id="openAdminModal" class="fk-form-button" style="margin-left:1.5rem;" onclick="window.location.href='admin/admin-login.html'">Admin</button>
         </div>
     </header>
 
     <nav class="fk-category-bar">
         <div class="fk-category-content">
+            <a href="products.html" class="fk-category-link" data-category="all">All Products</a>
             <a href="products.html?category=cement" class="fk-category-link" data-category="cement">Cement</a>
             <a href="products.html?category=paints" class="fk-category-link" data-category="paints">Paints</a>
             <a href="products.html?category=doors" class="fk-category-link" data-category="doors">Doors & Windows</a>
@@ -348,42 +506,7 @@
         </div>
     </main>
 
-    <nav class="bottom-nav" id="main-bottom-nav">
-        <a href="index.html" class="nav-item">
-            <i class="fa fa-home"></i>
-            <span>Home</span>
-        </a>
-        <a href="products.html?category=cement" class="nav-item active">
-            <i class="fa fa-th-large"></i>
-            <span>Products</span>
-        </a>
-        <a href="cart.html" class="nav-item">
-            <i class="fa fa-shopping-cart"></i>
-            <span>Cart</span>
-        </a>
-        <div class="nav-item dropdown">
-            <a href="#" class="nav-link">
-                <i class="fa fa-user"></i>
-                <span>Nilesh Singh (Admin)</span>
-                <i class="fa fa-chevron-down"></i>
-            </a>
-            <div class="dropdown-menu">
-                <div class="dropdown-user-card">
-                    <div class="dropdown-avatar">N</div>
-                    <div>
-                        <div class="dropdown-name">Nilesh Singh</div>
-                        <div class="dropdown-email">nilesh.singh0032@gmail.com</div>
-                        <div class="dropdown-role">Admin</div>
-                    </div>
-                </div>
-                <a href="admin.html" class="dropdown-item"><i class="fa fa-cog"></i> Admin Panel</a>
-                <a href="manage-products.html" class="dropdown-item"><i class="fa fa-box"></i> Manage Products</a>
-                <a href="manage-orders.html" class="dropdown-item"><i class="fa fa-list"></i> Manage Orders</a>
-                <a href="manage-users.html" class="dropdown-item"><i class="fa fa-users"></i> Manage Users</a>
-                <a href="#" class="dropdown-item logout-link"><i class="fa fa-sign-out-alt"></i> Logout</a>
-            </div>
-        </div>
-    </nav>
+        <span id="nav-auth-item"></span>
 
     <!-- Simple Footer -->
     <footer class="main-footer">
@@ -399,10 +522,77 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <div class="account-modal-overlay" id="accountModalOverlay">
+      <div class="account-modal" id="accountModalContent">
+        <button class="account-modal-close" id="accountModalClose" aria-label="Close">&times;</button>
+        <div id="accountModalBody"></div>
+        <form class="fk-register-form" autocomplete="off" style="margin-top:1rem;">
+            <div class="fk-register-input">
+                <i class="fa fa-user"></i>
+                <input type="text" placeholder="Full Name" name="name" required>
+            </div>
+            <div class="fk-register-input">
+                <i class="fa fa-envelope"></i>
+                <input type="email" placeholder="Email" name="email" required>
+            </div>
+            <div class="fk-register-input">
+                <i class="fa fa-phone"></i>
+                <input type="tel" placeholder="Mobile Number" name="phone" pattern="[0-9]{10}" required>
+            </div>
+            <div class="fk-register-input">
+                <i class="fa fa-lock"></i>
+                <input type="password" placeholder="Password" name="password" id="register-password" required minlength="6">
+                <span class="show-password" onclick="this.previousElementSibling.type = this.previousElementSibling.type === 'password' ? 'text' : 'password'; this.querySelector('i').classList.toggle('fa-eye'); this.querySelector('i').classList.toggle('fa-eye-slash');"><i class="fa fa-eye"></i></span>
+            </div>
+            <div class="fk-register-input">
+                <i class="fa fa-lock"></i>
+                <input type="password" placeholder="Confirm Password" name="confirm" id="register-confirm" required minlength="6">
+                <span class="show-password" onclick="this.previousElementSibling.type = this.previousElementSibling.type === 'password' ? 'text' : 'password'; this.querySelector('i').classList.toggle('fa-eye'); this.querySelector('i').classList.toggle('fa-eye-slash');"><i class="fa fa-eye"></i></span>
+            </div>
+            <button type="submit" class="fk-form-button">Create Account</button>
+        </form>
+        <div class="fk-register-login" style="margin-top:1rem;">Already have an account? <a href="login.html">Login</a></div>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav-link"><i class="fa fa-home"></i><span>Home</span></a>
+        <a href="cart.html" class="bottom-nav-link"><i class="fa fa-shopping-cart"></i><span>Cart</span></a>
+        <a href="account.html" class="bottom-nav-link"><i class="fa fa-user"></i><span>Account</span></a>
+    </nav>
+
     <script src="cart.js"></script>
     <script src="products.js"></script>
     <script src="auth.js"></script>
-
-    <span id="nav-auth-item"></span>
+    <script src="api-integration.js" defer></script>
+    <script>
+    // Show registration modal when button is clicked
+    document.getElementById('openRegisterModal').onclick = function() {
+        document.getElementById('accountModalOverlay').classList.add('active');
+    };
+    // Hide modal when close button is clicked
+    document.getElementById('accountModalClose').onclick = function() {
+        document.getElementById('accountModalOverlay').classList.remove('active');
+    };
+    // Hide modal when clicking outside modal content
+    document.getElementById('accountModalOverlay').onclick = function(e) {
+        if (e.target === this) this.classList.remove('active');
+    };
+    
+    // Highlight active category link
+    document.addEventListener('DOMContentLoaded', function() {
+        const params = new URLSearchParams(window.location.search);
+        const category = params.get('category');
+        const categoryLinks = document.querySelectorAll('.fk-category-link');
+        
+        categoryLinks.forEach(link => {
+            link.classList.remove('active');
+            const linkCategory = link.getAttribute('data-category');
+            if ((!category && linkCategory === 'all') || (category && linkCategory === category)) {
+                link.classList.add('active');
+            }
+        });
+    });
+    </script>
 </body>
 </html> 

@@ -492,13 +492,35 @@
         0% { opacity: 0; transform: translateY(24px); }
         100% { opacity: 1; transform: translateY(0); }
       }
+      
+      .fk-search-bar button[type="submit"] {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #2874f0;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 0.2rem;
+        transition: background 0.18s;
+        box-shadow: 0 2px 8px 0 rgba(40,116,240,0.08);
+        cursor: pointer;
+      }
+      .fk-search-bar button[type="submit"]:hover {
+        background: #0059c8;
+      }
+      .fk-search-bar button[type="submit"] i {
+        color: #fff;
+        font-size: 1.35rem;
+      }
     </style>
 </head>
 <body>
     <header class="fk-header">
         <div class="fk-header-content">
-            <a href="index.html" class="fk-logo-link" aria-label="Home">
-                <img src="images/hw-logo-red.svg" alt="HW Logo" style="height:36px;width:36px;">
+            <a href="index.html" class="fk-logo-link" aria-label="Home" style="display:flex;align-items:center;gap:8px;">
+                <img src="images/raam.avif" alt="Raam Logo" style="height:36px;width:36px;vertical-align:middle;border-radius:50%;object-fit:cover;box-shadow:0 2px 8px rgba(40,116,240,0.10);">
                 <span class="fk-logo-text" style="font-weight:700;font-size:1.6rem;letter-spacing:1px;">Shree Raam Hardware</span>
             </a>
             <form class="fk-search-bar" action="#" method="get">
@@ -506,6 +528,7 @@
                 <input type="text" placeholder="Search for products, brands and more" name="q" autocomplete="off">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
+            <button id="openAdminModal" class="fk-form-button" style="margin-left:1.5rem;" onclick="window.location.href='admin/admin-login.html'">Admin</button>
         </div>
     </header>
     
@@ -651,23 +674,6 @@
         </section>
     </main>
     
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav" id="main-bottom-nav">
-        <a href="index.html" class="nav-item active">
-            <i class="fa fa-home"></i>
-            <span>Home</span>
-        </a>
-        <a href="products.html?category=cement" class="nav-item">
-            <i class="fa fa-th-large"></i>
-            <span>Products</span>
-        </a>
-        <a href="cart.html" class="nav-item">
-            <i class="fa fa-shopping-cart"></i>
-            <span>Cart</span>
-        </a>
-        <span id="nav-auth-item"></span>
-    </nav>
-    
     <footer class="main-footer">
         <div style="max-width: 1248px; margin: 0 auto; padding: 2rem 1rem; text-align: center;">
             <p style="color:#2874f0; font-weight:600; font-size:1.1rem;">
@@ -675,6 +681,13 @@
             </p>
         </div>
     </footer>
+    
+    <div class="account-modal-overlay" id="accountModalOverlay">
+      <div class="account-modal" id="accountModalContent">
+        <button class="account-modal-close" id="accountModalClose" aria-label="Close">&times;</button>
+        <div id="accountModalBody"></div>
+      </div>
+    </div>
     
     <script src="cart.js"></script>
     <script src="auth.js"></script>
@@ -834,22 +847,55 @@
                 });
             }
         });
-        
-        // Dynamic Login/Account nav item
-        function renderAuthNavItem() {
-            const navAuth = document.getElementById('nav-auth-item');
-            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-            if (isLoggedIn) {
-                navAuth.innerHTML = `<a href="account.html" class="nav-item"><i class="fa fa-user"></i><span>Account</span></a>`;
-            } else {
-                navAuth.innerHTML = `<a href="login.html" class="nav-item"><i class="fa fa-user"></i><span>Login</span></a>`;
-            }
-        }
-        document.addEventListener('DOMContentLoaded', renderAuthNavItem);
     </script>
     <!-- WhatsApp Float -->
     <a href="https://wa.me/91XXXXXXXXXX" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
+    <nav class="bottom-nav">
+      <a href="index.html" class="bottom-nav-link"><i class="fa fa-home"></i><span>Home</span></a>
+      <a href="cart.html" class="bottom-nav-link"><i class="fa fa-shopping-cart"></i><span>Cart</span></a>
+      <a href="account.html" class="bottom-nav-link"><i class="fa fa-user"></i><span>Account</span></a>
+    </nav>
+    <style>
+      .bottom-nav {
+        position: fixed;
+        left: 0; right: 0; bottom: 0;
+        background: #fff;
+        border-top: 1.5px solid #e0e6ef;
+        box-shadow: 0 -2px 12px rgba(40,116,240,0.07);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 5000;
+        height: 56px;
+      }
+      .bottom-nav-link {
+        flex: 1;
+        text-align: center;
+        color: #2874f0;
+        text-decoration: none;
+        font-size: 1.1rem;
+        font-weight: 600;
+        padding: 6px 0 2px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: color 0.18s;
+      }
+      .bottom-nav-link i {
+        font-size: 1.35rem;
+        margin-bottom: 2px;
+      }
+      .bottom-nav-link:hover, .bottom-nav-link.active {
+        color: #0059c8;
+      }
+      body { padding-bottom: 60px; }
+      @media (max-width: 600px) {
+        .bottom-nav { height: 54px; }
+        .bottom-nav-link { font-size: 1rem; }
+        .bottom-nav-link i { font-size: 1.2rem; }
+      }
+    </style>
 </body>
 </html> 

@@ -97,7 +97,7 @@ PORT=3000
 NODE_ENV=development
 
 # Database Configuration
-MONGODB_URI=mongodb://localhost:27017/shree-raam-hardware
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/<dbname>?retryWrites=true&w=majority
 
 # JWT Configuration
 JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
@@ -119,9 +119,9 @@ STRIPE_SECRET_KEY=your-stripe-secret-key
 STRIPE_PUBLISHABLE_KEY=your-stripe-publishable-key
 
 # Cloudinary Configuration
-CLOUDINARY_CLOUD_NAME=your-cloud-name
-CLOUDINARY_API_KEY=your-api-key
-CLOUDINARY_API_SECRET=your-api-secret
+CLOUDINARY_CLOUD_NAME=shree_raam
+CLOUDINARY_API_KEY=JbOAAQQhxgqtdvGSpasswrd
+CLOUDINARY_API_SECRET=your_api_secret_here
 ```
 
 ## 📚 API Documentation
@@ -260,3 +260,118 @@ For support and questions, please contact the development team.
 ---
 
 **Note**: This backend is designed to work with the Shree Raam Hardware frontend. Make sure to configure the frontend URL in the environment variables for proper CORS handling. 
+
+---
+
+## 1. **Update Your `.env` File**
+
+In your `utu-backend` folder, add these lines to your `.env` file:
+
+```
+CLOUDINARY_CLOUD_NAME=shree_raam
+CLOUDINARY_API_KEY=JbOAAQQhxgqtdvGSpasswrd
+CLOUDINARY_API_SECRET=your_api_secret_here
+```
+- Replace `your_api_secret_here` with your actual Cloudinary API secret (find it in your Cloudinary dashboard).
+
+---
+
+## 2. **Install Cloudinary SDK**
+
+In your backend folder, run:
+```
+npm install cloudinary multer
+```
+
+---
+
+## 3. **Set Up Cloudinary in Your Backend**
+
+Create a file `config/cloudinary.js` with:
+
+```js
+const cloudinary = require('cloudinary').v2;
+require('dotenv').config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+module.exports = cloudinary;
+```
+
+---
+
+## 4. **How to Use (Example: Upload an Image)**
+
+In your route/controller, you can do:
+
+```js
+<code_block_to_apply_changes_from>
+```
+
+For file uploads from the frontend, use `multer` to handle the upload, then send the file to Cloudinary.
+
+---
+
+## 5. **Store the Cloudinary URL in MongoDB**
+
+When you upload a product image, save the returned `result.url` in your product document in MongoDB.
+
+---
+
+**Let me know if you want a full working example for product image upload, or if you want to integrate this into your admin panel!** 
+
+---
+
+To make (create) your admin account in MongoDB Atlas, follow these steps:
+
+---
+
+## 1. Make Sure Your `.env` File is Correct
+
+Your `utu-backend/.env` file should have:
+```
+MONGODB_URI=your_mongodb_atlas_connection_string
+JWT_SECRET=your_jwt_secret_here
+PORT=5000
+CLOUDINARY_CLOUD_NAME=shree_raam
+CLOUDINARY_API_KEY=JbOAAQQhxgqtdvGSpasswrd
+CLOUDINARY_API_SECRET=your_api_secret_here
+```
+- Replace `your_mongodb_atlas_connection_string` with your real Atlas URI.
+- Replace `your_api_secret_here` with your Cloudinary API secret.
+
+---
+
+## 2. Run the Admin Creation Script
+
+Open your terminal and run:
+```
+node createAdmin.js
+```
+
+You will be prompted for:
+- **Admin Name:** (e.g., Nilesh Singh)
+- **Admin Email:** nilesh.singh0032@gmail.com
+- **Admin Password:** Nil@123
+
+Type these in and press Enter after each.
+
+---
+
+## 3. Success!
+
+If everything is set up correctly, you’ll see:
+```
+Admin user created successfully!
+```
+
+You can now log in as admin using your email and password on your admin login page.
+
+---
+
+**If you see any errors, copy the error message here and I’ll help you fix it!**  
+If you want, I can walk you through the process step by step. 

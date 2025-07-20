@@ -67,6 +67,15 @@
     return localStorage.getItem('authToken');
   }
 
+  function isAdminUser() {
+    try {
+      const user = JSON.parse(localStorage.getItem('user'));
+      return user && user.role === 'admin';
+    } catch {
+      return false;
+    }
+  }
+
   async function fetchCart() {
     const token = getToken();
     if (!token) return null;
@@ -78,6 +87,10 @@
   }
 
   async function addToCart(productId, quantity = 1) {
+    if (isAdminUser()) {
+      alert('Admins are not allowed to order products.');
+      return;
+    }
     const token = getToken();
     if (!token) {
       alert('Please log in to add items to cart.');
@@ -303,5 +316,16 @@ document.addEventListener('DOMContentLoaded', function() {
     renderCartPage();
   } else if (window.cartFunctions && window.cartFunctions.renderCartPage) {
     window.cartFunctions.renderCartPage();
+  }
+  // Prevent admin from checking out
+  const checkoutBtn = document.querySelector('.checkout-btn');
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', function(e) {
+      if (isAdminUser()) {
+        e.preventDefault();
+        alert('Admins are not allowed to place orders.');
+        return false;
+      }
+    });
   }
 });

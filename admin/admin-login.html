@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | Shree Raam Hardware</title>
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="admin-login-section">
+    <form id="admin-login-form" class="admin-login-form">
+      <h2>Admin Login</h2>
+      <div class="login-info">
+        <i class="fa fa-shield-alt"></i>
+        <p>Restricted Access - Super Admin Only</p>
+        <small>Only authorized personnel can access this system</small>
+      </div>
+      <input type="email" id="admin-email" placeholder="Admin Email" required>
+      <input type="password" id="admin-password" placeholder="Password" required>
+      <button type="submit">Login</button>
+      <div id="admin-login-error" class="admin-login-error"></div>
+    </form>
+  </div>
+  <script src="auth-service.js"></script>
+  <script>
+    const loginForm = document.getElementById('admin-login-form');
+    const loginError = document.getElementById('admin-login-error');
+    const emailInput = document.getElementById('admin-email');
+    const passwordInput = document.getElementById('admin-password');
+
+    // Check if already logged in
+    window.addEventListener('DOMContentLoaded', function() {
+      if (window.authService && window.authService.isAuthenticated()) {
+        window.location.href = 'admin.html';
+      }
+    });
+
+    loginForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      loginError.textContent = '';
+      
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+
+      // Show loading state
+      const submitBtn = loginForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Logging in...';
+      submitBtn.disabled = true;
+
+      try {
+        const result = await window.authService.login(email, password);
+        
+        // Store token and user data
+        localStorage.setItem('adminToken', result.token);
+        localStorage.setItem('adminEmail', email);
+        localStorage.setItem('adminUser', JSON.stringify(result.user));
+        
+        // Redirect to admin dashboard
+        window.location.href = 'admin.html';
+        
+      } catch (error) {
+        loginError.textContent = error.message || 'Login failed. Please try again.';
+        console.error('Login error:', error);
+      } finally {
+        // Reset button state
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+
+    // Add some security features
+    document.addEventListener('keydown', function(e) {
+      // Prevent F12, Ctrl+Shift+I, Ctrl+U (common dev tools shortcuts)
+      if (e.key === 'F12' || 
+          (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+          (e.ctrlKey && e.key === 'u')) {
+        e.preventDefault();
+        return false;
+      }
+    });
+
+    // Prevent right-click context menu
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      return false;
+    });
+  </script>
+</body>
+</html> 
